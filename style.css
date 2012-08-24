@@ -1,0 +1,41 @@
+body {
+  background-color: #CCC;
+  font-family: sans-serif;
+}
+
+a {
+  color: #05F;
+}
+
+div {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+#center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+#cr-stage {
+  position: relative;
+  top: -320px;
+  left: -400px;
+  width: 800px;
+  height: 600px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+#legend {
+  position: relative;
+  top: 310px;
+  left: -390px;
+  font-size: 10pt;
+}
