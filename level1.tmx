@@ -34,6 +34,11 @@
     <property name="object" value=""/>
    </properties>
   </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+   </properties>
+  </tile>
   <tile id="8">
    <properties>
     <property name="components" value="CellNormal"/>
@@ -43,12 +48,12 @@
  </tileset>
  <layer name="Tiles" width="19" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjZIAARiphEGDFgxkJyLOimYXLHnLMooe7kNXgA8j+oBQQaycxgIXGZpFrNswsYsOb2LRKKSDGLFLTBDpATnvE+gGbPD5z8JmHLkeMObjSNrXKGRgGAEvgAV8=
+   eJxjZIAARiphEGDFgxkJyLMSaQ+pZlHTXcSEFyGA7A9KAbF2EgNYaGwWuWbDzCI2vIlNq5QCYswiNU2gA3x5ghSziMlbxJhFSh7FZRa1MABQBAFg
   </data>
  </layer>
  <layer name="Objects" width="19" height="16">
   <data encoding="base64" compression="zlib">
-   eJwTYYAAETyYkDy6WnyAWDWE7CXHLHq4ixT7iFFHDICZJUgFs5gYqOcubGaRazbMLGLDmxpplRhAjFnUSBPocoTMxBcu+PQQaxYxfkYGomjipMYDrvgDAA/RB0k=
+   eJwTYWBgEARiETyYgYA8ulp8gFg1xNhDilnUdBcxbqSWu4gB1DSLicZmkWs2zCxiw5saaZUYQIxZ1EgT6HKEzMQXLvj0EGsWMX5GBqJo4qTGA674AwCA6Qdd
   </data>
  </layer>
 </map>

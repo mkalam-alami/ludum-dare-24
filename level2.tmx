@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="6" height="6" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
   <image source="img/tiles/standard.png" width="192" height="192"/>
   <tile id="1">
@@ -34,15 +34,31 @@
     <property name="object" value=""/>
    </properties>
   </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="Tiles" width="6" height="6">
+ <layer name="Tiles" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgEARiRiwYBFiRMC41yGxkABJjQmIji+PCABbMADk=
+   eJxjYBgFgwkAAAGQAAE=
   </data>
  </layer>
- <layer name="Objects" width="6" height="6">
+ <layer name="Objects" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJwTYYAAESTMgEQjAxE8anGpF8JiHj79AG3gAXs=
+   eJxjZGBgYGSAAEYCmBAgVR0he2hlL6nuwAWYSFRHDAYAJmgAMg==
+  </data>
+ </layer>
+ <layer name="Calque 3" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYIAAQSAWwYEZkGh8AFk9IXXI6rHZR6p55KjDZT+x5sHMIBYQsg+EAXT2AzI=
   </data>
  </layer>
 </map>

@@ -14,6 +14,7 @@ c.c('Player', {
     
     c.viewport.centerOn(this); // FIXME
     
+    this.bind('KeyDown', this._keyDown);
     this.bind('EnterFrame', this._enterFrame);
     this.onHit('Wall', this._hitWall);
     this.xSpeed = 0;
@@ -28,7 +29,7 @@ c.c('Player', {
     this.bodySize = 1;
     this.vertical = false;
     this.sprites = [];
-    this.attachedCells = [this]; // {index:X , cell:X} (if null, true body)
+    this.attachedCells = [this]; // {index:X , cell:X} (if null, true body otherwise celltype)
     this.refresh();
   },
   
@@ -55,7 +56,7 @@ c.c('Player', {
     
     // Create new ones
     var newSprite = null, i = 0;
-    _.each(this.attachedCells, function(cell) {
+    _.each(this.attachedCells, function(cellType) {
       var spriteId = 2;
       if (this.bodySize == 1) {
         spriteId = 0;
@@ -66,26 +67,31 @@ c.c('Player', {
       else if (i == this.attachedCells.length - 1) {
         spriteId = 3;
       }
-      if (cell == this) {
-        newSprite = c.e('2D, ' + consts.RENDER + ', cellHero' + spriteId)
-          .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE, x: (i++ * 48), y: 0, z: 100});
+      if (cellType == this) {
+        newSprite = c.e('2D, ' + consts.RENDER + ', CellHero' + spriteId)
+          .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE,
+            x: this.x + (i++ * 48), y: this.y, z: 100});
         this.attach(newSprite);
-        console.log(newSprite);
       }
       else {
-        newSprite = c.e('2D, ' + consts.RENDER + ', cellNormal' + spriteId)
-          .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE, x: (i++ * 48), y: 0, z: 100});
+        newSprite = c.e('2D, ' + consts.RENDER + ', ' + cellType + spriteId)
+          .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE,
+            x: this.x + (i++ * 48), y: this.y, z: 100});
         this.attach(newSprite);
-        console.log(newSprite);
       }
       if (newSprite != null) {
         this.sprites.push(newSprite);
       }
       else {
-        console.error("No sprite for " + cell);
+        console.error("No sprite for " + cellType);
       }
     }, this);
-    
+  },
+  
+  _keyDown: function(e) {
+    if (e.keyIdentifier == "Enter" && this.targetCell) {
+        this._mergeWith(this.targetCell);
+    }
   },
   
   _enterFrame: function(e) {
@@ -192,6 +198,13 @@ c.c('Player', {
         this.collisions.hitCeiling = collision;
       }
     }, this);
+  },
+  
+  _mergeWith: function(targetCell) {
+    this.bodySize++;
+    this.attachedCells.push(targetCell.comp.replace(/^.*, /, ''));
+    this.targetCell.destroy();
+    this.refresh();
   }
   
 });

@@ -44,12 +44,11 @@ requirejs(['lib/jquery', 'lib/crafty'], function() {
             for (var i = 0; i < 4; i++) {
               o[s+i] = [i, 0];
             }
-            console.log(o);
             return o;
           }
           
-          Crafty.sprite(48, 48, consts.ASSETS.HERO_CELL, cellMap("cellHero"));
-          Crafty.sprite(48, 48, consts.ASSETS.CELL_NORMAL, cellMap("cellNormal"));
+          Crafty.sprite(48, 48, consts.ASSETS.HERO_CELL, cellMap("CellHero"));
+          Crafty.sprite(48, 48, consts.ASSETS.CELL_NORMAL, cellMap("CellNormal"));
           
           // Launch game
           game();

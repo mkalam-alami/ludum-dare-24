@@ -23,7 +23,8 @@ c.c('CellNormal', {
   },
   
   _onHitPlayer: function(e) {
-    e[0].obj.targetCell = this;
+    this.player = e[0].obj;
+    this.player.targetCell = this;
     
     // Remove halo from other cells
     _.each(c('Cell'), function(id) {
@@ -50,6 +51,7 @@ c.c('CellNormal', {
     if (this.halo) {
       this.halo.destroy();
       this.halo = null;
+      this.player.targetCell = null;
     }
   }
   
