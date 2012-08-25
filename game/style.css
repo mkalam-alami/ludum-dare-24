@@ -1,3 +1,9 @@
 #cr-stage {
   background-color: #BBB;
 }
+
+.LoadingMessage {
+  font-size: 25pt;
+  text-align: center;
+  position: relative;
+}
