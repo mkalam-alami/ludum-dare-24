@@ -24,7 +24,7 @@ c.c('SceneFade', {
   },
     
   _tweenEnd: function(param) {
-    if (this.alpha > 0.9) {
+    if (this.alpha > 0.5) {
         c.scene(this.targetScene);
         this.tween({
           fadeout: true,
@@ -48,10 +48,15 @@ c.c('Finish', {
     this.end = false;
   },
   
-  _endLevel: function() {
-    if (!this.end) {
-      c.e('Player').destroy();
-      var blackBg = c.e('2D, DOM, SceneFade').sceneFade('nextLevel');
+  _endLevel: function(e) {
+    if (!this.end && c('SceneFade').length == 0) {
+      try {
+        e[0].obj.disable();
+      }
+      catch (error) {
+        console.error(error);
+      } 
+      c.e('2D, DOM, SceneFade').sceneFade('nextLevel');
       this.end = true;
     }
   }
@@ -71,6 +76,32 @@ c.c('Wall', {
       [this.MARGIN,this.w-this.MARGIN]);
   }
   
+});
+
+c.c('Dead', {
+
+  dead: false,
+
+  init: function() {
+    this.addComponent('Collision');
+    this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
+    this.collision();
+    this.onHit('Player', this._restartLevel);
+  },
+  
+  _restartLevel: function(e) {
+    if (!this.dead) {
+      this.dead = true;
+      try {
+        e[0].obj.die();
+      }
+      catch (error) {
+        console.error(error);
+      }
+      c.e('2D, DOM, SceneFade').sceneFade('game');
+    }
+  }
+
 });
 
 });

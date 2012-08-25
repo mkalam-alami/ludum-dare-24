@@ -12,8 +12,6 @@ c.c('Player', {
     //this.image('img/entities/hero-cell.png');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     
-    c.viewport.centerOn(this); // FIXME
-    
     this.bind('KeyDown', this._keyDown);
     this.bind('EnterFrame', this._enterFrame);
     this.onHit('Wall', this._hitWall);
@@ -24,6 +22,7 @@ c.c('Player', {
     this.jumping = false;
     this.collisions = {};
     this.i = this.j = 0;
+    this.disabled = false;
     
     // Appearance
     this.bodySize = 1;
@@ -31,6 +30,15 @@ c.c('Player', {
     this.sprites = [];
     this.attachedCells = [this]; // {index:X , cell:X} (if null, true body otherwise celltype)
     this.refresh();
+  },
+  
+  disable: function() {
+    this.disabled = true;
+    this.unbind('EnterFrame');
+  },
+  
+  die: function() {
+    this.disable();
   },
   
   refresh: function() {
@@ -41,7 +49,7 @@ c.c('Player', {
     this.sprites = [];
     
     // Update collision polygon & shape
-    if (this.bodySize == 1) {
+    if (this.bodySize <= 1) {
       var circle = new Crafty.circle(0, 0, this.w/2);
       circle.shift(this.w/2, this.w/2);
       this.collision(circle);
@@ -183,7 +191,9 @@ c.c('Player', {
   
   _hitWall: function(e) {
     // Collisions lookup object: hitFloor, hitCeiling, hitLeftWall, hitRightWall
-    
+    if (this.disabled) {
+      return;
+    }
     _.each(e, function(collision) {
       if (collision.normal.x == 1) {
         this.collisions.hitLeftWall = collision;
@@ -204,6 +214,7 @@ c.c('Player', {
     this.bodySize++;
     this.attachedCells.push(targetCell.comp.replace(/^.*, /, ''));
     this.targetCell.destroy();
+    this.targetCell = null;
     this.refresh();
   }
   

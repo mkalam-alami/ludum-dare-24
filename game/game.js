@@ -22,6 +22,8 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells'],
     });
     c.scene('game', function() {
       c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
+      c.viewport.clampToEntities = true;
+      c.viewport.mouselook(true);
     });
     
     c.scene('nextLevel');
