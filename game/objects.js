@@ -79,7 +79,7 @@ c.c('Wall', {
   },
   
   setup: function() {
-  //  c.e('2D, Canvas, Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
+    //c.e('2D, Canvas, Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
   }
   
 });

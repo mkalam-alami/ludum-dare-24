@@ -71,7 +71,9 @@
           if (!level[tileI]) {
             level[tileI] = [];
           }
-          level[tileI][tileJ] = tile;
+          if (tile.has('Wall')) {
+            level[tileI][tileJ] = tile;
+          }
         }
         
         

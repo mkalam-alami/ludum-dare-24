@@ -136,14 +136,19 @@ c.c('Player', {
   
   _keyDown: function(e) {
     if (e.key == Crafty.keys['ENTER'] && this.targetCell) {
+      if (this.ySpeed <= 0) { // Hack to avoid glitch that make cells teleport
         this._mergeWith(this.targetCell);
+      }
+    }
+    if (e.key == Crafty.keys['R']) {
+      c.scene('game');
     }
     if (this.bodySize > 1) {
       var oldDirection = this.direction;
       
       if (this.isDown('DOWN_ARROW') && e.key == Crafty.keys['LEFT_ARROW']
        || this.isDown('LEFT_ARROW') && e.key == Crafty.keys['DOWN_ARROW']) {
-        if (this._checkEmptyTiles((this.direction % 2 == 1) ? -this.bodySize : 0)) {
+        if (this._checkEmptyTiles((this.direction % 2 == 1) ? -this.bodySize : -1, this.bodySize)) {
           this.direction += 3;
           this.direction %= 4;
           this.refresh(oldDirection);
@@ -151,7 +156,7 @@ c.c('Player', {
       }
       else if (this.isDown('DOWN_ARROW') && e.key == Crafty.keys['RIGHT_ARROW']
        || this.isDown('RIGHT_ARROW') && e.key == Crafty.keys['DOWN_ARROW']) {
-         if (this._checkEmptyTiles((this.direction % 2 == 1) ? this.bodySize : -this.bodySize)) {
+         if (this._checkEmptyTiles((this.direction % 2 == 1) ? this.bodySize-1 : -this.bodySize, this.bodySize)) {
           this.direction++;
           this.direction %= 4;
           this.refresh(oldDirection);
@@ -160,22 +165,21 @@ c.c('Player', {
     }
   },
   
-  _checkEmptyTiles: function(until) {
+  _checkEmptyTiles: function(untilx, untily) {
     var xs;
-    if (until > 0) {
-      xs = _.range(this.i, this.i + until);
+    if (untilx > 0) {
+      xs = _.range(this.i + 1, this.i + untilx + 1);
     }
     else {
-      xs = _.range(this.i + until, this.i);
+      xs = _.range(this.i + untilx + 1, this.i + 1);
     }
-    var ys = _.range(this.j - Math.abs(until) + 1, this.j + 1);
-
+    var ys = _.range(this.j - Math.abs(untily) + 1, this.j + 1);
     var allEmpty = true;
     _.each(xs, function(x) {
       if (allEmpty) {
         _.each(ys, function(y) {
           if (allEmpty && this[x][y]) {
-            console.log("Cannot rotate cells because of " + x + "-" + y);
+            //console.log("Cannot rotate cells because of " + x + "-" + y);
             allEmpty = false;
           }
         }, this);
