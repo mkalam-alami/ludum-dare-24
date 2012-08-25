@@ -15,7 +15,7 @@ requirejs(['lib/underscore',
 
   require(['game'], function(game) {
     $(document).ready(function() {
-      game.run();
+      game();
     });
   });
 

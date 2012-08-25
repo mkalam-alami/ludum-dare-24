@@ -1,6 +1,6 @@
-define(['wan-components', 'tiledLevel', 'player'], {
+define(['consts', 'wan-components', 'tiledLevel', 'player'], function(consts) {
   
-  run: function() {
+  return function() {
 
     // Force focus
     var stage = document.getElementById('cr-stage');
@@ -21,7 +21,9 @@ define(['wan-components', 'tiledLevel', 'player'], {
     $stage = $('#cr-stage');
     c.init($stage.width(), $stage.height());
     c.canvas.init();
-    c.scene('game');
+    c.load(_.values(consts.ASSETS), function() {
+      c.scene('game');
+    });
 
   }
 
