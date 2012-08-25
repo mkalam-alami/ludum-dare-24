@@ -24,12 +24,12 @@
           if (tsProperties[tNum - 1 - tNumOffset]) {
             var tsPropIndex = tNum - 1 - tNumOffset;
             if (tsProperties[tsPropIndex]["components"]) {
-             // if (tsProperties[tsPropIndex]["object"] !== undefined) {
+              if (tsProperties[tsPropIndex]["object"] !== undefined) {
                 components = "2D, " + drawType + ", " + tsProperties[tsPropIndex]["components"];
-             /* }
+              }
               else {
                 components += ", " + tsProperties[tsPropIndex]["components"];
-              }*/
+              }
             }
           }
         }
@@ -50,13 +50,28 @@
     makeLayer: function(layer) {
       var i, lData, lHeight, lWidth, tDatum, tile, _len;
       lData = layer.data, lWidth = layer.width, lHeight = layer.height;
+      var level = [];
       for (i = 0, _len = lData.length; i < _len; i++) {
         tDatum = lData[i];
+        var tileI = i % lWidth;
+        var tileJ = Math.floor(i / lHeight);
+        
         if (tDatum) {
           tile = Crafty.e("tile" + tDatum);
           tile.x = (i % lWidth) * tile.w;
           tile.y = (i / lWidth | 0) * tile.h;
+          tile.i = tileI;
+          tile.j = tileJ;
+          tile.level = level;
+          
+          // Fill level table
+          if (!level[tileI]) {
+            level[tileI] = [];
+          }
+          level[tileI][tileJ] = tile;
         }
+        
+        
       }
       return null;
     },

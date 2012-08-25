@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="19" height="16" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="6" height="6" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
   <image source="img/tiles/standard.png" width="192" height="192"/>
   <tile id="0">
@@ -34,14 +34,14 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="19" height="16">
+ <layer name="Tiles" width="6" height="6">
   <data encoding="base64" compression="zlib">
-   eJy9kl0KACAIgxXqAN3/stVDIFJz/dBgT8ZnjqmIlGZ95K4MrME8O9Zqzwnrx7/sGyR7BzKjaOcOK0mcFyvLGmKyQSw2b7art2JYu53wst1jb5jNEQfx/IzhjG6vWK9cAXaLAbs=
+   eJxjZGBgEARiRiwYBFiRMC41yGxkABJjQmIji+PCABbMADk=
   </data>
  </layer>
- <layer name="Objects" width="19" height="16">
+ <layer name="Objects" width="6" height="6">
   <data encoding="base64" compression="zlib">
-   eJwTYaAOEIHiUbOGtllMg9wsXBgd4FNLDCbVHHyA2PjBp45Ue8kNF2LNIjVMJEnQRwoGABxFB9w=
+   eJwTYcAORKgkLkSiegAnkAB3
   </data>
  </layer>
 </map>

@@ -4,10 +4,10 @@ define(['consts', 'wan-components'], function(consts) {
 
 c.c('Player', {
   
-  ACCELERATION: 0.9,
-  BOUNCING: 0.3,
+  ACCELERATION: 1.2,
+  BOUNCING: 0.4,
   FRICTION: 0.85,
-  JUMP: 7,
+  JUMP_TABLE: [7],
 
   init: function() {
     this.addComponent('Image, Keyboard, Canvas, Collision');
@@ -24,85 +24,122 @@ c.c('Player', {
     this.onHit('Ramp', this._hitRamp);
     this.xSpeed = 0;
     this.ySpeed = 0;
+    this.prevX = 0;
+    this.prevY = 0;
+    this.collisions = {};
+    
+    this.jumping = false;
+    this.bodySize = 1;
   },
   
   _enterFrame: function(e) {
-    if (this.isDown('LEFT_ARROW')) {
-      this.xSpeed -= this.ACCELERATION;
+    // Handle collisions
+    if (this.collisions.hitFloor && !this.collisions.hitCeiling) {
+      // Floor
+      if (Math.abs(this.collisions.hitFloor.overlap) > 1) {
+        this.y -= Math.abs(this.collisions.hitFloor.overlap) / 2;
+      }
+      else {
+        this.ySpeed = 0;
+      }
+      this.ySpeed *= -this.BOUNCING;
+      // Fall from edges
+      var i = this.collisions.hitFloor.obj.i, j = this.collisions.hitFloor.obj.j;
+      if (this.x - this.collisions.hitFloor.obj.x > 30
+        && !this.level[i+1][j] && Math.abs(this.xSpeed) < 3) {
+        this.xSpeed++;
+      }
+      if (this.x - this.collisions.hitFloor.obj.x < -30
+        && !this.level[i-1][j] && Math.abs(this.xSpeed) < 3) {
+        this.xSpeed--;
+      }
     }
-    if (this.isDown('RIGHT_ARROW')) {
-      this.xSpeed += this.ACCELERATION;
+    else if (!this.collisions.hitFloor && this.collisions.hitCeiling) {
+      // Ceiling
+      this.ySpeed *= -this.BOUNCING;
+      this.y -= this.collisions.hitCeiling.overlap;
     }
-    if (this.isDown('UP_ARROW') && this.onFloor) {
-      this.ySpeed = -this.JUMP;
+    if (this.collisions.hitLeftWall && !this.collisions.hitRightWall) {
+      // Left wall
+      this.xSpeed *= this.FRICTION;
+      this.x -= this.collisions.hitLeftWall.overlap;
     }
-    this.xSpeed *= this.FRICTION;
+    else if (!this.collisions.hitLeftWall && this.collisions.hitRightWall) {
+      // Right wall
+      this.xSpeed *= this.FRICTION;
+      this.x += this.collisions.hitRightWall.overlap;
+    }
+    else if (this.collisions.hitLeftWall && this.collisions.hitRightWall) {
+      // Vertical "tube"
+      this.xSpeed = 0;
+    }
     
-    if (!this.onFloor) {
+    // Handle physics
+    if (!this.collisions.hitFloor) {
       this.ySpeed += consts.GRAVITY;
     }
-    this.onFloor = false;
+    else if (this.jumping) {
+      this.jumping = false;
+    }
+    if (!this.jumping) {
+      this.xSpeed *= this.FRICTION;
+    }
     
+    // Handle controls
+    if (!this.jumping) {
+      if (this.isDown('LEFT_ARROW') && !this.collisions.hitLeftWall) {
+        this.xSpeed -= this.ACCELERATION;
+      }
+      if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
+        this.xSpeed += this.ACCELERATION;
+      }
+      if (this.isDown('UP_ARROW') && !this.jumping
+        && this.collisions.hitFloor && !this.collisions.hitCeiling) {
+        if (this.isDown('LEFT_ARROW')) {
+          this.xSpeed = -5;
+        }
+        if (this.isDown('RIGHT_ARROW')) {
+          this.xSpeed = 5;
+        }
+        this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
+        this.jumping = true;
+      }
+    }
+    
+    // Update position/rotation
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-    this.rotation += this.xSpeed;
+    this.rotation += (this.x - this.prevX) * 2;
+    this.prevX = this.x;
+    this.prevY = this.y;
+    
+    this.collisions = {};
   },
   
   _hitWall: function(e) {
+    // Collisions lookup object: hitFloor, hitCeiling, hitLeftWall, hitRightWall
+    
     _.each(e, function(collision) {
-      // If top almost reached, consider it a floor
-      if (collision.normal.x != 0 && collision.obj.y - this.y > this.h - 30) {
-        collision.normal = {x: 0, y: -1};
-        this.xSpeed *= .8;
+      if (collision.normal.x == 1) {
+        this.collisions.hitLeftWall = collision;
       }
-  
-      // Walls
-      if (collision.normal.x == -1) {
-        this.xSpeed *= -this.BOUNCING;
-        if (collision.overlap < 1) {
-          this.x += collision.overlap;
-        }
+      else if (collision.normal.x == -1) {
+        this.collisions.hitRightWall = collision;
       }
-     else if (collision.normal.x == 1) {
-      this.xSpeed *= -this.BOUNCING;
-      if (collision.overlap < 1) {
-        this.x -= collision.overlap;
+      else if (collision.normal.y == -1) {
+        this.collisions.hitFloor = collision;
       }
-     }
-     
-     // Floor
-     else if (collision.normal.y == -1) {
-      this.onFloor = true;
-      this.ySpeed *= -this.BOUNCING;
-      if (collision.overlap < 1) {
-        this.y += collision.overlap;
+      else if (collision.normal.y == 1) {
+        this.collisions.hitCeiling = collision;
       }
-     }
-     
-     // Ceiling
-     else if (collision.normal.y == 1) {
-      this.ySpeed = 0;
-      if (collision.overlap < 1) {
-        this.y -= collision.overlap;
-      }
-     }
-     
-    }, this);
-  },
-  
-  _hitRamp: function(e) {
-    _.each(e, function(collision) {
-       this.onFloor = true;
-       this.x -= collision.normal.x * collision.overlap;
-       this.y -= collision.normal.y * collision.overlap;
-       this.xSpeed *= 1.1;
     }, this);
   }
+  
 });
 
 c.c('Wall', {
   
-  MARGIN: 1,
+  MARGIN: 0,
 
   init: function() {
     this.addComponent('Collision');
@@ -111,26 +148,6 @@ c.c('Wall', {
       [this.w-this.MARGIN,this.MARGIN],
       [this.w-this.MARGIN,this.w-this.MARGIN],
       [this.MARGIN,this.w-this.MARGIN]);
-  }
-  
-});
-
-c.c('LeftRamp', {
-
-  init: function() {
-    this.addComponent('Ramp, Collision');
-    this.attr({w: consts.TILESIZE, h: consts.TILESIZE});
-    this.collision([48,0], [48,48], [0,48]);
-  }
-  
-});
-
-c.c('RightRamp', {
-
-  init: function() {
-    this.addComponent('Ramp, Collision');
-    this.attr({w: consts.TILESIZE, h: consts.TILESIZE});
-    this.collision([0,0], [48,48], [0,48]);
   }
   
 });

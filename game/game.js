@@ -10,8 +10,11 @@ define(['consts', 'wan-components', 'tiledLevel', 'player'], function(consts) {
 
     // Game scene
     c.scene('game', function() {
-      Crafty.e('TiledLevel').tiledLevel('level1.json', 'Canvas', function() {
+      c.e('TiledLevel').tiledLevel('level1.json', 'DOM', function() {
         console.log('level1.json loaded');
+      });
+      c.e('2D, DOM, Text').bind('EnterFrame', function() {
+        this.text(c.timer.getFPS());
       });
     });
     
