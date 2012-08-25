@@ -42,7 +42,7 @@ c.c('Finish', {
 
   init: function() {
     this.addComponent('Collision');
-    this.attr({w: consts.TILESIZE, h: consts.TILESIZE});
+    this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     this.collision();
     this.onHit('Player', this._endLevel);
     this.end = false;
@@ -64,7 +64,7 @@ c.c('Wall', {
 
   init: function() {
     this.addComponent('Collision');
-    this.attr({w: consts.TILESIZE, h: consts.TILESIZE});
+    this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     this.collision([this.MARGIN,this.MARGIN],
       [this.w-this.MARGIN,this.MARGIN],
       [this.w-this.MARGIN,this.w-this.MARGIN],

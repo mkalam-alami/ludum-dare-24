@@ -1,4 +1,4 @@
-define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects'], function(consts) {
+define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells'], function(consts) {
   
   return function() {
 
