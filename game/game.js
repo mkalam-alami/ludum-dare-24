@@ -11,7 +11,7 @@ define(['consts', 'wan-components', 'tiledLevel', 'player'], function(consts) {
     // Game scene
     c.scene('game', function() {
     
-      Crafty.e('TiledLevel').tiledLevel('./levels/1.json', 'Canvas', function() {
+      Crafty.e('TiledLevel').tiledLevel('level1.json', 'Canvas', function() {
       
       });
     
