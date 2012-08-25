@@ -97,7 +97,7 @@
             }
             return _results;
           })();
-          Crafty.load(tsImages, function() {
+         // Crafty.load(tsImages, function() {
             var layer, ts, _i, _j, _len, _len2;
             for (_i = 0, _len = tss.length; _i < _len; _i++) {
               ts = tss[_i];
@@ -111,7 +111,7 @@
               callback();
             }
             return null;
-          });
+        // });
           return null;
         }
       });

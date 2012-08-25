@@ -2,11 +2,6 @@
 <map version="1.0" orientation="orthogonal" width="6" height="6" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
   <image source="img/tiles/standard.png" width="192" height="192"/>
-  <tile id="0">
-   <properties>
-    <property name="components" value="Wall"/>
-   </properties>
-  </tile>
   <tile id="1">
    <properties>
     <property name="components" value="Finish"/>
@@ -14,7 +9,7 @@
   </tile>
  </tileset>
  <tileset firstgid="17" name="objects" tilewidth="48" tileheight="48">
-  <image source="img/tiles/objects.png" width="384" height="384"/>
+  <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
    <properties>
     <property name="components" value="Player"/>
@@ -33,6 +28,12 @@
     <property name="object" value=""/>
    </properties>
   </tile>
+  <tile id="3">
+   <properties>
+    <property name="components" value="Wall"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tiles" width="6" height="6">
   <data encoding="base64" compression="zlib">
@@ -41,7 +42,7 @@
  </layer>
  <layer name="Objects" width="6" height="6">
   <data encoding="base64" compression="zlib">
-   eJwTYcAORKgkLkSiegAnkAB3
+   eJwTYYAAESTMgEQjAxE8anGpF8JiHj79AG3gAXs=
   </data>
  </layer>
 </map>

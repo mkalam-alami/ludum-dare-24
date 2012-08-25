@@ -1,6 +1,8 @@
 define({
 
-  GRAVITY: 0.5,
+  RENDER: "Canvas",
+
+  GRAVITY: 0.8,
   TILE_SIZE: 48,
   LEVEL_COUNT: 2,
   
@@ -12,7 +14,8 @@ define({
     HERO_CELL: 'img/entities/hero-cell.png',
     HERO_CELL_CORE: 'img/entities/hero-cell-core.png',
     
-    STANDARD_SPRITESHEET: 'img/tiles/standard.png'
+    STANDARD_SPRITESHEET: 'img/tiles/standard.png',
+    OBJECTS_SPRITESHEET: 'img/tiles/objects.png'
   }
 
 });

@@ -1,9 +1,9 @@
 define(['consts'], function(consts) {
 
-c.c('CellSimple', {
+c.c('CellNormal', {
 
   init: function() {
-    this.addComponent('Collision, Cell');
+    this.addComponent('cellNormal0, Collision, Cell');
     
     var circle = new Crafty.circle(0, 0, this.w * 5);
     circle.shift(this.w/2, this.w/2);

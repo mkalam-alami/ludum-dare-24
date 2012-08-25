@@ -38,11 +38,24 @@ requirejs(['lib/jquery', 'lib/crafty'], function() {
           .attr({x: 0, y: $stage.height()/2 - 20, w: $stage.width(), h: 40})
           .text(assetsLoadBaseText + "<b>0%</b>");
         c.load(_.values(consts.ASSETS), function() {
+          // Register sprites
+          function cellMap(s) {
+            var o = {};
+            for (var i = 0; i < 4; i++) {
+              o[s+i] = [i, 0];
+            }
+            console.log(o);
+            return o;
+          }
+          
+          Crafty.sprite(48, 48, consts.ASSETS.HERO_CELL, cellMap("cellHero"));
+          Crafty.sprite(48, 48, consts.ASSETS.CELL_NORMAL, cellMap("cellNormal"));
+          
           // Launch game
           game();
         },
         function(e) {
-          assetsLoadText.text(assetsLoadBaseText + "<b>" + e.percent + "%</b>");
+          assetsLoadText.text(assetsLoadBaseText + "<b>" + Math.floor(e.percent) + "%</b>");
         });
       });
       c.scene('loadassets');

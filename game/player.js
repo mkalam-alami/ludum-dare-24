@@ -1,38 +1,91 @@
 define(['consts', 'wan-components'], function(consts) {
 
-
-
 c.c('Player', {
   
-  ACCELERATION: 1.2,
+  ACCELERATION: 1.5,
   BOUNCING: 0.4,
   FRICTION: 0.85,
-  JUMP_TABLE: [7],
+  JUMP_TABLE: [9, 15, 19, 25], // TODO
 
   init: function() {
     this.addComponent('Image, Keyboard, Canvas, Collision');
-    this.image('img/entities/hero-cell.png');
+    //this.image('img/entities/hero-cell.png');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
-    this.origin(this.w/2, this.w/2);
     
-    c.viewport.centerOn(this);
-    
-    var circle = new Crafty.circle(0, 0, this.w/2);
-    circle.shift(this.w/2, this.w/2);
-    this.collision(circle);
+    c.viewport.centerOn(this); // FIXME
     
     this.bind('EnterFrame', this._enterFrame);
     this.onHit('Wall', this._hitWall);
-    this.onHit('Ramp', this._hitRamp);
     this.xSpeed = 0;
     this.ySpeed = 0;
     this.prevX = 0;
     this.prevY = 0;
+    this.jumping = false;
     this.collisions = {};
     this.i = this.j = 0;
     
-    this.jumping = false;
+    // Appearance
     this.bodySize = 1;
+    this.vertical = false;
+    this.sprites = [];
+    this.attachedCells = [this]; // {index:X , cell:X} (if null, true body)
+    this.refresh();
+  },
+  
+  refresh: function() {
+    // Reset sprites
+    _.each(this.sprites, function(sprite) {
+      sprite.destroy();
+    });
+    this.sprites = [];
+    
+    // Update collision polygon & shape
+    if (this.bodySize == 1) {
+      var circle = new Crafty.circle(0, 0, this.w/2);
+      circle.shift(this.w/2, this.w/2);
+      this.collision(circle);
+      this.origin(this.w/2, this.w/2);
+    }
+    else {
+      this.rotation = 0;
+      var ww = consts.TILE_SIZE*this.bodySize;
+      this.attr({w: ww, h: consts.TILE_SIZE});
+      this.collision([0,0], [ww,0], [ww,this.h], [0,this.h]);
+    }
+    
+    // Create new ones
+    var newSprite = null, i = 0;
+    _.each(this.attachedCells, function(cell) {
+      var spriteId = 2;
+      if (this.bodySize == 1) {
+        spriteId = 0;
+      }
+      else if (i == 0) {
+        spriteId = 1;
+      }
+      else if (i == this.attachedCells.length - 1) {
+        spriteId = 3;
+      }
+      if (cell == this) {
+        newSprite = c.e('2D, ' + consts.RENDER + ', cellHero' + spriteId)
+          .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE, x: (i++ * 48), y: 0, z: 100});
+        this.attach(newSprite);
+        console.log(newSprite);
+      }
+      else {
+        newSprite = c.e('2D, ' + consts.RENDER + ', cellNormal' + spriteId)
+          .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE, x: (i++ * 48), y: 0, z: 100});
+        this.attach(newSprite);
+        console.log(newSprite);
+      }
+      if (newSprite != null) {
+        this.sprites.push(newSprite);
+      }
+      else {
+        console.error("No sprite for " + cell);
+      }
+    }, this);
+    
   },
   
   _enterFrame: function(e) {
@@ -97,9 +150,8 @@ c.c('Player', {
       if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
         this.xSpeed += this.ACCELERATION;
       }
-      console.log(this.level[this.i][this.j-1]);
-      if (this.isDown('UP_ARROW') && !this.jumping
-        && this.collisions.hitFloor && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
+      if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
+          && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
         if (this.isDown('LEFT_ARROW')) {
           this.xSpeed = -5;
         }
@@ -114,7 +166,9 @@ c.c('Player', {
     // Update position/rotation
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-    this.rotation += (this.x - this.prevX) * 2;
+    if (this.bodySize == 1) {
+      this.rotation += (this.x - this.prevX) * 2;
+    }
     this.prevX = this.x;
     this.prevY = this.y;
     

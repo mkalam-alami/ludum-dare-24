@@ -21,12 +21,8 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells'],
       c.scene('game');
     });
     c.scene('game', function() {
-      c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', 'DOM');
-      c.e('2D, DOM, Text').bind('EnterFrame', function() {
-        this.text(c.timer.getFPS());
-      });
+      c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
     });
-    
     
     c.scene('nextLevel');
       
