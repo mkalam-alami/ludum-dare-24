@@ -1,4 +1,4 @@
-define(['consts', 'wan-components', 'tiledLevel', 'player'], function(consts) {
+define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects'], function(consts) {
   
   return function() {
 
@@ -7,18 +7,28 @@ define(['consts', 'wan-components', 'tiledLevel', 'player'], function(consts) {
     if (stage.focus) {
       stage.focus();
     }
+    
+    var gameState = {
+      currentLevel: 0
+    };
 
-    // Game scene
+    // Game scenes
+    c.scene('nextLevel', function() {
+      gameState.currentLevel++;
+      if (gameState.currentLevel > consts.LEVEL_COUNT) {
+        gameState.currentLevel = 1; // TODO Endgame
+      }
+      c.scene('game');
+    });
     c.scene('game', function() {
-      c.e('TiledLevel').tiledLevel('level1.json', 'DOM', function() {
-        console.log('level1.json loaded');
-      });
+      c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', 'DOM');
       c.e('2D, DOM, Text').bind('EnterFrame', function() {
         this.text(c.timer.getFPS());
       });
     });
     
-    c.scene('game');
+    
+    c.scene('nextLevel');
       
   }
 

@@ -2,6 +2,7 @@ define({
 
   GRAVITY: 0.5,
   TILESIZE: 48,
+  LEVEL_COUNT: 2,
   
   ASSETS: {
     CELL_NORMAL: 'img/entities/cell-normal.png',

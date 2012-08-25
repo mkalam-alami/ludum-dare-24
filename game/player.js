@@ -15,6 +15,8 @@ c.c('Player', {
     this.attr({w: consts.TILESIZE, h: consts.TILESIZE});
     this.origin(this.w/2, this.w/2);
     
+    c.viewport.centerOn(this);
+    
     var circle = new Crafty.circle(0, 0, this.w/2);
     circle.shift(this.w/2, this.w/2);
     this.collision(circle);
@@ -35,6 +37,8 @@ c.c('Player', {
   _enterFrame: function(e) {
     // Handle collisions
     if (this.collisions.hitFloor && !this.collisions.hitCeiling) {
+      this.i = this.collisions.hitFloor.obj.i;
+      this.j = this.collisions.hitFloor.obj.j - 1;
       // Floor
       if (Math.abs(this.collisions.hitFloor.overlap) > 1) {
         this.y -= Math.abs(this.collisions.hitFloor.overlap) / 2;
@@ -44,20 +48,19 @@ c.c('Player', {
       }
       this.ySpeed *= -this.BOUNCING;
       // Fall from edges
-      var i = this.collisions.hitFloor.obj.i, j = this.collisions.hitFloor.obj.j;
       if (this.x - this.collisions.hitFloor.obj.x > 30
-        && !this.level[i+1][j] && Math.abs(this.xSpeed) < 3) {
+        && (!this.level[this.i+1] || !this.level[this.i+1][this.j+1]) && Math.abs(this.xSpeed) < 3) {
         this.xSpeed++;
       }
       if (this.x - this.collisions.hitFloor.obj.x < -30
-        && !this.level[i-1][j] && Math.abs(this.xSpeed) < 3) {
+        && (!this.level[this.i-1] || !this.level[this.i-1][this.j+1]) && Math.abs(this.xSpeed) < 3) {
         this.xSpeed--;
       }
     }
     else if (!this.collisions.hitFloor && this.collisions.hitCeiling) {
       // Ceiling
       this.ySpeed *= -this.BOUNCING;
-      this.y -= this.collisions.hitCeiling.overlap;
+      this.y -= this.collisions.hitCeiling.overlap / 2;
     }
     if (this.collisions.hitLeftWall && !this.collisions.hitRightWall) {
       // Left wall
@@ -94,7 +97,7 @@ c.c('Player', {
         this.xSpeed += this.ACCELERATION;
       }
       if (this.isDown('UP_ARROW') && !this.jumping
-        && this.collisions.hitFloor && !this.collisions.hitCeiling) {
+        && this.collisions.hitFloor && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
         if (this.isDown('LEFT_ARROW')) {
           this.xSpeed = -5;
         }

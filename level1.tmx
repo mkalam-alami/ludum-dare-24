@@ -36,12 +36,12 @@
  </tileset>
  <layer name="Tiles" width="19" height="16">
   <data encoding="base64" compression="zlib">
-   eJy9kl0KACAIgxXqAN3/stVDIFJz/dBgT8ZnjqmIlGZ95K4MrME8O9Zqzwnrx7/sGyR7BzKjaOcOK0mcFyvLGmKyQSw2b7art2JYu53wst1jb5jNEQfx/IzhjG6vWK9cAXaLAbs=
+   eJy9kkEKgDAMBBOxD/D/n1UPhRB0M63FgT2lnTYhbmbHFV+UmybiRb0l19s7M64//hXPKGIfKoTqzRHXbvW8KNHVIbNRLjpvuqtfIa7RncjE3aM9PNWVR/lyjXj6bmc2eJfmBHbbAbw=
   </data>
  </layer>
  <layer name="Objects" width="19" height="16">
   <data encoding="base64" compression="zlib">
-   eJwTYaAOEIHiUbOGtllMg9wsXBgd4FNLDCbVHHyA2PjBp45Ue8kNF2LNIjVMJEnQRwoGABxFB9w=
+   eJwTYaAOEIHiUbOGtllMg9wsXBgd4FNLDCbVHHyA2PjBp45Ue8kNF2LNIjVMJEnUSywGABYFB8g=
   </data>
  </layer>
 </map>

@@ -107,7 +107,9 @@
               layer = lLayers[_j];
               _this.makeLayer(layer);
             }
-            callback();
+            if (callback) {
+              callback();
+            }
             return null;
           });
           return null;
