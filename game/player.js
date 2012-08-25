@@ -6,9 +6,10 @@ c.c('Player', {
   BOUNCING: 0.4,
   FRICTION: 0.85,
   JUMP_TABLE: [9, 15, 19, 25], // TODO
+  ROTATION_SPEED: 9,
 
   init: function() {
-    this.addComponent('Image, Keyboard, Canvas, Collision');
+    this.addComponent('Image, Tween, Keyboard, Canvas, Collision, WiredHitBox');
     //this.image('img/entities/hero-cell.png');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     
@@ -20,13 +21,14 @@ c.c('Player', {
     this.prevX = 0;
     this.prevY = 0;
     this.jumping = false;
+    this.rotating = false;
     this.collisions = {};
     this.i = this.j = 0;
     this.disabled = false;
     
     // Appearance
     this.bodySize = 1;
-    this.vertical = false;
+    this.direction = 0; // 0 = right 1 = top 2 = left 3 = bottom
     this.sprites = [];
     this.attachedCells = [this]; // {index:X , cell:X} (if null, true body otherwise celltype)
     this.refresh();
@@ -41,7 +43,24 @@ c.c('Player', {
     this.disable();
   },
   
-  refresh: function() {
+  setRotationCenter: function(center) {
+    _.each(this.sprites, function(sprite, i) {
+      sprite.origin((-i + 1/2 + center)*consts.TILE_SIZE, consts.TILE_SIZE / 2);
+    });
+  },
+  
+  shiftRotation: function(amount) {
+    _.each(this.sprites, function(sprite) {
+      sprite.rotation += amount
+    }, this);
+  },
+  
+  refresh: function(oldDirection) {
+    // Prepare offset on rotation (hacky...)
+    if (this.bodySize > 1) {
+      this._fixPositionBeforeRotation(oldDirection);
+    }
+    
     // Reset sprites
     _.each(this.sprites, function(sprite) {
       sprite.destroy();
@@ -56,13 +75,21 @@ c.c('Player', {
     }
     else {
       this.rotation = 0;
-      var ww = consts.TILE_SIZE*this.bodySize;
-      this.attr({w: ww, h: consts.TILE_SIZE});
-      this.collision([0,0], [ww,0], [ww,this.h], [0,this.h]);
+      var newWidth = consts.TILE_SIZE*this.bodySize;
+      var newHeight = consts.TILE_SIZE;
+      if (this.direction % 2 == 1) {
+        var buffer = newWidth;
+        newWidth = newHeight;
+        newHeight = buffer;
+      }
+      this.attr({w: newWidth, h: newHeight});
+      this.collision([0,0], [newWidth,0], [newWidth,newHeight], [0,newHeight]);
     }
     
     // Create new ones
-    var newSprite = null, i = 0;
+    var newSprite = null, i = 0, 
+      xOffset = (this.direction == 2) ? consts.TILE_SIZE : 0,
+      yOffset = (this.direction == 3) ? consts.TILE_SIZE : 0;
     _.each(this.attachedCells, function(cellType) {
       var spriteId = 2;
       if (this.bodySize == 1) {
@@ -77,16 +104,17 @@ c.c('Player', {
       if (cellType == this) {
         newSprite = c.e('2D, ' + consts.RENDER + ', CellHero' + spriteId)
           .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE,
-            x: this.x + (i++ * 48), y: this.y, z: 100});
-        newSprite.origin(newSprite.w/2, newSprite.w/2);
-        this.attach(newSprite);
+            x: xOffset + this.x + (i * consts.TILE_SIZE),
+            y: yOffset + this.y});
       }
       else {
         newSprite = c.e('2D, ' + consts.RENDER + ', ' + cellType + spriteId)
           .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE,
-            x: this.x + (i++ * 48), y: this.y, z: 100});
-        this.attach(newSprite);
+            x: xOffset + this.x + (i * 48),
+            y: yOffset + this.y});
       }
+      this.attach(newSprite);
+      i++;
       if (newSprite != null) {
         this.sprites.push(newSprite);
       }
@@ -94,12 +122,54 @@ c.c('Player', {
         console.error("No sprite for " + cellType);
       }
     }, this);
+    
+    this.setRotationCenter(0);
+    this.shiftRotation(90 * this.direction);
+    
   },
   
   _keyDown: function(e) {
-    if (e.keyIdentifier == "Enter" && this.targetCell) {
+    if (Crafty.keys['ENTER'] && this.targetCell) {
         this._mergeWith(this.targetCell);
     }
+    if (this.isDown('DOWN_ARROW')) {
+      var oldDirection = this.direction;
+      if (e.key == Crafty.keys['LEFT_ARROW']
+        && this._checkEmptyTiles(-this.bodySize)) {
+        this.direction += 3;
+        this.direction %= 4;
+        this.refresh(oldDirection);
+      }
+      else if (e.key == Crafty.keys['RIGHT_ARROW']
+        && this._checkEmptyTiles(this.bodySize)) {
+        this.direction++;
+        this.direction %= 4;
+        this.refresh(oldDirection);
+      }
+    }
+  },
+  
+  _checkEmptyTiles: function(until) {
+    var xs;
+    if (until > 0) {
+      xs = _.range(this.i, this.i + until);
+    }
+    else {
+      xs = _.range(this.i + until, this.i);
+    }
+    var ys = _.range(this.j - Math.abs(until), this.j);
+    var allEmpty = true;
+    _.each(xs, function(x) {
+      if (allEmpty) {
+        _.each(ys, function(y) {
+          if (allEmpty && this[x][y]) {
+            //console.log("Cannot turn cells because of " + x + "-" + y);
+            allEmpty = false;
+          }
+        }, this);
+      }
+    }, this.level);
+    return allEmpty;
   },
   
   _enterFrame: function(e) {
@@ -157,32 +227,45 @@ c.c('Player', {
     }
     
     // Handle controls
-    if (!this.jumping) {
-      if (this.isDown('LEFT_ARROW') && !this.collisions.hitLeftWall) {
-        this.xSpeed -= this.ACCELERATION;
-      }
-      if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
-        this.xSpeed += this.ACCELERATION;
-      }
-      if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
-          && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
-        if (this.isDown('LEFT_ARROW')) {
-          this.xSpeed = -5;
+    if (!this.jumping && this.rotating === false) {
+      if (!this.isDown('DOWN_ARROW')) {
+        if (this.isDown('LEFT_ARROW') && !this.collisions.hitLeftWall) {
+          this.xSpeed -= this.ACCELERATION;
         }
-        if (this.isDown('RIGHT_ARROW')) {
-          this.xSpeed = 5;
+        if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
+          this.xSpeed += this.ACCELERATION;
         }
-        this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
-        this.jumping = true;
+        if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
+            && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
+          if (this.isDown('LEFT_ARROW')) {
+            this.xSpeed = -5;
+          }
+          if (this.isDown('RIGHT_ARROW')) {
+            this.xSpeed = 5;
+          }
+          this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
+          this.jumping = true;
+        }
       }
     }
     
     // Update position/rotation
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-    if (this.bodySize == 1) {
-      this.sprites[0].rotation += (this.x - this.prevX) * 2;
+    /*if (this.bodySize == 1) {
+      this.shiftRotation((this.x - this.prevX) * 2);
     }
+    if (this.rotating !== false) {
+      var amount = this.ROTATION_SPEED * ((this.rotating > 0) ? 1 : -1);
+      this.shiftRotation(amount);
+      this.rotating += amount;
+      if (Math.abs(this.rotating) >= 90) {
+        this.direction += ((this.rotating > 0) ? 1 : -1) + 4;
+        this.direction %= 4;
+        this.rotating = false;
+        this.refresh();
+      }
+    }*/
     this.prevX = this.x;
     this.prevY = this.y;
     
@@ -216,6 +299,59 @@ c.c('Player', {
     this.targetCell.destroy();
     this.targetCell = null;
     this.refresh();
+  },
+  
+  _fixPositionBeforeRotation: function(oldDirection) {
+    if (this.direction == 3) {
+      if (oldDirection == 0) {
+        this.attr({y: this.y - consts.TILE_SIZE * (this.bodySize - 1)});
+      }
+      else {
+        this.attr({
+          x: this.x + consts.TILE_SIZE * (this.bodySize - 1),
+          y: this.y - consts.TILE_SIZE * (this.bodySize - 1)
+        });
+      }
+    }
+    if (this.direction == 2) {
+      if (oldDirection == 3) {
+        this.attr({
+          x: this.x - consts.TILE_SIZE * (this.bodySize - 1),
+          y: this.y + consts.TILE_SIZE * (this.bodySize - 1)
+        });
+      }
+      else {
+        this.attr({
+          y: this.y + consts.TILE_SIZE * (this.bodySize - 1)
+        });
+      }
+    }
+    if (this.direction == 1) {
+      if (oldDirection == 2) {
+        this.attr({
+          y: this.y - consts.TILE_SIZE * (this.bodySize - 1),
+        });
+      }
+      else {
+        this.attr({
+          x: this.x + consts.TILE_SIZE * (this.bodySize - 1),
+          y: this.y - consts.TILE_SIZE * (this.bodySize - 1),
+        });
+      }
+    }
+    if (this.direction == 0) {
+      if (oldDirection == 1) {
+        this.attr({
+          x: this.x - consts.TILE_SIZE * (this.bodySize - 1),
+          y: this.y + consts.TILE_SIZE * (this.bodySize - 1)
+        });
+      }
+      else if (oldDirection == 3) {
+        this.attr({
+          y: this.y + consts.TILE_SIZE * (this.bodySize - 1)
+        });
+      }
+    }
   }
   
 });
