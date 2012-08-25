@@ -10,7 +10,7 @@ define(['lib/jquery'], function() {
     GRAVITY: 0.8,
     TILE_SIZE: 48,
     LEVEL_COUNT: 5,
-    START_LEVEL: 5,
+    START_LEVEL: 1,
     
     ASSETS: {
       CELL_NORMAL: 'img/entities/cell-normal.png',
