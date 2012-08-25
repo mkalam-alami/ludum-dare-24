@@ -5,5 +5,23 @@
 .LoadingMessage {
   font-size: 25pt;
   text-align: center;
-  position: relative;
+}
+
+.SceneFade {
+  background-color: white;
+}
+
+.GameOver {
+  font-size: 23pt;
+  text-align: center;
+  padding: 50px;
+}
+
+.Message {
+  font-size: 15pt;
+}
+
+.MessageCentered {
+  font-size: 15pt;
+  text-align: center;
 }

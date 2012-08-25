@@ -9,7 +9,7 @@ c.c('Player', {
   ROTATION_SPEED: 9,
 
   init: function() {
-    this.addComponent('Image, Tween, Keyboard, Canvas, Collision'); //, WiredHitBox
+    this.addComponent(consts.RENDER + ', Image, Tween, Keyboard, Collision'); //, WiredHitBox
     //this.image('img/entities/hero-cell.png');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     
@@ -32,7 +32,11 @@ c.c('Player', {
     this.bodySize = 1;
     this.direction = 0; // 0 = right 1 = top 2 = left 3 = bottom
     this.sprites = [];
+    
+    // Powerups
+    this.canJump = false;
     this.attachedCells = [this]; // {index:X , cell:X} (if null, true body otherwise celltype)
+    
     this.refresh();
   },
   
@@ -239,7 +243,7 @@ c.c('Player', {
         this.xSpeed = this.XSPEED;
       }
     }
-    if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
+    if (this.isDown('UP_ARROW') && !this.jumping && this.canJump && this.collisions.hitFloor
         && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
       if (this.isDown('LEFT_ARROW')) {
         this.xSpeed = -this.XSPEED;
@@ -303,9 +307,19 @@ c.c('Player', {
   },
   
   _mergeWith: function(targetCell) {
-    this.bodySize++;
-    this.attachedCells.push(targetCell.comp.replace(/^.*, /, ''));
-    this.targetCell.destroy();
+    var newCellType = targetCell.comp.replace(/^.*, /, '');
+    if (newCellType == 'CellJump') {
+      this.canJump = true;
+      targetCell.x = this.x;
+      targetCell.y = this.y;
+      this.attach(targetCell);
+      targetCell.attached();
+    }
+    else {
+      this.bodySize++;
+      this.attachedCells.push(targetCell.comp.replace(/^.*, /, ''));
+      this.targetCell.destroy();
+    }
     this.targetCell = null;
     this.refresh();
   },

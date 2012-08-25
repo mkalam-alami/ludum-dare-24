@@ -5,12 +5,11 @@ c.c('SceneFade', {
   init: function() {
     this.addComponent('Tween, Persist')
       .attr({
+        x: -c.viewport.x,
+        y: -c.viewport.y,
         w: 1000,
         h: 1000,
         alpha: 0
-      })
-      .css({
-        'background-color': 'black'
       })
       .bind('TweenEnd', this._tweenEnd);
   },
@@ -26,6 +25,7 @@ c.c('SceneFade', {
   _tweenEnd: function(param) {
     if (this.alpha > 0.5) {
         c.scene(this.targetScene);
+        this.attr({x: 0, y: 0});
         c.viewport.x = c.viewport.y = 0;
         this.tween({
           fadeout: true,

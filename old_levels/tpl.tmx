@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="17" height="12" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="16" height="12" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
-  <image source="img/tiles/standard.png" width="192" height="192"/>
+  <image source="../img/tiles/standard.png" width="192" height="192"/>
   <tile id="1">
    <properties>
     <property name="components" value="Finish"/>
@@ -14,7 +14,7 @@
   </tile>
  </tileset>
  <tileset firstgid="17" name="objects" tilewidth="48" tileheight="48">
-  <image source="img/tiles/objects.png" width="192" height="192"/>
+  <image source="../img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
    <properties>
     <property name="components" value="Player"/>
@@ -42,13 +42,6 @@
   <tile id="4">
    <properties>
     <property name="components" value="CellNormal"/>
-    <property name="object" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="components" value="CellJump"/>
-    <property name="object" value=""/>
    </properties>
   </tile>
   <tile id="8">
@@ -58,14 +51,14 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="17" height="12">
+ <layer name="Tiles" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQiJgWMRDOIlSPkDnzi1DQDBJhxqMNnBggwATHLIDKDGukbAKiAAHA=
+   eJxjZGBgYKQQkwtG9Y/qp4Z+SjAAUWgANQ==
   </data>
  </layer>
- <layer name="Objects" width="17" height="12">
+ <layer name="Objects" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYEAAERIwNoBLHBfApn6wmyFIoRn4wpAUdxAjTm58IetjwaGGkBnIYLCYQUr6xoUBVroEVg==
+   eJxjYBgFo2DkAgADAAAB
   </data>
  </layer>
 </map>

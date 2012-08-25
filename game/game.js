@@ -16,14 +16,25 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells'],
     c.scene('nextLevel', function() {
       gameState.currentLevel++;
       if (gameState.currentLevel > consts.LEVEL_COUNT) {
-        gameState.currentLevel = 1; // TODO Endgame
+        c.scene('endgame');
       }
-      c.scene('game');
+      else {
+        c.scene('game');
+      }
     });
     c.scene('game', function() {
       c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
       c.viewport.clampToEntities = true;
       c.viewport.mouselook(true);
+    });
+    
+    c.scene('endgame', function() {
+      c.e('2D, DOM, Text, GameOver')
+        .attr({x: 0, y: $stage.height()/2 - 20, w: $stage.width() - 80, h: 40})
+        .text('Congratulations, you finished the game.<br />It was awesome, right?');
+      c.e('2D, DOM, Text, MessageCentered')
+        .attr({x: 0, y: $stage.height()- 50, w: $stage.width(), h: 40})
+        .text('<a href=".">Restart?</a>');
     });
     
     c.scene('nextLevel');

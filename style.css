@@ -2,6 +2,7 @@ body {
   background-color: #CCC;
   font-family: 'Anonymous Pro', sans-serif;
   overflow: hidden;
+  margin-top: 10px;
 }
 
 a {
@@ -20,8 +21,8 @@ div {
 
 #cr-stage {
   margin: auto;
-  width: 920px;
-  height: 768px;
+  width: 768px;
+  height: 576px;
   border: 1px solid black;
   background-color: white;
 }
@@ -30,4 +31,9 @@ div {
   margin: auto;
   text-align: center;
   font-size: 10pt;
+  margin-top: 10px;
+}
+
+.Mouse {
+  cursor: pointer;
 }
