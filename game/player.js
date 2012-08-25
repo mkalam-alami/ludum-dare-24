@@ -5,7 +5,7 @@ c.c('Player', {
   XSPEED: 5,
   BOUNCING: 0.2,
   FRICTION: 0.82,
-  JUMP_TABLE: [9, 12, 16, 19],
+  JUMP_TABLE: [9, 12.5, 16, 19],
   ROTATION_SPEED: 9,
 
   init: function() {
@@ -25,6 +25,8 @@ c.c('Player', {
     this.collisions = {};
     this.i = this.j = 0;
     this.disabled = false;
+    this.viewportXSpeed = 0;
+    this.viewportYSpeed = 0;
     
     // Appearance
     this.bodySize = 1;
@@ -132,15 +134,17 @@ c.c('Player', {
     if (e.key == Crafty.keys['ENTER'] && this.targetCell) {
         this._mergeWith(this.targetCell);
     }
-    if (this.isDown('DOWN_ARROW')) {
+    if (this.bodySize > 1) {
       var oldDirection = this.direction;
-      if (e.key == Crafty.keys['LEFT_ARROW']
+      if ((this.isDown('DOWN_ARROW') && e.key == Crafty.keys['LEFT_ARROW']
+       || this.isDown('LEFT_ARROW') && e.key == Crafty.keys['DOWN_ARROW'])
         && this._checkEmptyTiles(-this.bodySize)) {
         this.direction += 3;
         this.direction %= 4;
         this.refresh(oldDirection);
       }
-      else if (e.key == Crafty.keys['RIGHT_ARROW']
+      else if ((this.isDown('DOWN_ARROW') && e.key == Crafty.keys['RIGHT_ARROW']
+       || this.isDown('RIGHT_ARROW') && e.key == Crafty.keys['DOWN_ARROW'])
         && this._checkEmptyTiles(this.bodySize)) {
         this.direction++;
         this.direction %= 4;
@@ -227,29 +231,50 @@ c.c('Player', {
     }
     
     // Handle controls
-      if (!this.isDown('DOWN_ARROW')) {
-        if (this.isDown('LEFT_ARROW') && !this.collisions.hitLeftWall) {
-          this.xSpeed = -this.XSPEED;
-        }
-        if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
-          this.xSpeed = this.XSPEED;
-        }
+    if (!this.isDown('DOWN_ARROW')) {
+      if (this.isDown('LEFT_ARROW') && !this.collisions.hitLeftWall) {
+        this.xSpeed = -this.XSPEED;
       }
-      if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
-          && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
-        if (this.isDown('LEFT_ARROW')) {
-          this.xSpeed = -this.XSPEED;
-        }
-        if (this.isDown('RIGHT_ARROW')) {
-          this.xSpeed = this.XSPEED;
-        }
-        this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
-        this.jumping = true;
+      if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
+        this.xSpeed = this.XSPEED;
       }
+    }
+    if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
+        && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
+      if (this.isDown('LEFT_ARROW')) {
+        this.xSpeed = -this.XSPEED;
+      }
+      if (this.isDown('RIGHT_ARROW')) {
+        this.xSpeed = this.XSPEED;
+      }
+      this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
+      this.jumping = true;
+    }
     
     // Update position/rotation
     this.x += this.xSpeed;
     this.y += this.ySpeed;
+    if (this.bodySize == 1) {
+      this.shiftRotation((this.x - this.prevX)*2);
+    }
+    
+    // Update viewport
+    //console.log(c.viewport.x + this.x);
+    if (c.viewport.x + this.x < consts.WIDTH/4) {
+      this.viewportXSpeed += 2;
+    }
+    if (c.viewport.x + this.x > consts.WIDTH/2) {
+      this.viewportXSpeed -= 5;
+    }
+    c.viewport.x += this.viewportXSpeed;
+    this._clamp({
+      min: {x: 0, y: 0},
+      max: {x: this.level.length * consts.TILE_SIZE, y: consts.HEIGHT}
+    });
+    this.viewportXSpeed *= this.FRICTION * this.FRICTION;
+   // console.log(c.viewport.x -);
+   // c.viewport.x = -this.x + 400;
+   // c.viewport.y = -this.y + 400;
     this.prevX = this.x;
     this.prevY = this.y;
     
@@ -337,8 +362,38 @@ c.c('Player', {
         });
       }
     }
-  }
+  },
   
+  // Adapted version of the Crafty code
+  _clamp: function (bound) {
+      if (bound.max.x - bound.min.x > Crafty.viewport.width) {
+          bound.max.x -= Crafty.viewport.width;
+
+          if (Crafty.viewport.x < -bound.max.x) {
+              Crafty.viewport.x = -bound.max.x;
+          }
+          else if (Crafty.viewport.x > -bound.min.x) {
+              Crafty.viewport.x = -bound.min.x;
+          }
+      }
+      else {
+          Crafty.viewport.x = -1 * (bound.min.x + (bound.max.x - bound.min.x) / 2 - Crafty.viewport.width / 2);
+      }
+      if (bound.max.y - bound.min.y > Crafty.viewport.height) {
+          bound.max.y -= Crafty.viewport.height;
+
+          if (Crafty.viewport.y < -bound.max.y) {
+              Crafty.viewport.y = -bound.max.y;
+          }
+          else if (Crafty.viewport.y > -bound.min.y) {
+              Crafty.viewport.y = -bound.min.y;
+          }
+      }
+      else {
+          Crafty.viewport.y = -1 * (bound.min.y + (bound.max.y - bound.min.y) / 2 - Crafty.viewport.height / 2);
+      }
+  }
+
 });
 
 });

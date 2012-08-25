@@ -26,6 +26,7 @@ c.c('SceneFade', {
   _tweenEnd: function(param) {
     if (this.alpha > 0.5) {
         c.scene(this.targetScene);
+        c.viewport.x = c.viewport.y = 0;
         this.tween({
           fadeout: true,
           alpha: 0

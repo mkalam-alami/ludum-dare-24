@@ -1,10 +1,13 @@
-define({
+define(['lib/jquery'], {
 
+  WIDTH: $('#cr-stage').width(),
+  HEIGHT: $('#cr-stage').height(),
+  
   RENDER: "Canvas",
 
   GRAVITY: 0.8,
   TILE_SIZE: 48,
-  LEVEL_COUNT: 2,
+  LEVEL_COUNT: 1,
   
   ASSETS: {
     CELL_NORMAL: 'img/entities/cell-normal.png',
