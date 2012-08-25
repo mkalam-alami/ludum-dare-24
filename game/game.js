@@ -1,27 +1,27 @@
-define({
+define(['wan-components', 'tiledLevel', 'player'], {
   
   run: function() {
 
     // Force focus
-    document.getElementById('cr-stage').focus();
+    var stage = document.getElementById('cr-stage');
+    if (stage.focus) {
+      stage.focus();
+    }
 
     // Game scene
     c.scene('game', function() {
-      for (var i = 0; i < 10; i++) {
-        var shade = i * 25;
-        c.e('2D, DOM')
-          .setName('Square ' + i)
-          .attr({x: i*40 + 10, y: 10, w: 30, h: 30})
-          .css({'background-color': 'rgb(' + shade + ',' + shade + ',' + shade + ')'});
-      }
+    
+      Crafty.e('TiledLevel').tiledLevel('./levels/1.json', 'Canvas', function() {
+      
+      });
+    
     });
       
     // Init Crafty
-    c.init(800, 600);
-    c.modules({ 'crafty-debug-bar': 'release' }, function () {
-      Crafty.debugBar.show();
-      c.scene('game');
-    });
+    $stage = $('#cr-stage');
+    c.init($stage.width(), $stage.height());
+    c.canvas.init();
+    c.scene('game');
 
   }
 

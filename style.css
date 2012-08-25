@@ -1,6 +1,7 @@
 body {
   background-color: #CCC;
-  font-family: sans-serif;
+  font-family: 'Anonymous Pro', sans-serif;
+  overflow: hidden;
 }
 
 a {
@@ -17,25 +18,16 @@ div {
   cursor: default;
 }
 
-#center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-}
-
 #cr-stage {
-  position: relative;
-  top: -320px;
-  left: -400px;
-  width: 800px;
-  height: 600px;
+  margin: auto;
+  width: 920px;
+  height: 768px;
   border: 1px solid black;
   background-color: white;
 }
 
 #legend {
-  position: relative;
-  top: 310px;
-  left: -390px;
+  margin: auto;
+  text-align: center;
   font-size: 10pt;
 }
