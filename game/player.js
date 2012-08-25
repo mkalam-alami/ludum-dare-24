@@ -45,7 +45,6 @@ c.c('Player', {
       var circle = new Crafty.circle(0, 0, this.w/2);
       circle.shift(this.w/2, this.w/2);
       this.collision(circle);
-      this.origin(this.w/2, this.w/2);
     }
     else {
       this.rotation = 0;
@@ -71,6 +70,7 @@ c.c('Player', {
         newSprite = c.e('2D, ' + consts.RENDER + ', CellHero' + spriteId)
           .attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE,
             x: this.x + (i++ * 48), y: this.y, z: 100});
+        newSprite.origin(newSprite.w/2, newSprite.w/2);
         this.attach(newSprite);
       }
       else {
@@ -173,7 +173,7 @@ c.c('Player', {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
     if (this.bodySize == 1) {
-      this.rotation += (this.x - this.prevX) * 2;
+      this.sprites[0].rotation += (this.x - this.prevX) * 2;
     }
     this.prevX = this.x;
     this.prevY = this.y;
