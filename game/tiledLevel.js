@@ -51,11 +51,11 @@
       var i, lData, lHeight, lWidth, tDatum, tile, _len;
       lData = layer.data, lWidth = layer.width, lHeight = layer.height;
       var level = [];
+      var side = Math.max(lWidth, lHeight);
       for (i = 0, _len = lData.length; i < _len; i++) {
         tDatum = lData[i];
-        var tileI = i % lWidth;
-        var tileJ = Math.floor(i / lHeight);
-        
+        var tileI = i % side;
+        var tileJ = Math.floor(i / side);
         if (tDatum) {
           tile = Crafty.e("tile" + tDatum);
           tile.x = (i % lWidth) * tile.w;
@@ -63,6 +63,9 @@
           tile.i = tileI;
           tile.j = tileJ;
           tile.level = level;
+          if (tile.setup) {
+            tile.setup();
+          }
           
           // Fill level table
           if (!level[tileI]) {

@@ -10,7 +10,7 @@ c.c('Player', {
 
   init: function() {
     this.addComponent(consts.RENDER + ', Image, Tween, Keyboard, Collision'); //, WiredHitBox
-    //this.image('img/entities/hero-cell.png');
+    //this.image(consts.ASSETS.HERO_CELL);
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     
     this.bind('KeyDown', this._keyDown);
@@ -37,7 +37,7 @@ c.c('Player', {
     this.canJump = false;
     this.attachedCells = [this]; // {index:X , cell:X} (if null, true body otherwise celltype)
     
-    this.refresh();
+    this.refresh(this.direction);
   },
   
   disable: function() {
@@ -63,7 +63,7 @@ c.c('Player', {
   
   refresh: function(oldDirection) {
     // Prepare offset on rotation (hacky...)
-    if (this.bodySize > 1) {
+    if (oldDirection !== undefined && this.bodySize > 1) {
       this._fixPositionBeforeRotation(oldDirection);
     }
     
@@ -140,19 +140,22 @@ c.c('Player', {
     }
     if (this.bodySize > 1) {
       var oldDirection = this.direction;
-      if ((this.isDown('DOWN_ARROW') && e.key == Crafty.keys['LEFT_ARROW']
-       || this.isDown('LEFT_ARROW') && e.key == Crafty.keys['DOWN_ARROW'])
-        && this._checkEmptyTiles(-this.bodySize)) {
-        this.direction += 3;
-        this.direction %= 4;
-        this.refresh(oldDirection);
+      
+      if (this.isDown('DOWN_ARROW') && e.key == Crafty.keys['LEFT_ARROW']
+       || this.isDown('LEFT_ARROW') && e.key == Crafty.keys['DOWN_ARROW']) {
+        if (this._checkEmptyTiles((this.direction % 2 == 1) ? -this.bodySize : 0)) {
+          this.direction += 3;
+          this.direction %= 4;
+          this.refresh(oldDirection);
+        }
       }
-      else if ((this.isDown('DOWN_ARROW') && e.key == Crafty.keys['RIGHT_ARROW']
-       || this.isDown('RIGHT_ARROW') && e.key == Crafty.keys['DOWN_ARROW'])
-        && this._checkEmptyTiles(this.bodySize)) {
-        this.direction++;
-        this.direction %= 4;
-        this.refresh(oldDirection);
+      else if (this.isDown('DOWN_ARROW') && e.key == Crafty.keys['RIGHT_ARROW']
+       || this.isDown('RIGHT_ARROW') && e.key == Crafty.keys['DOWN_ARROW']) {
+         if (this._checkEmptyTiles((this.direction % 2 == 1) ? this.bodySize : -this.bodySize)) {
+          this.direction++;
+          this.direction %= 4;
+          this.refresh(oldDirection);
+        }
       }
     }
   },
@@ -165,13 +168,14 @@ c.c('Player', {
     else {
       xs = _.range(this.i + until, this.i);
     }
-    var ys = _.range(this.j - Math.abs(until), this.j);
+    var ys = _.range(this.j - Math.abs(until) + 1, this.j + 1);
+
     var allEmpty = true;
     _.each(xs, function(x) {
       if (allEmpty) {
         _.each(ys, function(y) {
           if (allEmpty && this[x][y]) {
-            //console.log("Cannot turn cells because of " + x + "-" + y);
+            console.log("Cannot rotate cells because of " + x + "-" + y);
             allEmpty = false;
           }
         }, this);
@@ -263,7 +267,6 @@ c.c('Player', {
     }
     
     // Update viewport
-    //console.log(c.viewport.x + this.x);
     if (c.viewport.x + this.x < consts.WIDTH/4) {
       this.viewportXSpeed += 2;
     }
@@ -276,9 +279,6 @@ c.c('Player', {
       max: {x: this.level.length * consts.TILE_SIZE, y: consts.HEIGHT}
     });
     this.viewportXSpeed *= this.FRICTION * this.FRICTION;
-   // console.log(c.viewport.x -);
-   // c.viewport.x = -this.x + 400;
-   // c.viewport.y = -this.y + 400;
     this.prevX = this.x;
     this.prevY = this.y;
     

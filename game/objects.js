@@ -76,19 +76,22 @@ c.c('Wall', {
       [this.w-this.MARGIN,this.MARGIN],
       [this.w-this.MARGIN,this.w-this.MARGIN],
       [this.MARGIN,this.w-this.MARGIN]);*/
+  },
+  
+  setup: function() {
+  //  c.e('2D, Canvas, Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
   }
   
 });
 
 c.c('Dead', {
 
-  dead: false,
-
   init: function() {
     this.addComponent('Collision');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
-    this.collision();
+    this.collision([0,0],[this.w,0],[this.w,this.h],[0,this.h]);
     this.onHit('Player', this._restartLevel);
+    this.dead = false;
   },
   
   _restartLevel: function(e) {

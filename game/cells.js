@@ -6,7 +6,7 @@ c.c('Cell', {
     this.addComponent('Collision');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     
-    var circle = new Crafty.circle(0, 0, this.w * 5);
+    var circle = new Crafty.circle(0, 0, 200);
     circle.shift(this.w/2, this.w/2);
     this.collision(circle);
     

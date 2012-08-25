@@ -1,25 +1,30 @@
-define(['lib/jquery'], {
+define(['lib/jquery'], function() {
 
-  WIDTH: $('#cr-stage').width(),
-  HEIGHT: $('#cr-stage').height(),
-  
-  RENDER: 'Canvas',
+  return {
 
-  GRAVITY: 0.8,
-  TILE_SIZE: 48,
-  LEVEL_COUNT: 2,
-  
-  ASSETS: {
-    CELL_NORMAL: 'img/entities/cell-normal.png',
-    CELL_JUMP: 'img/entities/cell-jump.png',
+    WIDTH: $('#cr-stage').width(),
+    HEIGHT: $('#cr-stage').height(),
     
-    CELL_HALO: 'img/entities/cell-halo.png',
+    RENDER: 'Canvas',
+
+    GRAVITY: 0.8,
+    TILE_SIZE: 48,
+    LEVEL_COUNT: 4,
+    START_LEVEL: 1,
     
-    HERO_CELL: 'img/entities/hero-cell.png',
-    HERO_CELL_CORE: 'img/entities/hero-cell-core.png',
+    ASSETS: {
+      CELL_NORMAL: 'img/entities/cell-normal.png',
+      CELL_JUMP: 'img/entities/cell-jump.png',
+      
+      CELL_HALO: 'img/entities/cell-halo.png',
+      
+      HERO_CELL: 'img/entities/hero-cell.png',
+      HERO_CELL_CORE: 'img/entities/hero-cell-core.png',
+      
+      STANDARD_SPRITESHEET: 'img/tiles/standard.png',
+      OBJECTS_SPRITESHEET: 'img/tiles/objects.png'
+    }
     
-    STANDARD_SPRITESHEET: 'img/tiles/standard.png',
-    OBJECTS_SPRITESHEET: 'img/tiles/objects.png'
-  }
+  };
 
 });

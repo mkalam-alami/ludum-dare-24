@@ -6,14 +6,16 @@ requirejs.config({
 });
 
 // Load minimal libraries
-requirejs(['lib/jquery', 'lib/crafty'], function() {
+requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
 
   c = Crafty;
 
   // Init Crafty and display loading screen
   $stage = $('#cr-stage');
   c.init($stage.width(), $stage.height());
-  c.canvas.init();
+  if (consts.RENDER == 'Canvas') {
+    c.canvas.init();
+  }
   
   c.scene('loadjs', function() {
     c.e('2D, DOM, Text, LoadingMessage')
