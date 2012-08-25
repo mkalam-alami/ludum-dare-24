@@ -70,10 +70,11 @@ c.c('Wall', {
   init: function() {
     this.addComponent('Collision');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
-    this.collision([this.MARGIN,this.MARGIN],
+    this.collision([0,0],[this.w,0],[this.w,this.h],[0,this.h]);
+    /*this.collision([this.MARGIN,this.MARGIN],
       [this.w-this.MARGIN,this.MARGIN],
       [this.w-this.MARGIN,this.w-this.MARGIN],
-      [this.MARGIN,this.w-this.MARGIN]);
+      [this.MARGIN,this.w-this.MARGIN]);*/
   }
   
 });

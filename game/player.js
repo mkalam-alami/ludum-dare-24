@@ -2,14 +2,14 @@ define(['consts', 'wan-components'], function(consts) {
 
 c.c('Player', {
   
-  ACCELERATION: 1.5,
-  BOUNCING: 0.4,
-  FRICTION: 0.85,
-  JUMP_TABLE: [9, 15, 19, 25], // TODO
+  XSPEED: 5,
+  BOUNCING: 0.2,
+  FRICTION: 0.82,
+  JUMP_TABLE: [9, 12, 16, 19],
   ROTATION_SPEED: 9,
 
   init: function() {
-    this.addComponent('Image, Tween, Keyboard, Canvas, Collision, WiredHitBox');
+    this.addComponent('Image, Tween, Keyboard, Canvas, Collision'); //, WiredHitBox
     //this.image('img/entities/hero-cell.png');
     this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
     
@@ -75,7 +75,7 @@ c.c('Player', {
     }
     else {
       this.rotation = 0;
-      var newWidth = consts.TILE_SIZE*this.bodySize;
+      var newWidth = consts.TILE_SIZE * this.bodySize;
       var newHeight = consts.TILE_SIZE;
       if (this.direction % 2 == 1) {
         var buffer = newWidth;
@@ -88,8 +88,8 @@ c.c('Player', {
     
     // Create new ones
     var newSprite = null, i = 0, 
-      xOffset = (this.direction == 2) ? consts.TILE_SIZE : 0,
-      yOffset = (this.direction == 3) ? consts.TILE_SIZE : 0;
+      xOffset = (this.direction == 2) ? consts.TILE_SIZE * (this.bodySize-1)  : 0,
+      yOffset = (this.direction == 3) ? consts.TILE_SIZE * (this.bodySize-1) : 0;
     _.each(this.attachedCells, function(cellType) {
       var spriteId = 2;
       if (this.bodySize == 1) {
@@ -129,7 +129,7 @@ c.c('Player', {
   },
   
   _keyDown: function(e) {
-    if (Crafty.keys['ENTER'] && this.targetCell) {
+    if (e.key == Crafty.keys['ENTER'] && this.targetCell) {
         this._mergeWith(this.targetCell);
     }
     if (this.isDown('DOWN_ARROW')) {
@@ -186,11 +186,11 @@ c.c('Player', {
       }
       this.ySpeed *= -this.BOUNCING;
       // Fall from edges
-      if (this.x - this.collisions.hitFloor.obj.x > 30
+      if (this.x - this.collisions.hitFloor.obj.x > consts.TILE_SIZE * this.bodySize - 15
         && (!this.level[this.i+1] || !this.level[this.i+1][this.j+1]) && Math.abs(this.xSpeed) < 3) {
         this.xSpeed++;
       }
-      if (this.x - this.collisions.hitFloor.obj.x < -30
+      if (this.x - this.collisions.hitFloor.obj.x < - (consts.TILE_SIZE * this.bodySize - 15)
         && (!this.level[this.i-1] || !this.level[this.i-1][this.j+1]) && Math.abs(this.xSpeed) < 3) {
         this.xSpeed--;
       }
@@ -227,45 +227,29 @@ c.c('Player', {
     }
     
     // Handle controls
-    if (!this.jumping && this.rotating === false) {
       if (!this.isDown('DOWN_ARROW')) {
         if (this.isDown('LEFT_ARROW') && !this.collisions.hitLeftWall) {
-          this.xSpeed -= this.ACCELERATION;
+          this.xSpeed = -this.XSPEED;
         }
         if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
-          this.xSpeed += this.ACCELERATION;
-        }
-        if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
-            && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
-          if (this.isDown('LEFT_ARROW')) {
-            this.xSpeed = -5;
-          }
-          if (this.isDown('RIGHT_ARROW')) {
-            this.xSpeed = 5;
-          }
-          this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
-          this.jumping = true;
+          this.xSpeed = this.XSPEED;
         }
       }
-    }
+      if (this.isDown('UP_ARROW') && !this.jumping && this.collisions.hitFloor
+          && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
+        if (this.isDown('LEFT_ARROW')) {
+          this.xSpeed = -this.XSPEED;
+        }
+        if (this.isDown('RIGHT_ARROW')) {
+          this.xSpeed = this.XSPEED;
+        }
+        this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
+        this.jumping = true;
+      }
     
     // Update position/rotation
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-    /*if (this.bodySize == 1) {
-      this.shiftRotation((this.x - this.prevX) * 2);
-    }
-    if (this.rotating !== false) {
-      var amount = this.ROTATION_SPEED * ((this.rotating > 0) ? 1 : -1);
-      this.shiftRotation(amount);
-      this.rotating += amount;
-      if (Math.abs(this.rotating) >= 90) {
-        this.direction += ((this.rotating > 0) ? 1 : -1) + 4;
-        this.direction %= 4;
-        this.rotating = false;
-        this.refresh();
-      }
-    }*/
     this.prevX = this.x;
     this.prevY = this.y;
     
@@ -302,6 +286,7 @@ c.c('Player', {
   },
   
   _fixPositionBeforeRotation: function(oldDirection) {
+    //console.log(oldDirection + " " + this.direction);
     if (this.direction == 3) {
       if (oldDirection == 0) {
         this.attr({y: this.y - consts.TILE_SIZE * (this.bodySize - 1)});
@@ -352,21 +337,6 @@ c.c('Player', {
         });
       }
     }
-  }
-  
-});
-
-c.c('Wall', {
-  
-  MARGIN: 0,
-
-  init: function() {
-    this.addComponent('Collision');
-    this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
-    this.collision([this.MARGIN,this.MARGIN],
-      [this.w-this.MARGIN,this.MARGIN],
-      [this.w-this.MARGIN,this.w-this.MARGIN],
-      [this.MARGIN,this.w-this.MARGIN]);
   }
   
 });
