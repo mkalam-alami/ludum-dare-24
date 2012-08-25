@@ -13,9 +13,12 @@ c.c('Player', {
     this.addComponent('Image, Keyboard, Canvas, Collision');
     this.image('img/entities/hero-cell.png');
     this.attr({w: consts.TILESIZE, h: consts.TILESIZE});
+    this.origin(this.w/2, this.w/2);
+    
     var circle = new Crafty.circle(0, 0, this.w/2);
     circle.shift(this.w/2, this.w/2);
     this.collision(circle);
+    
     this.bind('EnterFrame', this._enterFrame);
     this.onHit('Wall', this._hitWall);
     this.onHit('Ramp', this._hitRamp);
@@ -42,6 +45,7 @@ c.c('Player', {
     
     this.x += this.xSpeed;
     this.y += this.ySpeed;
+    this.rotation += this.xSpeed;
   },
   
   _hitWall: function(e) {
