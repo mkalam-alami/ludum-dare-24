@@ -65,7 +65,7 @@
  </tileset>
  <layer name="Tiles" width="70" height="15">
   <data encoding="base64" compression="zlib">
-   eJzVVstygzAM1KnnEuCQ0Ef+/yuLpmiyo66ETGhIdmYnxsHGXq8lXUTk8sL8lF987TjnaeY4s5s5zOz/sa/l/aMxHb2AA/DuyKC6tJx59Uz39stA+nTcmXCEd/qF7D1kD2POiy5rYyJm2Dqn8hrM+bbyTQbd38fGcXo+qlcH7WF59n3GNb/gGDbez2X/S7IPXeu33HSL2n5MRRd/1lOyfn1GXUb3f4ZBbvfOfpnO/lmSfUxun1GbraMVpkvFKxhfKrpgTDL6uVr90qpLhiwe6Hyoga335PrQKxVdmB/QNxZrW/2iNQrWK6y9ByK/YA5BPVCfDOYFFp+sr1WXLbD5DZWcobC4y3Txfb383UMEf2/8/dzilxZYXXJPPopiITvrqi7mQbyLTA+mS6XeqJLVL9flO1luYzmHaYRxp+oX1MHXdXYfmS7Pgix3el06YAbzl89HUV8l9z8aazUFni96JoPXMKoRvUbPhB+0gi9D
+   eJzVVtGSgjAMzNM9i8CDcnf6/18pmSPjzl6apoiiO7NjqbS0222Ss4icP5g/8offDec8zhxndjOHmf0T+1re3xvT3gvYAQeiB9Wl5cyzZ7q1XwanT8edHI7wTr/Qew/Zw5jTokttTIkR1s6pvBbm/Kp804Pu73vlOD0f1auD9rA8c5+x5hcc443nuex/Cfaha73IXbdSm8dkdOGznoL16zPqMtL/EQa53zv79XTmZwn2MdE+S22D3c1R2mG6ZLyC8SWjC8YkI8/V6pcWXWqI4oHOhxrYeo/Uh17J6OL5AX1jsbbVL1qjYL3itbdAyS+YQ1AP1CeCecGLT9bXqssa2PyGTM5QWNz1dOG+Xv7voQS+N3w/1/ilBVaXPJKPSrHQO+usLuZBvIueHp4umXojS69+uS7fiXKbl3M8jTDuZP2COnBdZ/fR0+VdEOVO1qUDRjB/cT4q9WVy/6tRqynwfNEzEVjDUo3IGr0Tbk2RL1Q=
   </data>
  </layer>
  <layer name="Objects" width="70" height="15" opacity="0.4">
@@ -73,4 +73,39 @@
    eJzdVEEOwCAIY3P/f/PilYhggYg2aWK2lWJHIKqFD+AD6iSifWRzNyr0UBFZ/zR6XqRnmh7x9MysJRcUkTOM3vGkXKS9yM8jjcWTzwyC23Kx9uDVVclF85l5IbghF6QHr67q3l3ZN6hfRl2vdlTrpv0SRakmKWdP7573u9CCv+Po934nrJpLRzMQxanzsoIfld4DyQ==
   </data>
  </layer>
+ <objectgroup name="Calque d'objets 1" width="70" height="15">
+  <object x="2099" y="85" width="357" height="77">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="delayms" value="6000"/>
+    <property name="text" value="Baroque 8-bit &amp; kittens for everyone!"/>
+   </properties>
+  </object>
+  <object x="2723" y="52" width="494" height="142">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="-Yo!   -Hey wassup!  -Party!"/>
+   </properties>
+  </object>
+  <object x="861" y="131" width="352" height="138">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="kthxbai"/>
+   </properties>
+  </object>
+  <object x="2318" y="317" width="341" height="243">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="delayms" value="5000"/>
+    <property name="text" value="Hi! I'm a Weighted Companion"/>
+   </properties>
+  </object>
+  <object x="2327" y="370" width="323" height="175">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="delayms" value="5000"/>
+    <property name="text" value="cube, and I can talk!"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

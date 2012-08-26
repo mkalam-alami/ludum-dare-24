@@ -1,5 +1,5 @@
 var gameState = {
-  currentLevel: 1,
+  currentLevel: "kittens",
   mute: true,
   gameFinished: true,
   resetSave: true
