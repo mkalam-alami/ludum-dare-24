@@ -256,7 +256,9 @@ c.c('Player', {
     }
     if (Utils.isUpPressed() && !this.jumping && this.canJump && this.collisions.hitFloor
         && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
-      soundManager.play("jump" + (Utils.random(3) + 1));
+      if (!soundManager.muted) {
+        soundManager.play("jump" + (Utils.random(3) + 1));
+      }
       if (Utils.isLeftPressed()) {
         this.xSpeed = -this.XSPEED;
       }
@@ -315,7 +317,9 @@ c.c('Player', {
   },
   
   _mergeWith: function(targetCell) {
-    soundManager.play(consts.SOUNDS.MERGE.ID);
+    if (!soundManager.muted) {
+      soundManager.play(consts.SOUNDS.MERGE.ID);
+    }
     var newCellType = targetCell.comp.replace(/^.*, /, '');
     if (newCellType == 'CellJump') {
       this.canJump = true;
