@@ -30,7 +30,6 @@ define(['consts', 'wan-components'], function(consts) {
     init: function() {
       this.bind('EnterFrame', this._enterFrame);
       this._next = 0;
-    console.log("new");
     },
     _enterFrame: function() {
       if (this._next <= 0) {
@@ -48,7 +47,6 @@ define(['consts', 'wan-components'], function(consts) {
           .wallOfTextText(Utils.random(3)+1, from, to);
       }
       this._next--;
-    console.log("yeah");
     }
   });
   
@@ -134,7 +132,7 @@ define(['consts', 'wan-components'], function(consts) {
     soundManager.stopAll();
     soundManager.play(consts.SOUNDS.MUSIC_MAINSCREEN.ID);
     
-    c.e('WallOfText');
+    var bg = c.e('WallOfText');
     
     var logo = c.e('2D, ' + consts.RENDER + ', Image, Bouncey, Tween')
       .attr({x: 20, y: 30})
@@ -143,23 +141,27 @@ define(['consts', 'wan-components'], function(consts) {
     
     menu = c.e('Menu').menu((gameState.gameFinished) ? 5 : 4);
     menu.addEntry('Start a new game', function() {
+      bg.destroy();
       gameState.currentLevel = 1;
       soundManager.stopAll();
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('startLevel');
     })
     menu.addEntry('Continue game', function() {
+      bg.destroy();
       soundManager.stopAll();
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('startLevel');
     }, gameState.currentLevel <= 1);
     menu.addEntry('Play introduction', function() {
+      bg.destroy();
       soundManager.stopAll();
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('intro');
     });
     if (gameState.gameFinished) {
       menu.addEntry('1000 kittens', function() {
+      bg.destroy();
         gameState.currentLevel = "kittens";
         soundManager.stopAll();
         soundManager.play(consts.SOUNDS.START.ID);

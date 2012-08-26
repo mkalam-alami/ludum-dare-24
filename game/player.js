@@ -5,7 +5,7 @@ c.c('Player', {
   XSPEED: 5,
   BOUNCING: 0.2,
   FRICTION: 0.82,
-  JUMP_TABLE: [9, 12.5, 16, 19],
+  JUMP_TABLE: [8, 12.5, 16, 19],
   ROTATION_SPEED: 9,
 
   init: function() {

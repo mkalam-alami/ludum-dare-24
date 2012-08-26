@@ -1,5 +1,5 @@
 var gameState = {
-  currentLevel: 2,
+  currentLevel: 6,
   mute: true,
   gameFinished: true,
   resetSave: true,
@@ -25,7 +25,7 @@ define([], function() {
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
-    LEVEL_COUNT: 5,
+    LEVEL_COUNT: 6,
     
     MUSIC_VOLUME: 75,
     
@@ -57,7 +57,8 @@ define([], function() {
       ESCAPE: 'img/gui/escape.png',
       MERGE: 'img/gui/merge.png',
       JUMP: 'img/gui/jump.png',
-      RESET: 'img/gui/reset.png'
+      RESET: 'img/gui/reset.png',
+      ROTATE: 'img/gui/rotate.png'
     },
     
     SOUNDS: {

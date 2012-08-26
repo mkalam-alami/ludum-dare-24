@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="30" height="12" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="16" height="14" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
   <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
@@ -62,54 +62,16 @@
     <property name="components" value="Finish"/>
    </properties>
   </tile>
-  <tile id="29">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
  </tileset>
- <layer name="Tiles" width="30" height="12">
+ <layer name="Tiles" width="16" height="14">
   <data encoding="base64" compression="zlib">
-   eJyTYmBg0KIB1sYjLg3EOgz0B5pArD8A9sqNQHtFgFgMiMXRsARUDTY5SrEQEMvQ2nNYgOQA2as5QPbKDaC9KlQyiw2PnCgWe0FllhANsDASWwqLPAChawwX
+   eJyTYWBg0ABiTSDWIhFLAbEMA/lAEmqGOIlYAkm/CoX2I7tfjER30Nv/Elj0U2o/rvAjJiy0KLRfjgHifyEoFkbDIlj0CKKpGeoAAF6KCXM=
   </data>
  </layer>
- <layer name="Objects" width="30" height="12">
+ <layer name="Objects" width="16" height="14">
   <data encoding="base64" compression="zlib">
-   eJxjYBgYwDJqL93sZRwge3FhBjQ2te2lN6CVXwarvTC7h6u92OzAl55piQEaKwDO
+   eJxjYWBgYKEQMzKQByixkwGNTQpgxaGfErcgm0ssoMQubO7HB7C5DZ9+ct2Ezz5y7CFGPSWAUv3MFGIAXNkBtg==
   </data>
  </layer>
- <objectgroup name="Calque d'objets 1" width="30" height="12">
-  <object x="108" y="126" width="205" height="166">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="text" value="Cells cannot do much by themselves."/>
-   </properties>
-  </object>
-  <object x="406" y="374" width="165" height="184">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="text" value="But they are able to combine..."/>
-   </properties>
-  </object>
-  <object x="367" y="238" width="1"/>
-  <object x="628" y="428" width="165" height="184">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="text" value="...with other bodies?"/>
-   </properties>
-  </object>
-  <object x="787" y="321" width="209" height="233">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="image" value="MERGE"/>
-   </properties>
-  </object>
-  <object x="1011" y="422" width="234" height="220">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="image" value="JUMP"/>
-    <property name="text" value="This cell can now jump!"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="Calque d'objets 1" width="16" height="14"/>
 </map>

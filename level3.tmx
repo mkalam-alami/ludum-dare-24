@@ -57,23 +57,27 @@
     <property name="components" value="Finish"/>
    </properties>
   </tile>
+  <tile id="21">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tiles" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJyTYmBg0MKCdRggQBOHPAhLAbEMA/lAkkb6xYBYHAlL0Nn+oaRfZYjbLw3EQmRiUPoFAA+RBh4=
+   eJyTYmBg0MKCdYBYA4g1cciDsBQQyzCQDyRx6BcDYnEkLEGifnLsR7cT2V4xNL4Cle1HNx+be5DdIoGmnxL7VdDsQvcjNjmYG6hlPwiIkkGD9EsDsRAWLALEakAsiEMehEHpFwDEhQnJ
   </data>
  </layer>
  <layer name="Objects" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DkAgADAAAB
+   eJxjYWBgYMGBGfHIIWNyAS79xNpBTfvx+Q0bn5r2Y/MnIbfQyn5cfsQXVpTaj24fsTQx6ZKQGgAX8gF2
   </data>
  </layer>
  <objectgroup name="Calque d'objets 1" width="16" height="12">
-  <object x="367" y="238" width="1"/>
-  <object x="105" y="80" width="305" height="76">
+  <object x="53" y="59" width="362" height="77">
    <properties>
     <property name="components" value="IngameMessage"/>
-    <property name="image" value="STUCK"/>
+    <property name="image" value="RESET"/>
    </properties>
   </object>
  </objectgroup>
