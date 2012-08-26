@@ -86,7 +86,7 @@ define(['consts', 'wan-components'], function(consts) {
       .image(consts.ASSETS.LOGO)
       .bouncey();
     
-    menu = c.e('Menu').menu(4);
+    menu = c.e('Menu').menu((gameState.gameFinished) ? 5 : 4);
     menu.addEntry('Start a new game', function() {
       gameState.currentLevel = consts.START_LEVEL;
       soundManager.stopAll();
@@ -103,6 +103,14 @@ define(['consts', 'wan-components'], function(consts) {
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('intro');
     });
+    if (gameState.gameFinished) {
+      menu.addEntry('1000 kittens', function() {
+        gameState.currentLevel = "kittens";
+        soundManager.stopAll();
+        soundManager.play(consts.SOUNDS.START.ID);
+        c.e('SceneFade').sceneFade('startLevel');
+      });
+    }
     menu.addEntry('Sound: ' + ((gameState.mute) ? 'disabled' : 'enabled'), function(entry) {
       var base = 'Sound: ';
       if (gameState.mute) {

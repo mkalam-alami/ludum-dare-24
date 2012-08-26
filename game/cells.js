@@ -65,6 +65,12 @@ c.c('CellNormal', {
   }
 });
 
+c.c('CellCompanion', {
+  init: function() {
+    this.addComponent('CellCompanion0, Cell');
+  }
+});
+
 c.c('CellJump', {
   init: function() {
     this.addComponent('Cell, Image');

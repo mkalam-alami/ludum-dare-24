@@ -1,6 +1,8 @@
 var gameState = {
   currentLevel: 1,
   mute: false,
+  gameFinished: false,
+  resetSave: true,
   readMessages: {} // TODO
 };
 
@@ -15,7 +17,7 @@ define([], function() {
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
-    LEVEL_COUNT: 6,
+    LEVEL_COUNT: 5,
     START_LEVEL: 1,
     
     MUSIC_VOLUME: 75,
@@ -23,6 +25,7 @@ define([], function() {
     ASSETS: {
       CELL_NORMAL: 'img/entities/cell-normal.png',
       CELL_JUMP: 'img/entities/cell-jump.png',
+      CELL_COMPANION: 'img/entities/cell-companion.png',
       
       CELL_HALO: 'img/entities/cell-halo.png',
       
@@ -62,6 +65,10 @@ define([], function() {
       MUSIC_CUTSCENES: {
         ID: 'musiccutscenes',
         URL: 'sound/cutscenes.mp3'
+      },
+      MUSIC_KITTENS: {
+        ID: 'musickittens',
+        URL: 'sound/nyan.mp3'
       }
     }
     

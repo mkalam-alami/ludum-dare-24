@@ -34,7 +34,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
     
     // Load game state
     var newGameState = $.jStorage.get('gameState');
-    if (newGameState) {
+    if (newGameState && !gameState.resetSave) {
       gameState = newGameState;
     }
     
@@ -59,6 +59,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
           
           c.sprite(48, 48, consts.ASSETS.HERO_CELL, cellMap("CellHero"));
           c.sprite(48, 48, consts.ASSETS.CELL_NORMAL, cellMap("CellNormal"));
+          c.sprite(48, 48, consts.ASSETS.CELL_COMPANION, cellMap("CellCompanion"));
           
           // Launch game
           game();

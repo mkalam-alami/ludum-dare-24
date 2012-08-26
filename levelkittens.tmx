@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="70" height="15" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
+  <image source="img/tiles/objects.png" width="192" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="components" value="Player"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="components" value="Finish"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="components" value="Dead"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="components" value="Wall"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="components" value="CellJump"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="components" value="CellCompanion"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="kittens" tilewidth="48" tileheight="48">
+  <image source="img/tiles/kittens.png" width="192" height="192"/>
+  <tile id="5">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="70" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzVVstygzAM1KnnEuCQ0Ef+/yuLpmiyo66ETGhIdmYnxsHGXq8lXUTk8sL8lF987TjnaeY4s5s5zOz/sa/l/aMxHb2AA/DuyKC6tJx59Uz39stA+nTcmXCEd/qF7D1kD2POiy5rYyJm2Dqn8hrM+bbyTQbd38fGcXo+qlcH7WF59n3GNb/gGDbez2X/S7IPXeu33HSL2n5MRRd/1lOyfn1GXUb3f4ZBbvfOfpnO/lmSfUxun1GbraMVpkvFKxhfKrpgTDL6uVr90qpLhiwe6Hyoga335PrQKxVdmB/QNxZrW/2iNQrWK6y9ByK/YA5BPVCfDOYFFp+sr1WXLbD5DZWcobC4y3Txfb383UMEf2/8/dzilxZYXXJPPopiITvrqi7mQbyLTA+mS6XeqJLVL9flO1luYzmHaYRxp+oX1MHXdXYfmS7Pgix3el06YAbzl89HUV8l9z8aazUFni96JoPXMKoRvUbPhB+0gi9D
+  </data>
+ </layer>
+ <layer name="Objects" width="70" height="15" opacity="0.4">
+  <data encoding="base64" compression="zlib">
+   eJzdVEEOwCAIY3P/f/PilYhggYg2aWK2lWJHIKqFD+AD6iSifWRzNyr0UBFZ/zR6XqRnmh7x9MysJRcUkTOM3vGkXKS9yM8jjcWTzwyC23Kx9uDVVclF85l5IbghF6QHr67q3l3ZN6hfRl2vdlTrpv0SRakmKWdP7573u9CCv+Po934nrJpLRzMQxanzsoIfld4DyQ==
+  </data>
+ </layer>
+</map>

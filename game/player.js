@@ -330,6 +330,9 @@ c.c('Player', {
     }
     else {
       this.bodySize++;
+      if (this.bodySize >= 5) {
+        this.canJump = false; // This is not a bugfix, this is a feature!
+      }
       this.attachedCells.push(targetCell.comp.replace(/^.*, /, ''));
       this.targetCell.destroy();
     }

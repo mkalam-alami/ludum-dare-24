@@ -10,21 +10,34 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
 
     // Game scenes
     c.scene('nextLevel', function() {
-      gameState.currentLevel++;
-      $.jStorage.set('gameState', gameState);
-      if (gameState.currentLevel > consts.LEVEL_COUNT) {
-        c.scene('endgame');
+      if (gameState.currentLevel == "kittens") {
+        gameState.currentLevel = consts.LEVEL_COUNT;
+        c.scene('menu');
       }
       else {
-        c.scene('startLevel');
+        gameState.currentLevel++;
+        $.jStorage.set('gameState', gameState);
+        if (gameState.currentLevel > consts.LEVEL_COUNT) {
+          gameState.gameFinished = true;
+          $.jStorage.set('gameState', gameState);
+          c.scene('endgame');
+        }
+        else {
+          c.scene('startLevel');
+        }
       }
     });
     c.scene('startLevel', function() {
       var music = soundManager.getSoundById(consts.SOUNDS.MUSIC_THEME1.ID);
+      if (gameState.currentLevel == "kittens") {
+        // Party hard!
+        gameState.mute = false;
+        soundManager.unmute();
+        music = soundManager.getSoundById(consts.SOUNDS.MUSIC_KITTENS.ID);
+      }
       if (music.playState == 0) {
         music.play();
       }
-    
       c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
     });
     
