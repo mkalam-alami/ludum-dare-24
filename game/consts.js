@@ -24,7 +24,12 @@ define([], function() {
       STANDARD_SPRITESHEET: 'img/tiles/standard.png',
       OBJECTS_SPRITESHEET: 'img/tiles/objects.png',
       
-      ILLUS1: 'img/illus/1.jpg'
+      ILLUS1: 'img/illus/1.png',
+      ILLUS2: 'img/illus/2.png',
+      TEXT1: 'img/illus/text1.png',
+      TEXT2: 'img/illus/text2.png',
+      
+      GUISKIP: 'img/gui/skip.png'
     }
     
   };

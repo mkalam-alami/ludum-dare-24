@@ -32,7 +32,7 @@ define(['consts', 'wan-components'], function(consts) {
   
   var write = function(x, y, text, speed, w) {
     c.e('2D, ' + consts.RENDER + ', AnimatedText, Tween')
-      .attr({x: x, y: y, w: w || 1000, h: 100})
+      .attr({x: x, y: y - 100, w: w || 1000, h: 200})
       .animatedText(text, speed || 3);
   }
   
@@ -49,6 +49,34 @@ define(['consts', 'wan-components'], function(consts) {
     });
   }
   
+  // Game menu
+  c.scene('menu', function() {
+      c.scene('nextLevel');
+  });
+  
+  // Intro
+  c.scene('intro', function() {
+    c.e('Script')
+      .action(0, this, write, 50, 50, 'The discoveries I just made are fascinating.', 2)
+      .action(130, this, write, 50, 90, 'They will change our conception of biology, medicine...', 2)
+      .action(50, this, image, 450, 210, consts.ASSETS.ILLUS1)
+      .action(0, this, image, 570, 20, consts.ASSETS.GUISKIP)
+      .action(70, this, write, 50, 130, 'And, well... life.', 4)
+      .action(120, this, write, 50, 200, 'But it\'s to soo soon to share this.', 1)
+      .action(70, this, write, 50, 240, 'Too dangerous...', 2)
+      .action(0, this, image, 100, 500, consts.ASSETS.TEXT1)
+      .action(60, this, write, 50, 280, 'I would probably meet the same', 2)
+      .action(60, this, write, 50, 320, 'fate as that Galilei genius.', 2)
+      .action(100, this, fadeout)
+      .action(30, this, write, 50, 100, 'I\'m leaving these notes here.', 2)
+      .action(80, this, write, 50, 150, 'Hopefully they will be found when the world is ready.', 1)
+      .action(150, this, write, 50, 250, 'May 2, 1642', 1)
+      .action(30, this, write, 50, 300, 'A. K.', 1)
+      .action(120, this, fadeout)
+      .action(100, c, c.scene, 'menu')
+      .run();
+  });
+
 
   // Endgame
   c.scene('endgame', function() {
@@ -59,21 +87,5 @@ define(['consts', 'wan-components'], function(consts) {
       .attr({x: 0, y: $stage.height() - 50, w: $stage.width(), h: 40})
       .text('<a href=".">Restart?</a>');
   });
-  
-  // Intro
-  c.scene('intro', function() {
-  
-    // TODO
-    c.e('Script')
-      .action(0, this, write, 100, 100, 'Salut les gens', 3)
-      .action(50, this, image, 400, 200, consts.ASSETS.ILLUS1)
-      .action(100, this, write, 150, 150, 'Mon nom est bob', 2)
-      .action(100, this, write, 150, 200, 'Je n\'ai pas d\'amis', 2)
-      .action(100, this, write, 150, 250, '(intro de test)', 1)
-      .action(50, this, fadeout)
-      .action(100, c, c.scene, 'nextLevel')
-      .run();
-  });
-
 
 });

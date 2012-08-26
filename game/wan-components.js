@@ -53,6 +53,7 @@ c.c('Bouncey', {
 // Allows to schedule calls to any object (time unit = frames)
 c.c('Script', {
   init: function() {
+    this.addComponent('Keyboard');
     this.t = 0;
     this.actions = [];
     this.bind('EnterFrame', this._enterFrame);
@@ -60,6 +61,7 @@ c.c('Script', {
     this.loop = true;
     this.currentActionIndex = 0;
     this.currentAction = null;
+    this.skipDelay = 0;
   },
   
   action: function(delay, context, callback /* [args] */) {
@@ -104,7 +106,13 @@ c.c('Script', {
         this.currentAction = this.actions[this.currentActionIndex];
       }
       this.t++;
-      if (this.currentAction.delay <= this.t) {
+      if (this.skipDelay > 0) {
+        this.skipDelay--;
+      }
+      if (this.currentAction.delay <= this.t || (this.isDown('ENTER') && this.skipDelay == 0)) {
+        if (this.isDown('ENTER')) {
+          this.skipDelay = 10;
+        }
         this.currentAction.callback.apply(this.currentAction.context, this.currentAction.arguments);
         this.currentAction = null;
         this.currentActionIndex++;
