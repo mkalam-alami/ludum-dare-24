@@ -48,7 +48,6 @@
     
     // Create tiled layer
     makeLayer: function(layer) {
-      console.log("lay");
       var i, lData, lHeight, lWidth, tDatum, tile, _len;
       lData = layer.data, lWidth = layer.width, lHeight = layer.height;
       var level = [];
@@ -84,7 +83,6 @@
     
     // Create object layer
     makeObjects: function(layer) {
-      console.log("obj");
       _.each(layer.objects, function(object) {
         if (object.properties.components == 'IngameMessage') {
           Crafty.e('IngameMessage')
