@@ -11,6 +11,7 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
     // Game scenes
     c.scene('nextLevel', function() {
       gameState.currentLevel++;
+      $.jStorage.set('gameState', gameState);
       if (gameState.currentLevel > consts.LEVEL_COUNT) {
         c.scene('endgame');
       }

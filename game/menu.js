@@ -115,6 +115,7 @@ define(['consts', 'wan-components'], function(consts) {
         soundManager.mute();
         entry.text(base + 'disabled');
       }
+      $.jStorage.set('gameState', gameState);
     });
     
     // Fade in menu contents

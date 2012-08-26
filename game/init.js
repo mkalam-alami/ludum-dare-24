@@ -27,11 +27,16 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
   // Load remaining libraries & game entry point
   require(['lib/underscore',
     'lib/crafty',
-   // 'lib/jquery.json',
-   // 'lib/jstorage',
+    'lib/jquery.json',
+    'lib/jstorage',
     'lib/inheritance',
     'lib/soundmanager2'], function() {
     
+    // Load game state
+    var newGameState = $.jStorage.get('gameState');
+    if (newGameState) {
+      gameState = newGameState;
+    }
     
     require(['consts', 'game'], function(consts, game) {
     
