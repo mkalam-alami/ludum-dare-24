@@ -46,6 +46,18 @@ define([], function() {
       START: {
         ID: 'start',
         URL: '/sound/start.mp3'
+      },
+      MUSIC_THEME1: {
+        ID: 'musictheme1',
+        URL: '/sound/theme1.mp3'
+      },
+      MUSIC_MAINSCREEN: {
+        ID: 'musicmainscreen',
+        URL: '/sound/mainscreen.mp3'
+      },
+      MUSIC_CUTSCENES: {
+        ID: 'musiccutscenes',
+        URL: '/sound/cutscenes.mp3'
       }
     }
     

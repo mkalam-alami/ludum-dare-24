@@ -55,7 +55,6 @@ define(['consts', 'wan-components'], function(consts) {
       if (e.key == c.keys['ENTER']) {
         var callback = this._callbacks[this._currentIndex];
         if (callback) {
-          soundManager.play(consts.SOUNDS.START.ID);
           callback(this._entries[this._currentIndex]);
         }
       }
@@ -77,6 +76,9 @@ define(['consts', 'wan-components'], function(consts) {
   });
   c.scene('menu', function() {
     c.viewport.x = c.viewport.y = 0;
+    soundManager.stopAll();
+    Utils.playAndLoop(consts.SOUNDS.MUSIC_MAINSCREEN.ID);
+    
     var logo = c.e('2D, ' + consts.RENDER + ', Image, Bouncey, Tween')
       .attr({x: 100, y: 100})
       .image(consts.ASSETS.LOGO)
@@ -85,15 +87,21 @@ define(['consts', 'wan-components'], function(consts) {
     menu = c.e('Menu').menu(4);
     menu.addEntry('Start a new game', function() {
       gameState.currentLevel = consts.START_LEVEL;
+      soundManager.stopAll();
+      soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('startLevel');
     })
     menu.addEntry('Continue game', function() {
+      soundManager.stopAll();
+      soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('startLevel');
     }, gameState.currentLevel <= 1);
     menu.addEntry('Play introduction', function() {
+      soundManager.stopAll();
+      soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('intro');
     });
-    menu.addEntry('Sound: enabled', function(entry) {
+    menu.addEntry('Sound: ' + ((gameState.mute) ? 'disabled' : 'enabled'), function(entry) {
       var base = 'Sound: ';
       if (gameState.mute) {
         gameState.mute = false;
@@ -171,6 +179,12 @@ define(['consts', 'wan-components'], function(consts) {
   // Intro script
   
   c.scene('intro', function() {
+    soundManager.stopAll();
+    music = soundManager.getSoundById(consts.SOUNDS.MUSIC_CUTSCENES.ID);
+    if (music.playState == 0) {
+      music.play();
+    }
+    
     c.e('Script')
       .action(0, this, write, 50, 50, 'The discoveries I just made are fascinating.', 2)
       .action(130, this, write, 50, 90, 'They will change our conception of biology, medicine...', 2)

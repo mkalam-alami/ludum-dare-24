@@ -19,6 +19,11 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
       }
     });
     c.scene('startLevel', function() {
+      var music = soundManager.getSoundById(consts.SOUNDS.MUSIC_THEME1.ID);
+      if (music.playState == 0) {
+        music.play();
+      }
+    
       c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
     });
     

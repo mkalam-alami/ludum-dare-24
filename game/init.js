@@ -74,6 +74,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
             soundManager.createSound({
               id: sound.ID,
               url: sound.URL,
+              loops: (sound.ID.indexOf('music') != -1) ? 999 : 0,
               onload: function() {
                 loadedSounds++;
                 soundLoadMessage.text(soundsLoadBaseText + "<b>" + Math.floor(100 * loadedSounds / soundCount) + "%</b>");
@@ -86,10 +87,14 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
       });
       soundManager.setup({
         url: '/',
+        preferFlash: true,
         onready: function() {
           c.scene('loadsounds');
         }
       });
+      if (gameState.mute) {
+        soundManager.mute();
+      }
     
     });
     
