@@ -143,7 +143,7 @@ c.c('IngameMessageAbstract', {
 c.c('IngameMessageText', {
   init: function() {
     this.addComponent('IngameMessageAbstract, Text');
-    this.textFont({ family: "'Niconne', sans-serif", size: '30pt' });
+    this.textFont({ family: "'TVEFont', serif", size: '30pt' });
     this.textColor('#666666', 0.9);
   },
   ingameMessageText: function(text, delayms, initialSpeed) {

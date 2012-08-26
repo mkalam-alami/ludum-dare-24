@@ -1,10 +1,62 @@
 define(['consts', 'wan-components'], function(consts) {
   
+  c.c('WallOfTextText', {
+    init: function() {
+      this.addComponent('2D, ' + consts.RENDER + ', Image, Tween');
+      this.bind('TweenEnd', this._tweenEnd);
+      this.alpha = 0;
+    },
+    wallOfTextText: function(id, from, to) {
+      this.image(consts.ASSETS['TEXT' + id]);
+      this.attr(from);
+      this.tween({alpha: .3}, 50);
+      this.tween(to, 300);
+    },
+    _tweenEnd: function(param) {
+      if (param == 'alpha') {
+        if (this.alpha > .2) {
+          this.tween(this._to, 500);
+        }
+        else {
+          this.destroy();
+        }
+      }
+      else if (param == 'x') {
+          this.tween({alpha: 0}, 30);
+      }
+    }
+  });
+  c.c('WallOfText', {
+    init: function() {
+      this.bind('EnterFrame', this._enterFrame);
+      this._next = 0;
+    },
+    _enterFrame: function() {
+      if (this._next <= 0) {
+        this._next = Utils.random(200)+50;
+        var from = {x: Utils.random(900)-100, y: Utils.random(700)-100};
+        var to = {x: from.x, y: from.y};
+        if (Utils.random(2) == 0) {
+          to.x = Utils.random(900)-100;
+        }
+        else {
+          to.y = Utils.random(700)-100;
+        }
+        var to = {x: Utils.random(700), y: Utils.random(500)};
+        c.e('WallOfTextText')
+          .wallOfTextText(Utils.random(3)+1, from, to);
+      }
+      this._next--;
+    
+    }
+  });
+  
+  
   c.c('MenuEntry', {
     init: function() {
       this.addComponent('2D, ' + consts.RENDER + ', Text, Tween');
       this.attr({w: 200, h: 50});
-      this.textFont({ family: "'Niconne', sans-serif", size: '30pt' });
+      this.textFont({ family: "'TVEFont', serif", size: '25pt' });
       this.textColor('#332222', 0.9);
     }
   });
@@ -81,8 +133,10 @@ define(['consts', 'wan-components'], function(consts) {
     soundManager.stopAll();
     soundManager.play(consts.SOUNDS.MUSIC_MAINSCREEN.ID);
     
+    c.e('WallOfText');
+    
     var logo = c.e('2D, ' + consts.RENDER + ', Image, Bouncey, Tween')
-      .attr({x: 100, y: 100})
+      .attr({x: 20, y: 30})
       .image(consts.ASSETS.LOGO)
       .bouncey();
     

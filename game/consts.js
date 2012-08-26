@@ -1,16 +1,17 @@
-/*var gameState = {
+var gameState = {
   currentLevel: 0,
   mute: true,
   gameFinished: true,
-  resetSave: true
-};*/
+  resetSave: false,
+  skipIntro: false
+};
 
-var gameState = {
+/*var gameState = {
   currentLevel: 1,
   mute: false,
   gameFinished: false,
   resetSave: false
-};
+};*/
 
 
 define([], function() {
@@ -45,6 +46,7 @@ define([], function() {
       ILLUS2: 'img/illus/2.png',
       TEXT1: 'img/illus/text1.png',
       TEXT2: 'img/illus/text2.png',
+      TEXT3: 'img/illus/text3.png',
       
       LEVEL1: 'img/illus/level1.png',
       

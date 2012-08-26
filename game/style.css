@@ -1,13 +1,14 @@
 @font-face {
-  font-family: 'Niconne';
+  font-family: 'TVEFont';
   font-style: normal;
   font-weight: 400;
-  src: local('Niconne'), local('Niconne-Regular'), url('../niconne.woff') format('woff');
+  line-height: 20pt;
+  src: local('TVEFont'), local('TVEFont'), url('../font.woff') format('woff');
 }
 
 body {
   background-color: #FFF;
-  font-family: 'Niconne', cursive;
+  font-family: 'TVEFont', serif;
   margin-top: 10px;
 }
 
