@@ -85,7 +85,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
         });
       });
       soundManager.setup({
-        url: '/sound/swf/',
+        url: '/',
         onready: function() {
           c.scene('loadsounds');
         }
