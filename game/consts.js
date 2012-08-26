@@ -29,7 +29,10 @@ define([], function() {
       TEXT1: 'img/illus/text1.png',
       TEXT2: 'img/illus/text2.png',
       
-      GUISKIP: 'img/gui/skip.png'
+      LOGO: 'img/gui/logo.png',
+      GUISKIP: 'img/gui/skip.png',
+      LEFTRIGHT: 'img/gui/leftright.png',
+      UPDOWN: 'img/gui/updown.png'
     }
     
   };

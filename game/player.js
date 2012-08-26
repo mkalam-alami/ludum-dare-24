@@ -146,16 +146,16 @@ c.c('Player', {
     if (this.bodySize > 1) {
       var oldDirection = this.direction;
       
-      if (this.isDown('DOWN_ARROW') && e.key == Crafty.keys['LEFT_ARROW']
-       || this.isDown('LEFT_ARROW') && e.key == Crafty.keys['DOWN_ARROW']) {
+      if (Utils.isDownPressed() && Utils.isLeftPressed(e) 
+       || Utils.isLeftPressed() && Utils.isDownPressed(e)) {
         if (this._checkEmptyTiles((this.direction % 2 == 1) ? -this.bodySize : -1, this.bodySize)) {
           this.direction += 3;
           this.direction %= 4;
           this.refresh(oldDirection);
         }
       }
-      else if (this.isDown('DOWN_ARROW') && e.key == Crafty.keys['RIGHT_ARROW']
-       || this.isDown('RIGHT_ARROW') && e.key == Crafty.keys['DOWN_ARROW']) {
+      else if (Utils.isDownPressed() && Utils.isRightPressed(e) 
+       || Utils.isRightPressed() && Utils.isDownPressed(e)) {
          if (this._checkEmptyTiles((this.direction % 2 == 1) ? this.bodySize-1 : -this.bodySize, this.bodySize)) {
           this.direction++;
           this.direction %= 4;
@@ -243,20 +243,20 @@ c.c('Player', {
     }
     
     // Handle controls
-    if (!this.isDown('DOWN_ARROW')) {
-      if (this.isDown('LEFT_ARROW') && !this.collisions.hitLeftWall) {
+    if (!Utils.isDownPressed()) {
+      if (Utils.isLeftPressed() && !this.collisions.hitLeftWall) {
         this.xSpeed = -this.XSPEED;
       }
-      if (this.isDown('RIGHT_ARROW') && !this.collisions.hitRightWall) {
+      if (Utils.isRightPressed() && !this.collisions.hitRightWall) {
         this.xSpeed = this.XSPEED;
       }
     }
-    if (this.isDown('UP_ARROW') && !this.jumping && this.canJump && this.collisions.hitFloor
+    if (Utils.isUpPressed() && !this.jumping && this.canJump && this.collisions.hitFloor
         && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
-      if (this.isDown('LEFT_ARROW')) {
+      if (Utils.isLeftPressed()) {
         this.xSpeed = -this.XSPEED;
       }
-      if (this.isDown('RIGHT_ARROW')) {
+      if (Utils.isRightPressed()) {
         this.xSpeed = this.XSPEED;
       }
       this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];

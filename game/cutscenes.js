@@ -50,8 +50,57 @@ define(['consts', 'wan-components'], function(consts) {
   }
   
   // Game menu
+  c.c('Menu', {
+    YSIZE: 300,
+    init: function() {
+      this.addComponent('2D, ' + consts.RENDER + ', Image, Keyboard');
+      this.image(consts.ASSETS.UPDOWN);
+      this.bind('KeyDown', this._keyDown);
+      this._callbacks = [];
+      this._currentIndex = 0;
+      this._menuSize = 0;
+    },
+    menu: function(initialIndex, size) {
+      this._currentIndex = initialIndex;
+      this._menuSize = size;
+      this._update();
+      return this;
+    },
+    setCallback: function(index, callback) {
+      this._callbacks[index] = callback;
+      return this;
+    },
+    _keyDown: function(e) {
+      if (e.key == c.keys['ENTER']) {
+        var callback = this._callbacks[this._currentIndex];
+        if (callback) {
+          callback();
+        }
+      }
+      if (Utils.isUpPressed(e)) {
+        this._currentIndex += this._menuSize - 1;
+      }
+      if (Utils.isDownPressed(e)) {
+        this._currentIndex++;
+      }
+      this._currentIndex %= this._menuSize;
+      this._update();
+    },
+    _update: function() {
+      this.attr({x: 180, y: 230 + this.YSIZE*this._currentIndex/this._menuSize});
+    }
+  });
   c.scene('menu', function() {
-      c.scene('nextLevel');
+      c.e('2D, ' + consts.RENDER + ', Image, Bouncey')
+        .attr({x: 100, y: 100})
+        .image(consts.ASSETS.LOGO)
+        .bouncey();
+      c.e('Menu')
+        .menu(0, 3)
+        .setCallback(0, function() {
+          c.scene('nextLevel');
+        });
+     // c.scene('nextLevel');
   });
   
   // Intro

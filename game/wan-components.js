@@ -14,6 +14,30 @@ var Utils = {
   // Returns a random element from the given array.
   randomElement: function(array) {
     return array[Utils.random(array.length)];
+  },
+  isDownPressed: function(e) {
+    if (e)
+      return e.key == c.keys['DOWN_ARROW'] || e.key == c.keys['S'];
+    else
+      return c.keydown[c.keys['DOWN_ARROW']] || c.keydown[c.keys['S']];
+  },
+  isUpPressed: function(e) {
+    if (e)
+      return e.key == Crafty.keys['UP_ARROW'] || e.key == Crafty.keys['Z'] || e.key == Crafty.keys['W'];
+    else
+      return c.keydown[c.keys['UP_ARROW']] || c.keydown[c.keys['Z']] || c.keydown[c.keys['W']];
+  },
+  isLeftPressed: function(e) {
+    if (e)
+      return e.key == Crafty.keys['LEFT_ARROW'] || e.key == Crafty.keys['Q'] || e.key == Crafty.keys['A'];
+    else
+      return c.keydown[c.keys['LEFT_ARROW']] || c.keydown[c.keys['Q']] || c.keydown[c.keys['A']];
+  },
+  isRightPressed: function(e) {
+    if (e)
+      return e.key == Crafty.keys['RIGHT_ARROW'] || e.key == Crafty.keys['D'];
+    else
+      return c.keydown[c.keys['RIGHT_ARROW']] || c.keydown[c.keys['D']];
   }
 };
 
