@@ -1,7 +1,7 @@
 var gameState = {
   currentLevel: 1,
   mute: false,
-  gameFinished: false,
+  gameFinished: true,
   resetSave: true,
   readMessages: {} // TODO
 };

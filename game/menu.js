@@ -9,7 +9,7 @@ define(['consts', 'wan-components'], function(consts) {
     }
   });
   c.c('Menu', {
-    YSIZE: 230,
+    YSIZE: 260,
     BASEY: 260,
     BASEX: 200,
     init: function() {
@@ -32,7 +32,7 @@ define(['consts', 'wan-components'], function(consts) {
       .text(text)
       .attr({
         x: this.BASEX + 50,
-        y: this.BASEY + this.YSIZE * (this._entries.length - 1) / this._menuSize + 40
+        y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize - 15
       });
       if (disabled) {
         entry.textColor('#332222', 0.2);
