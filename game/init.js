@@ -29,15 +29,19 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
     'lib/crafty',
    // 'lib/jquery.json',
    // 'lib/jstorage',
-    'lib/inheritance'], function() {
+    'lib/inheritance',
+    'lib/soundmanager2'], function() {
+    
     
     require(['consts', 'game'], function(consts, game) {
+    
       // Assets loading & loading screen
       c.scene('loadassets', function() {
         assetsLoadBaseText = "Loading assets: ";
         var assetsLoadText = c.e('2D, DOM, Text, LoadingMessage')
           .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
           .text(assetsLoadBaseText + "<b>0%</b>");
+      
         c.load(_.values(consts.ASSETS), function() {
           // Register sprites
           function cellMap(s) {
@@ -58,7 +62,35 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
           assetsLoadText.text(assetsLoadBaseText + "<b>" + Math.floor(e.percent) + "%</b>");
         });
       });
-      c.scene('loadassets');
+    
+      // Init sound and load mp3s
+      c.scene('loadsounds', function() {
+        soundsLoadBaseText = "Loading sounds: ";
+        var soundCount = _.size(consts.SOUNDS), loadedSounds = 0;
+        var soundLoadMessage = c.e('2D, DOM, Text, LoadingMessage')
+          .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
+          .text(soundsLoadBaseText + "<b>0%</b>");
+        _.each(consts.SOUNDS, function(sound) {
+            soundManager.createSound({
+              id: sound.ID,
+              url: sound.URL,
+              onload: function() {
+                loadedSounds++;
+                soundLoadMessage.text(soundsLoadBaseText + "<b>" + Math.floor(100 * loadedSounds / soundCount) + "%</b>");
+                if (loadedSounds == soundCount) {
+                  c.scene('loadassets');
+                }
+              }
+            }).load();
+        });
+      });
+      soundManager.setup({
+        url: '/sound/swf/',
+        onready: function() {
+          c.scene('loadsounds');
+        }
+      });
+    
     });
     
   });

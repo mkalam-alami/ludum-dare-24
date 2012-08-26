@@ -1,5 +1,7 @@
 var gameState = {
-  currentLevel: 1
+  currentLevel: 1,
+  mute: false,
+  readMessages: {} // TODO
 };
 
 define([], function() {
@@ -38,6 +40,13 @@ define([], function() {
       LEFTRIGHT: 'img/gui/leftright.png',
       UPDOWN: 'img/gui/updown.png',
       ESCAPE: 'img/gui/escape.png'
+    },
+    
+    SOUNDS: {
+      START: {
+        ID: 'start',
+        URL: '/sound/start.mp3'
+      }
     }
     
   };

@@ -3,7 +3,7 @@ define(['consts'], function(consts) {
 c.c('SceneFade', {
 
   init: function() {
-    this.addComponent('Tween, Persist')
+    this.addComponent('2D, DOM, Tween, Persist')
       .attr({
         x: -c.viewport.x,
         y: -c.viewport.y,
@@ -57,7 +57,7 @@ c.c('Finish', {
       catch (error) {
         console.error(error);
       } 
-      c.e('2D, DOM, SceneFade').sceneFade('nextLevel');
+      c.e('SceneFade').sceneFade('nextLevel');
       this.end = true;
     }
   }
@@ -103,7 +103,7 @@ c.c('Dead', {
       catch (error) {
         console.error(error);
       }
-      c.e('2D, DOM, SceneFade').sceneFade('startLevel');
+      c.e('SceneFade').sceneFade('startLevel');
     }
   }
 
