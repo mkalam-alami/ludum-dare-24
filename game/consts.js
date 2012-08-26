@@ -1,5 +1,5 @@
 var gameState = {
-  currentLevel: "kittens",
+  currentLevel: 0,
   mute: true,
   gameFinished: true,
   resetSave: true
@@ -26,7 +26,6 @@ define([], function() {
     GRAVITY: 0.8,
     TILE_SIZE: 48,
     LEVEL_COUNT: 5,
-    START_LEVEL: 1,
     
     MUSIC_VOLUME: 75,
     
@@ -47,6 +46,8 @@ define([], function() {
       ILLUS2: 'img/illus/2.png',
       TEXT1: 'img/illus/text1.png',
       TEXT2: 'img/illus/text2.png',
+      
+      LEVEL1: 'img/illus/level1.png',
       
       LOGO: 'img/gui/logo.png',
       GUISKIP: 'img/gui/skip.png',

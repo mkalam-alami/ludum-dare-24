@@ -48,6 +48,7 @@
     
     // Create tiled layer
     makeLayer: function(layer) {
+      console.log("lay");
       var i, lData, lHeight, lWidth, tDatum, tile, _len;
       lData = layer.data, lWidth = layer.width, lHeight = layer.height;
       var level = [];
@@ -83,11 +84,17 @@
     
     // Create object layer
     makeObjects: function(layer) {
+      console.log("obj");
       _.each(layer.objects, function(object) {
         if (object.properties.components == 'IngameMessage') {
           Crafty.e('IngameMessage')
             .attr({x: object.x, y: object.y, w: object.width, h: object.height})
             .ingameMessage(object.properties.text, object.properties.image, object.properties.delayms);
+        }
+        else if (object.properties.components == 'Image') {
+          Crafty.e('IngameImage')
+            .attr({x: object.x, y: object.y})
+            .ingameImage(object.properties.image);
         }
       });
     },

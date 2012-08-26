@@ -88,7 +88,7 @@ define(['consts', 'wan-components'], function(consts) {
     
     menu = c.e('Menu').menu((gameState.gameFinished) ? 5 : 4);
     menu.addEntry('Start a new game', function() {
-      gameState.currentLevel = consts.START_LEVEL;
+      gameState.currentLevel = 1;
       soundManager.stopAll();
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('startLevel');

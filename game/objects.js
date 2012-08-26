@@ -194,7 +194,16 @@ c.c('IngameMessage', {
     this.destroy();
   }
   
-  
+});
+
+
+c.c('IngameImage', {
+  init: function() {
+    this.addComponent('2D, ' + consts.RENDER + ', Image');
+  },
+  ingameImage: function(assetId) {
+    this.image(consts.ASSETS[assetId]);
+  }
 });
 
 });

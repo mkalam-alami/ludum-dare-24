@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="17" height="12" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
+  <image source="img/tiles/objects.png" width="192" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="components" value="Player"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="components" value="Finish"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="components" value="Dead"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="components" value="Wall"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="components" value="CellJump"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="standardv2" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standardv2.png" width="384" height="384"/>
+ </tileset>
+ <objectgroup name="Calque d'objets 1" width="17" height="12">
+  <object x="203" y="124" width="340" height="250">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="delayms" value="8000"/>
+    <property name="image" value="LEFTRIGHT"/>
+    <property name="text" value="The most basic lifeform is cells."/>
+   </properties>
+  </object>
+  <object x="261" y="66" width="85" height="67">
+   <properties>
+    <property name="components" value="Image"/>
+    <property name="image" value="LEVEL1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="Tiles" width="17" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxTYmBgUAJiKSDWgmJtIrAUElaCYhkG0oDkCDRDDIiFgFiCSDNUcNgnS4Q7YHGpg0OtKA5xTSS9hAAud5ACcLmDFECMO4TwYGEGSJjhUwPCAL2+CZU=
+  </data>
+ </layer>
+ <layer name="Objects" width="17" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAFhIwNoBLHBfApn6wm8FIoRn4wpAUdxAjTm58EdJHjBmkAHqZQUr6xoUBQF8A2g==
+  </data>
+ </layer>
+</map>
