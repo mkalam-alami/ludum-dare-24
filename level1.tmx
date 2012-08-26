@@ -68,4 +68,14 @@
    eJxjYEAAERIwNoBLHBfApn6wmyFIoRn4wpAUdxAjTm58IetjwaGGkBnIYLCYQUr6xoUBVroEVg==
   </data>
  </layer>
+ <objectgroup name="Calque d'objets 1" width="17" height="12">
+  <object x="203" y="124" width="340" height="250">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="delayms" value="8000"/>
+    <property name="image" value="LEFTRIGHT"/>
+    <property name="text" value="The most basic lifeform is cells."/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

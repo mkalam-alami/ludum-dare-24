@@ -21,6 +21,32 @@
          "width":17,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":12,
+         "name":"Calque d'objets 1",
+         "objects":[
+                {
+                 "height":250,
+                 "name":"",
+                 "properties":
+                    {
+                     "components":"IngameMessage",
+                     "delayms":"8000",
+                     "image":"LEFTRIGHT",
+                     "text":"The most basic lifeform is cells."
+                    },
+                 "type":"",
+                 "width":340,
+                 "x":203,
+                 "y":124
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":17,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":
