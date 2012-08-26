@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="30" height="14" tilewidth="48" tileheight="48">
- <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
-  <image source="img/tiles/standard.png" width="192" height="192"/>
-  <tile id="1">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="17" name="objects" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="30" height="12" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
   <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
    <properties>
@@ -42,6 +29,7 @@
   <tile id="4">
    <properties>
     <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
    </properties>
   </tile>
   <tile id="5">
@@ -57,14 +45,61 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="30" height="14">
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="30" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYCQTM1CgF6afVMCIRpOqlxx3U9teYvXQwl5S/UlNe3GppYe9xPqTFvaSQlNqLwMan5A4pfbSEzDRwF5sZQIue2mBGYiQH0kAADCWAJA=
+   eJyTYmBg0KIB1sYjLg3EOgz0B5pALDcA9sqNQHtFgFgMiMXRsARUDTY5SrEQEMvQ2nNYgOQA2as5QPbKDaC9KlQyiw2PnCgWe0FllhANsDASWwqLPADKNAvk
   </data>
  </layer>
- <layer name="Objects" width="30" height="14" opacity="0.4">
+ <layer name="Objects" width="30" height="12">
   <data encoding="base64" compression="zlib">
-   eJwTYWBgEKEzZkCiSQUgfYJk6ke2nxy9yPSovYPbXkLm4FJHbXtJpSm1lwGNT0ic3vFLKcBnrxiZ5olgYeNTS+0ykJA6agJhAnxaAmEkjAsAAGIECPc=
+   eJxjYBgYwDJqL93sZRwge3FhBjQ2te2lN6CVXwarvTC7h6u92OzAl55piQEaKwDO
   </data>
  </layer>
+ <objectgroup name="Calque d'objets 1" width="30" height="12">
+  <object x="108" y="126" width="205" height="166">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="Cell cannot do much by themselves."/>
+   </properties>
+  </object>
+  <object x="406" y="374" width="165" height="184">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="But they are able to combine..."/>
+   </properties>
+  </object>
+  <object x="367" y="238" width="1"/>
+  <object x="628" y="428" width="165" height="184">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="...with other bodies?"/>
+   </properties>
+  </object>
+  <object x="787" y="321" width="209" height="233">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="image" value="MERGE"/>
+   </properties>
+  </object>
+  <object x="1011" y="422" width="234" height="220">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="image" value="JUMP"/>
+    <property name="text" value="This cell can now jump!"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

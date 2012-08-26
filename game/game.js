@@ -45,9 +45,8 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
       c.scene('menu');
     }
     else {
-      c.scene('menu');
-      //c.scene('endgame');
-      //c.scene('intro');
+      c.scene('startLevel');
+    // c.scene('intro');
     }
       
   }

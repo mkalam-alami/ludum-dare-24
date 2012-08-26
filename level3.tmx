@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="24" height="12" tilewidth="48" tileheight="48">
- <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
-  <image source="img/tiles/standard.png" width="192" height="192"/>
-  <tile id="1">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="17" name="objects" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="16" height="12" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
   <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
    <properties>
@@ -42,6 +29,7 @@
   <tile id="4">
    <properties>
     <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
    </properties>
   </tile>
   <tile id="5">
@@ -57,14 +45,36 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="24" height="12">
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQCZiAgRwsw1M1nYsAfVsSENQMWfejmUwpINZ9UOwmlJVxqKQXkpGVS7CZGDyV20Cv90xIDAPE8AHI=
+   eJyTYmBg0MKCdRggQBOHPAhLAbEMA/lAkkb6xYBYHAlL0Nn+oaRfZYjbLw3EQmRiUPoFAA+RBh4=
   </data>
  </layer>
- <layer name="Objects" width="24" height="12" opacity="0.4">
+ <layer name="Objects" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYGBgEKECFsQjRysw1M0XQrMH3S584YnOxmU+NdxPqvmk2onPf/jChFKAzS5cYuSkaWxxhU0NuXbgUidKpPvQgRgJbqMWBgBrMwh/
+   eJxjYBgFo2DkAgADAAAB
   </data>
  </layer>
+ <objectgroup name="Calque d'objets 1" width="16" height="12">
+  <object x="367" y="238" width="1"/>
+  <object x="105" y="80" width="305" height="76">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="image" value="STUCK"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

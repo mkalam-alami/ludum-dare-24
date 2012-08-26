@@ -30,6 +30,7 @@ define(['consts', 'wan-components'], function(consts) {
     init: function() {
       this.bind('EnterFrame', this._enterFrame);
       this._next = 0;
+    console.log("new");
     },
     _enterFrame: function() {
       if (this._next <= 0) {
@@ -47,7 +48,7 @@ define(['consts', 'wan-components'], function(consts) {
           .wallOfTextText(Utils.random(3)+1, from, to);
       }
       this._next--;
-    
+    console.log("yeah");
     }
   });
   

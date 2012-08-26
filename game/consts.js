@@ -1,8 +1,8 @@
 var gameState = {
-  currentLevel: 0,
+  currentLevel: 2,
   mute: true,
   gameFinished: true,
-  resetSave: false,
+  resetSave: true,
   skipIntro: false
 };
 
@@ -54,7 +54,10 @@ define([], function() {
       GUISKIP: 'img/gui/skip.png',
       LEFTRIGHT: 'img/gui/leftright.png',
       UPDOWN: 'img/gui/updown.png',
-      ESCAPE: 'img/gui/escape.png'
+      ESCAPE: 'img/gui/escape.png',
+      MERGE: 'img/gui/merge.png',
+      JUMP: 'img/gui/jump.png',
+      RESET: 'img/gui/reset.png'
     },
     
     SOUNDS: {

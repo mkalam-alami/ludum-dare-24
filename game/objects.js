@@ -171,7 +171,7 @@ c.c('IngameMessage', {
   ingameMessage: function(text, image, delayms) {
     this._text = text;
     this._image = image;
-    this._delayms = delayms || 3000;
+    this._delayms = delayms || 5000;
     this.collision([0,0],[this.w,0],[this.w,this.h],[0,this.h]);
     this.onHit('Player', this._displayMessageAndDie);
   },

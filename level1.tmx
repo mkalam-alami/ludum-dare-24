@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="17" height="12" tilewidth="48" tileheight="48">
- <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
-  <image source="img/tiles/standard.png" width="192" height="192"/>
-  <tile id="1">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="17" name="objects" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
   <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
    <properties>
@@ -58,16 +45,19 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="17" height="12">
-  <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQiJgWMRDOIlSPkDnzi1DQDBJhxqMNnBggwATHLIDKDGukbAKiAAHA=
-  </data>
- </layer>
- <layer name="Objects" width="17" height="12">
-  <data encoding="base64" compression="zlib">
-   eJxjYEAAERIwNoBLHBfApn6wmyFIoRn4wpAUdxAjTm58IetjwaGGkBnIYLCYQUr6xoUBVroEVg==
-  </data>
- </layer>
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
  <objectgroup name="Calque d'objets 1" width="17" height="12">
   <object x="203" y="124" width="340" height="250">
    <properties>
@@ -77,5 +67,21 @@
     <property name="text" value="The most basic lifeform is cells."/>
    </properties>
   </object>
+  <object x="257" y="160" width="85" height="67">
+   <properties>
+    <property name="components" value="Image"/>
+    <property name="image" value="LEVEL1"/>
+   </properties>
+  </object>
  </objectgroup>
+ <layer name="Tiles" width="17" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxTYmBgUAJiKSDWgmJtIrAUElaCYhkG0oDkCDRDDIiFgFiCSDNUcNgnS4Q7pKEYl19wmaHJgEgH5JoBA3JQ/Qx4zNAl0gwQxhUehACyGSAshIaFoRhdHB0DAHQhCro=
+  </data>
+ </layer>
+ <layer name="Objects" width="17" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAFhIwNoBLHBfApn6wm8FIoRn4wpAUd5AiTo4Z6G4kN86Z6GQGIYBuBrkYAD6XANg=
+  </data>
+ </layer>
 </map>
