@@ -1,3 +1,7 @@
+var gameState = {
+  currentLevel: 1
+};
+
 define([], function() {
 
   return {
@@ -32,7 +36,8 @@ define([], function() {
       LOGO: 'img/gui/logo.png',
       GUISKIP: 'img/gui/skip.png',
       LEFTRIGHT: 'img/gui/leftright.png',
-      UPDOWN: 'img/gui/updown.png'
+      UPDOWN: 'img/gui/updown.png',
+      ESCAPE: 'img/gui/escape.png'
     }
     
   };

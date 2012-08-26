@@ -7,10 +7,6 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
     if (stage.focus) {
       stage.focus();
     }
-    
-    var gameState = {
-      currentLevel: consts.START_LEVEL - 1
-    };
 
     // Game scenes
     c.scene('nextLevel', function() {
@@ -26,7 +22,7 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
       c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
     });
     
-    c.scene('menu');
+    c.scene('endgame');
     //c.scene('intro');
       
   }

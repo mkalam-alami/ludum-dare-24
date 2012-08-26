@@ -50,20 +50,44 @@ define(['consts', 'wan-components'], function(consts) {
   }
   
   // Game menu
-  c.c('Menu', {
-    YSIZE: 300,
+  c.c('MenuEntry', {
     init: function() {
-      this.addComponent('2D, ' + consts.RENDER + ', Image, Keyboard');
+      this.addComponent('2D, ' + consts.RENDER + ', Text, Tween');
+      this.attr({w: 200, h: 50});
+      this.textFont({ family: "'Niconne', sans-serif", size: '30pt' });
+      this.textColor('#332222', 0.9);
+    }
+  });
+  c.c('Menu', {
+    YSIZE: 150,
+    BASEY: 250,
+    BASEX: 200,
+    init: function() {
+      this.addComponent('2D, ' + consts.RENDER + ', Image, Tween, Keyboard');
       this.image(consts.ASSETS.UPDOWN);
       this.bind('KeyDown', this._keyDown);
       this._callbacks = [];
       this._currentIndex = 0;
-      this._menuSize = 0;
+      this._menuSize = 1;
+      this._index = 0;
     },
-    menu: function(initialIndex, size) {
-      this._currentIndex = initialIndex;
+    menu: function(size) {
       this._menuSize = size;
-      this._update();
+      this._update(true);
+      return this;
+    },
+    addEntry: function(text, callback, disabled) {
+      this._callbacks.push((disabled) ? null : callback);
+     var entry = c.e('MenuEntry')
+      .text(text)
+      .attr({
+        x: this.BASEX + 50,
+        y: this.BASEY + this.YSIZE * (this._callbacks.length - 1) / this._menuSize - 15
+      });
+      if (disabled) {
+        entry.textColor('#332222', 0.2);
+      }
+      this._index++;
       return this;
     },
     setCallback: function(index, callback) {
@@ -86,21 +110,39 @@ define(['consts', 'wan-components'], function(consts) {
       this._currentIndex %= this._menuSize;
       this._update();
     },
-    _update: function() {
-      this.attr({x: 180, y: 230 + this.YSIZE*this._currentIndex/this._menuSize});
+    _update: function(fast) {
+      this.tween({
+          x: this.BASEX,
+          y: this.BASEY + this.YSIZE * this._currentIndex / this._menuSize
+      }, (fast) ? 1 : 5);
     }
   });
   c.scene('menu', function() {
-      c.e('2D, ' + consts.RENDER + ', Image, Bouncey')
-        .attr({x: 100, y: 100})
-        .image(consts.ASSETS.LOGO)
-        .bouncey();
-      c.e('Menu')
-        .menu(0, 3)
-        .setCallback(0, function() {
-          c.scene('nextLevel');
-        });
-     // c.scene('nextLevel');
+    c.viewport.x = c.viewport.y = 0;
+    var logo = c.e('2D, ' + consts.RENDER + ', Image, Bouncey, Tween')
+      .attr({x: 100, y: 100})
+      .image(consts.ASSETS.LOGO)
+      .bouncey();
+    
+    menu = c.e('Menu').menu(3);
+    menu.addEntry('Start a new game', function() {
+      gameState.currentLevel = consts.START_LEVEL;
+      c.scene('startLevel');
+    })
+    menu.addEntry('Continue game', function() {
+      c.scene('startLevel');
+    }, gameState.currentLevel <= 1);
+    menu.addEntry('Play introduction', function() {
+      c.scene('intro');
+    });
+    
+    // Fade in menu
+    _.each(c('Tween'), function(id) {
+      var e = c(id);
+      e.attr({alpha: 0});
+      e.tween({alpha: 1}, 80);
+    });
+    logo.tween({alpha: 1}, 20);
   });
   
   // Intro
@@ -122,7 +164,7 @@ define(['consts', 'wan-components'], function(consts) {
       .action(150, this, write, 50, 250, 'May 2, 1642', 1)
       .action(30, this, write, 50, 300, 'A. K.', 1)
       .action(120, this, fadeout)
-      .action(100, c, c.scene, 'menu')
+      .action(70, c, c.scene, 'menu')
       .run();
   });
 
@@ -130,11 +172,16 @@ define(['consts', 'wan-components'], function(consts) {
   // Endgame
   c.scene('endgame', function() {
     c.e('2D, DOM, Text, GameOver')
-      .attr({x: 0, y: $stage.height()/2 - 50, w: $stage.width() - 80, h: 40})
+      .attr({x: 0, y: consts.HEIGHT/2 - 50, w: consts.WIDTH - 80, h: 40})
       .text('Congratulations, you finished the game.<br />It was awesome, right?');
-    c.e('2D, DOM, Text, MessageCentered')
-      .attr({x: 0, y: $stage.height() - 50, w: $stage.width(), h: 40})
-      .text('<a href=".">Restart?</a>');
+    c.e('2D, DOM, Image, Keyboard')
+      .attr({x: consts.WIDTH/2 - 85, y: consts.HEIGHT - 50})
+      .image(consts.ASSETS.ESCAPE)
+      .bind('KeyDown', function(e) {
+        if (e.key == c.keys['ESC']) {
+          c.scene('menu');
+        }
+      });
   });
 
 });

@@ -129,11 +129,19 @@ c.c('Script', {
       if (this.currentAction == null) {
         this.currentAction = this.actions[this.currentActionIndex];
       }
+      // Skip script
+      if (this.isDown('ESC')) {
+        this.currentActionIndex = this.actions.length - 1;
+        this.currentAction = this.actions[this.currentActionIndex];
+        this.t = this.currentAction.delay;
+      }
+      
       this.t++;
       if (this.skipDelay > 0) {
         this.skipDelay--;
       }
       if (this.currentAction.delay <= this.t || (this.isDown('ENTER') && this.skipDelay == 0)) {
+        // Skip action
         if (this.isDown('ENTER')) {
           this.skipDelay = 10;
         }

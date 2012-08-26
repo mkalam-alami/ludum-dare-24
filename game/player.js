@@ -140,6 +140,9 @@ c.c('Player', {
         this._mergeWith(this.targetCell);
       }
     }
+    if (e.key == Crafty.keys['ESC']) {
+      c.scene('menu');
+    }
     if (e.key == Crafty.keys['R']) {
       c.scene('startLevel');
     }

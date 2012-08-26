@@ -78,9 +78,9 @@ c.c('Wall', {
       [this.MARGIN,this.w-this.MARGIN]);*/
   },
   
-  setup: function() {
-    //c.e('2D, Canvas, Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
-  }
+ /* setup: function() {
+    c.e('2D, Canvas, Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
+  }*/
   
 });
 
