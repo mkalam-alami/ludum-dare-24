@@ -1,9 +1,9 @@
-define(['lib/jquery'], function() {
+define([], function() {
 
   return {
 
-    WIDTH: $('#cr-stage').width(),
-    HEIGHT: $('#cr-stage').height(),
+    WIDTH: 768,
+    HEIGHT: 576,
     
     RENDER: 'Canvas',
 

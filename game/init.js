@@ -7,19 +7,19 @@ requirejs.config({
 
 // Load minimal libraries
 requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
-
+  $(document).ready(function() {
+  
   c = Crafty;
 
   // Init Crafty and display loading screen
-  $stage = $('#cr-stage');
-  c.init($stage.width(), $stage.height());
+  c.init(consts.WIDTH, consts.HEIGHT);
   if (consts.RENDER == 'Canvas') {
     c.canvas.init();
   }
   
   c.scene('loadjs', function() {
     c.e('2D, DOM, Text, LoadingMessage')
-      .attr({x: 0, y: $stage.height()/2 - 20, w: $stage.width(), h: 40})
+      .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
       .text('Loading libraries...');
   });
   c.scene('loadjs');
@@ -27,9 +27,8 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
   // Load remaining libraries & game entry point
   require(['lib/underscore',
     'lib/crafty',
-    'lib/jquery',
-    'lib/jquery.json',
-    'lib/jstorage',
+   // 'lib/jquery.json',
+   // 'lib/jstorage',
     'lib/inheritance'], function() {
     
     require(['consts', 'game'], function(consts, game) {
@@ -37,7 +36,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
       c.scene('loadassets', function() {
         assetsLoadBaseText = "Loading assets: ";
         var assetsLoadText = c.e('2D, DOM, Text, LoadingMessage')
-          .attr({x: 0, y: $stage.height()/2 - 20, w: $stage.width(), h: 40})
+          .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
           .text(assetsLoadBaseText + "<b>0%</b>");
         c.load(_.values(consts.ASSETS), function() {
           // Register sprites
@@ -63,5 +62,6 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
     });
     
   });
-
+  
+  });
 });

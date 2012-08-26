@@ -1,6 +1,6 @@
 body {
-  background-color: #CCC;
-  font-family: 'Anonymous Pro', sans-serif;
+  background-color: #FFF;
+  font-family: 'Niconne', cursive;
   overflow: hidden;
   margin-top: 10px;
 }
@@ -19,19 +19,48 @@ div {
   cursor: default;
 }
 
-#cr-stage {
+#stage-container {
   margin: auto;
+  width: 915px;
+  height: 620px;
+  background: url('img/background.jpg');
+}
+
+#stage-foreground {
+  position: relative;
+  top: -546px;
+  left: 90px;
   width: 768px;
   height: 576px;
-  border: 1px solid black;
-  background-color: white;
+  background: url('img/foreground.png');
+  z-index: 100;
+}
+
+#cr-stage {
+  position: relative;
+  top: 30px;
+  left: 90px;
+  width: 768px;
+  height: 576px;
+  z-index: 50;
 }
 
 #legend {
+  font-family: 'Trebuchet MS', 'Verdana', 'Arial', sans-serif;
   margin: auto;
   text-align: center;
-  font-size: 10pt;
-  margin-top: 10px;
+  margin-top: 20px;
+  color: #A86;
+}
+
+#legend a {
+  color: #A86;
+}
+
+p {
+  margin-top: 5px;
+  margin-bottom: -5px;
+  font-size: 80%;
 }
 
 .Mouse {
