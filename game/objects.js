@@ -110,56 +110,87 @@ c.c('Dead', {
 });
 
 
-c.c('IngameMessageText', {
+c.c('IngameMessageAbstract', {
   init: function() {
-    this.addComponent('2D, ' + consts.RENDER + ', Text, Tween');
-    this.bind('TweenEnd', this._tweenEnd);
-    this.bind('EnterFrame', this._enterFrame);
+    this.addComponent('2D, ' + consts.RENDER + ', Tween');
+    this.bind('TweenEnd', this._tweenEndAbstract);
+    this.bind('EnterFrame', this._enterFrameAbstract);
     this.attr({alpha: 0});
-    this.textFont({ family: "'Niconne', sans-serif", size: '30pt' });
-    this.textColor('#666666', 0.9);
   },
-  ingameMessageText: function(text, delayms, initialSpeed) {
-    this.text(text);
+  ingameMessageAbstract: function(delayms, initialSpeed) {
     this._delayms = delayms;
     this._xspeed = initialSpeed;
     this.tween({alpha: 1}, 40);
   },
-  _tweenEnd: function() {
+  _tweenEndAbstract: function() {
     if (this._alpha > 0.5) {
       this.timeout(function() {
         this.tween({alpha: 0}, 30);
-      }, this._delayms); // /!\ in milliseconds
+      }, this._delayms);
     }
     else {
       this.destroy();
     }
   },
-  _enterFrame: function() {
+  _enterFrameAbstract: function() {
     if (Math.abs(this._xspeed) > 0.1) {
       this.x += this._xspeed / 2;
       this._xspeed *= 0.95;
     }
   }
 });
+
+c.c('IngameMessageText', {
+  init: function() {
+    this.addComponent('IngameMessageAbstract, Text');
+    this.textFont({ family: "'Niconne', sans-serif", size: '30pt' });
+    this.textColor('#666666', 0.9);
+  },
+  ingameMessageText: function(text, delayms, initialSpeed) {
+    this.ingameMessageAbstract(delayms, initialSpeed);
+    this.text(text);
+  }
+});
   
+c.c('IngameMessageImage', {
+  init: function() {
+    this.addComponent('IngameMessageAbstract, Image');
+  },
+  ingameMessageImage: function(image, delayms, initialSpeed) {
+    this.ingameMessageAbstract(delayms, initialSpeed);
+    this.image(consts.ASSETS[image]);
+  }
+});
+
 c.c('IngameMessage', {
   
   init: function() {
     this.addComponent('2D, Collision');
   },
   
-  ingameMessage: function(text, delayms) {
+  ingameMessage: function(text, image, delayms) {
     this._text = text;
+    this._image = image;
     this._delayms = delayms || 3000;
     this.collision([0,0],[this.w,0],[this.w,this.h],[0,this.h]);
     this.onHit('Player', this._displayMessageAndDie);
   },
   
   _displayMessageAndDie: function(e) {
-    var text = c.e('IngameMessageText')
-      .attr({x: this.x, y: this.y})
-      .ingameMessageText(this._text, this._delayms, e[0].obj.xSpeed);
+    if (this._text) {
+      c.e('IngameMessageText')
+        .attr({x: this.x, y: this.y})
+        .ingameMessageText(this._text, this._delayms, e[0].obj.xSpeed);
+    }
+    if (this._image) {
+      var yOffset = 0;
+      if (this._text) {
+        yOffset = 20;
+      }
+      c.e('IngameMessageImage')
+        .attr({x: this.x, y: this.y + yOffset})
+        .ingameMessageImage(this._image, this._delayms, e[0].obj.xSpeed);
+    }
     this.destroy();
   }
   

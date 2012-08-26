@@ -10,12 +10,38 @@
                  "properties":
                     {
                      "components":"IngameMessage",
+                     "image":"LEFTRIGHT",
                      "text":"Hello!"
                     },
                  "type":"bulle",
                  "width":48,
                  "x":235,
                  "y":222
+                }, 
+                {
+                 "height":131,
+                 "name":"fdefijomj",
+                 "properties":
+                    {
+                     "components":"IngameMessage",
+                     "image":"LEFTRIGHT"
+                    },
+                 "type":"",
+                 "width":57,
+                 "x":306,
+                 "y":226
+                }, 
+                {
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "width":0,
+                 "x":396,
+                 "y":450
                 }],
          "opacity":1,
          "type":"objectgroup",

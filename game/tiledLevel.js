@@ -87,7 +87,7 @@
         if (object.properties.components == 'IngameMessage') {
           Crafty.e('IngameMessage')
             .attr({x: object.x, y: object.y, w: object.width, h: object.height})
-            .ingameMessage(object.properties.text, object.properties.delayms);
+            .ingameMessage(object.properties.text, object.properties.image, object.properties.delayms);
         }
       });
     },
