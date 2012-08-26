@@ -41,7 +41,8 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
       c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
     });
     
-    c.scene('menu');
+    c.scene('startLevel');
+   // c.scene('menu');
     //c.scene('intro');
       
   }

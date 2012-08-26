@@ -81,6 +81,17 @@
       return null;
     },
     
+    // Create object layer
+    makeObjects: function(layer) {
+      _.each(layer.objects, function(object) {
+        if (object.properties.components == 'IngameMessage') {
+          Crafty.e('IngameMessage')
+            .attr({x: object.x, y: object.y, w: object.width, h: object.height})
+            .ingameMessage(object.properties.text, object.properties.delayms);
+        }
+      });
+    },
+    
     tiledLevel: function(levelURL, drawType, callback) {
       var _this = this;
       $.ajax({
@@ -110,7 +121,12 @@
             }
             for (_j = 0, _len2 = lLayers.length; _j < _len2; _j++) {
               layer = lLayers[_j];
-              _this.makeLayer(layer);
+              if (layer.type == "objectgroup") {
+                _this.makeObjects(layer);
+              }
+              else {
+                _this.makeLayer(layer);
+              }
             }
             if (callback) {
               callback();

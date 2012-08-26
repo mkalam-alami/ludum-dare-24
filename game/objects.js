@@ -76,7 +76,7 @@ c.c('Wall', {
       [this.w-this.MARGIN,this.MARGIN],
       [this.w-this.MARGIN,this.w-this.MARGIN],
       [this.MARGIN,this.w-this.MARGIN]);*/
-  },
+  }
   
  /* setup: function() {
     c.e('2D, Canvas, Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
@@ -107,6 +107,63 @@ c.c('Dead', {
     }
   }
 
+});
+
+
+c.c('IngameMessageText', {
+  init: function() {
+    this.addComponent('2D, ' + consts.RENDER + ', Text, Tween');
+    this.bind('TweenEnd', this._tweenEnd);
+    this.bind('EnterFrame', this._enterFrame);
+    this.attr({alpha: 0});
+    this.textFont({ family: "'Niconne', sans-serif", size: '30pt' });
+    this.textColor('#666666', 0.9);
+  },
+  ingameMessageText: function(text, delayms, initialSpeed) {
+    this.text(text);
+    this._delayms = delayms;
+    this._xspeed = initialSpeed;
+    this.tween({alpha: 1}, 40);
+  },
+  _tweenEnd: function() {
+    if (this._alpha > 0.5) {
+      this.timeout(function() {
+        this.tween({alpha: 0}, 30);
+      }, this._delayms); // /!\ in milliseconds
+    }
+    else {
+      this.destroy();
+    }
+  },
+  _enterFrame: function() {
+    if (Math.abs(this._xspeed) > 0.1) {
+      this.x += this._xspeed / 2;
+      this._xspeed *= 0.95;
+    }
+  }
+});
+  
+c.c('IngameMessage', {
+  
+  init: function() {
+    this.addComponent('2D, Collision');
+  },
+  
+  ingameMessage: function(text, delayms) {
+    this._text = text;
+    this._delayms = delayms || 3000;
+    this.collision([0,0],[this.w,0],[this.w,this.h],[0,this.h]);
+    this.onHit('Player', this._displayMessageAndDie);
+  },
+  
+  _displayMessageAndDie: function(e) {
+    var text = c.e('IngameMessageText')
+      .attr({x: this.x, y: this.y})
+      .ingameMessageText(this._text, this._delayms, e[0].obj.xSpeed);
+    this.destroy();
+  }
+  
+  
 });
 
 });

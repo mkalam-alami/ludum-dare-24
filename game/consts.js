@@ -1,10 +1,18 @@
 var gameState = {
+  currentLevel: 0,
+  mute: true,
+  gameFinished: true,
+  resetSave: true
+};
+/*
+var gameState = {
   currentLevel: 1,
   mute: false,
-  gameFinished: true,
-  resetSave: true,
+  gameFinished: false,
+  resetSave: false,
   readMessages: {} // TODO
 };
+*/
 
 define([], function() {
 
@@ -18,7 +26,7 @@ define([], function() {
     GRAVITY: 0.8,
     TILE_SIZE: 48,
     LEVEL_COUNT: 5,
-    START_LEVEL: 1,
+    START_LEVEL: 0,
     
     MUSIC_VOLUME: 75,
     
