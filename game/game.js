@@ -38,15 +38,20 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
       if (music.playState == 0) {
         music.play();
       }
-      c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
+      
+      if (gameState.currentLevel == 7) {
+        c.scene('scriptmidgame');
+      }
+      else {
+        c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
+      }
     });
     
-    if (gameState.skipIntro) {
+    if (gameState.currentLevel > 0) {
       c.scene('menu');
     }
     else {
-      c.scene('startLevel');
-    // c.scene('intro');
+      c.scene('intro');
     }
       
   }

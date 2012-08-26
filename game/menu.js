@@ -147,7 +147,13 @@ define(['consts', 'wan-components'], function(consts) {
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('startLevel');
     })
-    menu.addEntry('Continue game', function() {
+    var currentLevelLabel = '';
+    if (gameState.currentLevel > 0) {
+      var n = gameState.currentLevel;
+      if (n >= 7) n--; // do not count midgame script
+      currentLevelLabel = ' (lvl. ' + n + ')';
+    }
+    menu.addEntry('Continue game' + currentLevelLabel, function() {
       bg.destroy();
       soundManager.stopAll();
       soundManager.play(consts.SOUNDS.START.ID);

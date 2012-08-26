@@ -83,6 +83,34 @@ define(['consts', 'wan-components'], function(consts) {
       .action(70, c, c.scene, 'menu')
       .run();
   });
+  
+  
+  // Midgame
+  
+  c.scene('scriptmidgame', function() {
+    soundManager.stopAll();
+    music = soundManager.getSoundById(consts.SOUNDS.MUSIC_CUTSCENES.ID);
+    if (music.playState == 0) {
+      music.play();
+    }
+    
+    if (consts.mute) {
+      soundManager.mute();
+    }
+    
+    c.e('Script')
+      .action(0, this, write, 50, 50, 'This is amazing!', 3)
+      .action(100, this, write, 50, 120, 'Thanks to these first experiments,', 2)
+      .action(70, this, write, 50, 160, 'I now have a theory...', 2)
+      .action(0, this, image, 440, 80, consts.ASSETS.ILLUS2)
+      .action(100, this, write, 50, 230, 'A theory about the evolution of life across space and time.', 2)
+      .action(130, this, write, 50, 300, 'I can\'t wait to see how amazed', 2)
+      .action(60, this, write, 50, 340, 'the scientific community will be!', 2)
+      .action(120, this, fadeout)
+      .action(70, c, c.scene, 'nextLevel')
+      .run();
+  });
+  
 
   // Endgame
   
@@ -114,31 +142,6 @@ define(['consts', 'wan-components'], function(consts) {
       .action(80, this, write, 50, 360, 'A. K.', 10)
       .action(50, this, image, 300, 530, consts.ASSETS.ESCAPE)
       .run();
-     /* .action(0, this, image, 570, 20, consts.ASSETS.GUISKIP)
-      .action(70, this, write, 50, 130, 'And, well... life.', 4)
-      .action(120, this, write, 50, 200, 'But it\'s to soo soon to share this.', 1)
-      .action(70, this, write, 50, 240, 'Too dangerous...', 2)
-      .action(0, this, image, 100, 500, consts.ASSETS.TEXT1)
-      .action(60, this, write, 50, 280, 'I would probably meet the same', 2)
-      .action(60, this, write, 50, 320, 'fate as that Galilei genius.', 2)
-      .action(100, this, fadeout)
-      .action(30, this, write, 50, 100, 'I\'m leaving these notes here.', 2)
-      .action(80, this, write, 50, 150, 'Hopefully they will be found when the world is ready.', 1)
-      .action(150, this, write, 50, 250, 'May 2, 1642', 1)
-      .action(120, this, fadeout)
-      .action(70, c, c.scene, 'menu')
-      .run();*/
-   /* c.e('2D, DOM, Text, GameOver')
-      .attr({x: 0, y: consts.HEIGHT/2 - 50, w: consts.WIDTH - 80, h: 40})
-      .text('Congratulations, you finished the game.<br />It was awesome, right?'); //  TODO*/
-   /* c.e('2D, DOM, Image, Keyboard')
-      .attr({x: consts.WIDTH/2 - 85, y: consts.HEIGHT - 50})
-      .image(consts.ASSETS.ESCAPE)
-      .bind('KeyDown', function(e) {
-        if (e.key == c.keys['ESC']) {
-          c.scene('menu');
-        }
-      });*/
   });
 
 });

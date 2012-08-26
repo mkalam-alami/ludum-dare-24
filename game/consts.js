@@ -1,9 +1,8 @@
 var gameState = {
-  currentLevel: 6,
+  currentLevel: 7,
   mute: true,
   gameFinished: true,
-  resetSave: true,
-  skipIntro: false
+  resetSave: true
 };
 
 /*var gameState = {
@@ -25,7 +24,7 @@ define([], function() {
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
-    LEVEL_COUNT: 6,
+    LEVEL_COUNT: 8,
     
     MUSIC_VOLUME: 75,
     
