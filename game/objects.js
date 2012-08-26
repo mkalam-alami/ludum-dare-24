@@ -103,7 +103,7 @@ c.c('Dead', {
       catch (error) {
         console.error(error);
       }
-      c.e('2D, DOM, SceneFade').sceneFade('game');
+      c.e('2D, DOM, SceneFade').sceneFade('startLevel');
     }
   }
 

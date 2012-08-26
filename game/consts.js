@@ -9,7 +9,7 @@ define([], function() {
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
-    LEVEL_COUNT: 5,
+    LEVEL_COUNT: 6,
     START_LEVEL: 1,
     
     ASSETS: {
@@ -22,7 +22,9 @@ define([], function() {
       HERO_CELL_CORE: 'img/entities/hero-cell-core.png',
       
       STANDARD_SPRITESHEET: 'img/tiles/standard.png',
-      OBJECTS_SPRITESHEET: 'img/tiles/objects.png'
+      OBJECTS_SPRITESHEET: 'img/tiles/objects.png',
+      
+      ILLUS1: 'img/illus/1.jpg'
     }
     
   };

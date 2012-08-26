@@ -141,7 +141,7 @@ c.c('Player', {
       }
     }
     if (e.key == Crafty.keys['R']) {
-      c.scene('game');
+      c.scene('startLevel');
     }
     if (this.bodySize > 1) {
       var oldDirection = this.direction;

@@ -72,7 +72,7 @@ c.c('Script', {
     this.actions.push({
       delay: delay,
       context: context,
-      callback: context[callback],
+      callback: (typeof(callback) == 'String') ? context[callback] : callback,
       arguments: args
     });
     return this;
