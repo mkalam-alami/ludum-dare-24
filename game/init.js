@@ -37,7 +37,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
     
       // Assets loading & loading screen
       c.scene('loadassets', function() {
-        assetsLoadBaseText = "Loading assets: ";
+        assetsLoadBaseText = "Loading graphics: ";
         var assetsLoadText = c.e('2D, DOM, Text, LoadingMessage')
           .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
           .text(assetsLoadBaseText + "<b>0%</b>");
