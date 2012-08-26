@@ -52,8 +52,8 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
             return o;
           }
           
-          Crafty.sprite(48, 48, consts.ASSETS.HERO_CELL, cellMap("CellHero"));
-          Crafty.sprite(48, 48, consts.ASSETS.CELL_NORMAL, cellMap("CellNormal"));
+          c.sprite(48, 48, consts.ASSETS.HERO_CELL, cellMap("CellHero"));
+          c.sprite(48, 48, consts.ASSETS.CELL_NORMAL, cellMap("CellNormal"));
           
           // Launch game
           game();
@@ -71,10 +71,12 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
           .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
           .text(soundsLoadBaseText + "<b>0%</b>");
         _.each(consts.SOUNDS, function(sound) {
+            var isMusic = sound.ID.indexOf('music') != -1;
             soundManager.createSound({
               id: sound.ID,
               url: sound.URL,
-              loops: (sound.ID.indexOf('music') != -1) ? 999 : 0,
+              loops: (isMusic) ? 999 : 0,
+              volume: (isMusic) ? consts.MUSIC_VOLUME : 100,
               onload: function() {
                 loadedSounds++;
                 soundLoadMessage.text(soundsLoadBaseText + "<b>" + Math.floor(100 * loadedSounds / soundCount) + "%</b>");

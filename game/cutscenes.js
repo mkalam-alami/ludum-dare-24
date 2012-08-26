@@ -60,9 +60,11 @@ define(['consts', 'wan-components'], function(consts) {
       }
       if (Utils.isUpPressed(e)) {
         this._currentIndex += this._menuSize - 1;
+        soundManager.play(consts.SOUNDS.CHANGE.ID);
       }
       if (Utils.isDownPressed(e)) {
         this._currentIndex++;
+        soundManager.play(consts.SOUNDS.CHANGE.ID);
       }
       this._currentIndex %= this._menuSize;
       this._update();
@@ -77,7 +79,7 @@ define(['consts', 'wan-components'], function(consts) {
   c.scene('menu', function() {
     c.viewport.x = c.viewport.y = 0;
     soundManager.stopAll();
-    Utils.playAndLoop(consts.SOUNDS.MUSIC_MAINSCREEN.ID);
+    soundManager.play(consts.SOUNDS.MUSIC_MAINSCREEN.ID);
     
     var logo = c.e('2D, ' + consts.RENDER + ', Image, Bouncey, Tween')
       .attr({x: 100, y: 100})

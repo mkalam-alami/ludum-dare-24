@@ -38,9 +38,6 @@ var Utils = {
       return e.key == Crafty.keys['RIGHT_ARROW'] || e.key == Crafty.keys['D'];
     else
       return c.keydown[c.keys['RIGHT_ARROW']] || c.keydown[c.keys['D']];
-  },
-  playAndLoop: function(id) {
-    soundManager.play(id);
   }
 };
 

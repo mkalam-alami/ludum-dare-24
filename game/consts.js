@@ -18,6 +18,8 @@ define([], function() {
     LEVEL_COUNT: 6,
     START_LEVEL: 1,
     
+    MUSIC_VOLUME: 75,
+    
     ASSETS: {
       CELL_NORMAL: 'img/entities/cell-normal.png',
       CELL_JUMP: 'img/entities/cell-jump.png',
@@ -43,10 +45,12 @@ define([], function() {
     },
     
     SOUNDS: {
-      START: {
-        ID: 'start',
-        URL: 'sound/start.mp3'
-      },
+      START: { ID: 'start', URL: 'sound/start.mp3' },
+      CHANGE: { ID: 'change', URL: 'sound/change.wav' },
+      MERGE: { ID: 'merge', URL: 'sound/merge.wav' },
+      JUMP1: { ID: 'jump1', URL: 'sound/jump1.wav' },
+      JUMP2: { ID: 'jump2', URL: 'sound/jump2.wav' },
+      JUMP3: { ID: 'jump3', URL: 'sound/jump3.wav' },
       MUSIC_THEME1: {
         ID: 'musictheme1',
         URL: 'sound/theme1.mp3'
