@@ -1,18 +1,17 @@
-var gameState = {
+/*var gameState = {
   currentLevel: 0,
   mute: true,
   gameFinished: true,
   resetSave: true
-};
-/*
+};*/
+
 var gameState = {
   currentLevel: 1,
   mute: false,
   gameFinished: false,
-  resetSave: false,
-  readMessages: {} // TODO
+  resetSave: false
 };
-*/
+
 
 define([], function() {
 

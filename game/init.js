@@ -33,8 +33,11 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
     'lib/soundmanager2'], function() {
     
     // Load game state
+    if (gameState.resetSave) {
+      $.jStorage.set('gameState', null);
+    }
     var newGameState = $.jStorage.get('gameState');
-    if (newGameState && !gameState.resetSave) {
+    if (newGameState) {
       gameState = newGameState;
     }
     
