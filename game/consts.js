@@ -1,5 +1,5 @@
 var gameState = {
-  currentLevel: 7,
+  currentLevel: 6,
   mute: true,
   gameFinished: true,
   resetSave: true

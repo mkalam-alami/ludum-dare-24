@@ -136,7 +136,7 @@ c.c('Player', {
   
   _keyDown: function(e) {
     if (e.key == Crafty.keys['ENTER'] && this.targetCell) {
-      if (this.ySpeed <= 0) { // Hack to avoid glitch that make cells teleport
+      if (this.ySpeed <= 0 || this.targetCell.comp.indexOf('Jump') != -1) { // Hack to avoid glitch that make cells teleport
         this._mergeWith(this.targetCell);
       }
     }

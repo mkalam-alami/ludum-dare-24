@@ -150,7 +150,7 @@ define(['consts', 'wan-components'], function(consts) {
     var currentLevelLabel = '';
     if (gameState.currentLevel > 0) {
       var n = gameState.currentLevel;
-      if (n >= 7) n--; // do not count midgame script
+      if (n >= 6) n--; // do not count midgame script
       currentLevelLabel = ' (lvl. ' + n + ')';
     }
     menu.addEntry('Continue game' + currentLevelLabel, function() {

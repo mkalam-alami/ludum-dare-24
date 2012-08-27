@@ -39,7 +39,7 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
         music.play();
       }
       
-      if (gameState.currentLevel == 7) {
+      if (gameState.currentLevel == 6) {
         c.scene('scriptmidgame');
       }
       else {
@@ -48,6 +48,7 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
     });
     
     if (gameState.currentLevel > 0) {
+    //c.scene('endgame');
       c.scene('menu');
     }
     else {
