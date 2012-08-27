@@ -140,7 +140,7 @@ define(['consts', 'wan-components'], function(consts) {
       .action(100, this, write, 50, 230, 'This whole idea of "evolution" has been treated like...', 2)
       .action(120, this, write, 50, 270, 'Some kind of blasphemy?', 2)
       .action(120, this, fadeout)
-      .action(100, this, write, 50, 50, 'I definitely don\'t want to end like Galileo at the time.', 1)
+      .action(100, this, write, 50, 50, 'I definitely don\'t want to end like Galileo.', 1)
       .action(120, this, write, 50, 90, 'I decided to hide my findings in crypted manuscripts.', 2)
       .action(100, this, write, 50, 160, 'Hopefully they will come to light', 1)
       .action(60, this, write, 50, 200, 'when the world is ready.', 1)
