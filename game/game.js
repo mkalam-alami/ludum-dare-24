@@ -47,7 +47,7 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
       }
     });
     
-    if (gameState.currentLevel > 0) {
+    if (gameState.currentLevel > 1) {
       c.scene('menu');
     }
     else {
