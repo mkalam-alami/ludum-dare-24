@@ -100,13 +100,15 @@ define(['consts', 'wan-components'], function(consts) {
     
     c.e('Script')
       .action(0, this, write, 50, 50, 'This is amazing!', 3)
-      .action(100, this, write, 50, 120, 'Thanks to these first experiments,', 2)
-      .action(70, this, write, 50, 160, 'I now have a theory...', 2)
-      .action(0, this, image, 440, 80, consts.ASSETS.ILLUS2)
-      .action(100, this, write, 50, 230, 'A theory about the evolution of life across space and time.', 2)
-      .action(130, this, write, 50, 300, 'I can\'t wait to see how amazed', 2)
-      .action(60, this, write, 50, 340, 'the scientific community will be!', 2)
-      .action(120, this, fadeout)
+      .action(100, this, write, 50, 90, 'The cells adapt to their environment seamlessly.', 2)
+      .action(100, this, write, 50, 160, 'Thanks to these first experiments,', 2)
+      .action(70, this, write, 50, 200, 'I\'m thinking about a theory...', 2)
+      .action(0, this, image, 440, 230, consts.ASSETS.ILLUS2)
+      .action(120, this, write, 50, 240, 'A theory about the evolution of life', 2)
+      .action(100, this, write, 50, 280, 'across space and time.', 2)
+      .action(130, this, write, 50, 350, 'I can\'t wait to see how amazed', 2)
+      .action(60, this, write, 50, 390, 'the scientific community will be!', 2)
+      .action(160, this, fadeout)
       .action(70, c, c.scene, 'nextLevel')
       .run();
   });

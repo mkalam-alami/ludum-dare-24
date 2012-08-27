@@ -70,7 +70,7 @@
  </layer>
  <layer name="Objects" width="70" height="15" opacity="0.4">
   <data encoding="base64" compression="zlib">
-   eJzdVEEOwCAIY3P/f/PilYhggYg2aWK2lWJHIKqFD+AD6iSifWRzNyr0UBFZ/zR6XqRnmh7x9MysJRcUkTOM3vGkXKS9yM8jjcWTzwyC23Kx9uDVVclF85l5IbghF6QHr67q3l3ZN6hfRl2vdlTrpv0SRakmKWdP7573u9CCv+Po934nrJpLRzMQxanzsoIfld4DyQ==
+   eJzdlN0KwCAIhd3a+z/z6Fay7KikfXAgtvnTmUiUiw/QA8ZJQvuI1mky9JCRqH/qPS/Ss1U8UtMysxpfUDxnGL1jJV+kvcjPoxhNTT4zCBV8sezxm33R1JnVQrjBF6QHa1zWvbuzb9B6EXmtsaNcN+0XL0k5aXG29G55f4rm/B2n3/udKKsvnaYQStV52eEHud4DzQ==
   </data>
  </layer>
  <objectgroup name="Calque d'objets 1" width="70" height="15">

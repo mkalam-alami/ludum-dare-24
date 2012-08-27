@@ -148,7 +148,7 @@ define(['consts', 'wan-components'], function(consts) {
       c.e('SceneFade').sceneFade('startLevel');
     })
     var currentLevelLabel = '';
-    if (gameState.currentLevel > 0) {
+    if (gameState.currentLevel > 1) {
       var n = gameState.currentLevel;
       if (n >= 6) n--; // do not count midgame script
       currentLevelLabel = ' (lvl. ' + n + ')';

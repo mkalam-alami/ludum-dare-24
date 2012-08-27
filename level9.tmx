@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="24" height="12" tilewidth="48" tileheight="48">
- <tileset firstgid="1" name="standard" tilewidth="48" tileheight="48">
-  <image source="img/tiles/standard.png" width="192" height="192"/>
-  <tile id="1">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="components" value="Finish"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="17" name="objects" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="30" height="14" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
   <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
    <properties>
@@ -42,6 +29,7 @@
   <tile id="4">
    <properties>
     <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
    </properties>
   </tile>
   <tile id="5">
@@ -57,14 +45,27 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="24" height="12">
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="30" height="14">
   <data encoding="base64" compression="zlib">
-   eJy1k8ENACAIA0ucQfcf1QWgUAhN+hFzBYwGwAKD1Ko+8GXBuZrJ+BszTfpn97xaxnqkB8aPMjNWha/s8Tr8zu6UzMrbbvErc2RS+aomf6PjDxTaAOY=
+   eJzTYWBgUKAzFgVifQb6A9lhaq8gEIsDsQgWe0FiYlB5EJaAyiGL4cKE1Oog2YNurwzl3iIINNHcQy970QG6vaD4EIJiYQbMeKEW0EWzVxKIpaBYmoF2YSFHQ7MHo72iFNiLL59JENCjQ4G9lAKYvcx0xgCc4wuO
   </data>
  </layer>
- <layer name="Objects" width="24" height="12" opacity="0.4">
+ <layer name="Objects" width="30" height="14">
   <data encoding="base64" compression="zlib">
-   eJytlFEKACAIQ71C4P3PGv27zZlCX8V8c1JGRJpno57OIXcb+ogd6aO3lXfG2J0b40H9nQyQ/iTHLv90hyq/nd6I1cm+YkIcypPaLcWqSvn+LaXh/hUq+wtSEAki
+   eJxjYWBgYBkgTG8w0PYyIomx0cB8dL/hC3dS4ogYeRBgRVNPa0BsumLFIkYLd+Bz13CyF2bXQABq2cvKQHy6oCQsySkDB7qchLmBeQDsBQAqpQGz
   </data>
  </layer>
 </map>
