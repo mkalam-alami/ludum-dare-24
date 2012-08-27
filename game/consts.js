@@ -1,16 +1,16 @@
-var gameState = {
+/*var gameState = {
   currentLevel: 6,
   mute: true,
   gameFinished: true,
   resetSave: true
-};
+};*/
 
-/*var gameState = {
+var gameState = {
   currentLevel: 1,
   mute: false,
   gameFinished: false,
   resetSave: false
-};*/
+};
 
 
 define([], function() {

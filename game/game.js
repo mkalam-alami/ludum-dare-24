@@ -48,7 +48,6 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
     });
     
     if (gameState.currentLevel > 0) {
-    //c.scene('endgame');
       c.scene('menu');
     }
     else {
