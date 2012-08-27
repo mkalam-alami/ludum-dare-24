@@ -28,7 +28,6 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
       }
     });
     c.scene('startLevel', function() {
-      soundManager.stopAll();
       var music = soundManager.getSoundById(consts.SOUNDS.MUSIC_THEME1.ID);
       if (gameState.currentLevel == "kittens") {
         // Party hard!

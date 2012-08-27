@@ -109,6 +109,7 @@ define(['consts', 'wan-components'], function(consts) {
       .action(130, this, write, 50, 350, 'I can\'t wait to see how amazed', 2)
       .action(60, this, write, 50, 390, 'the scientific community will be!', 2)
       .action(160, this, fadeout)
+      .action(0, this, soundManager.stopAll)
       .action(70, c, c.scene, 'nextLevel')
       .run();
   });
