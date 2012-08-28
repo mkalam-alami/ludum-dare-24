@@ -206,7 +206,8 @@ define(['consts', 'wan-components'], function(consts) {
     menu.menu(consts.LEVEL_COUNT + 2);
     
     levelNames = {
-      6: 'Mid-game cutscene'
+      6: 'Mid-game cutscene',
+      10: 'Level 9 (post-compo!)'
     };
     
     for (var i = 1; i <= consts.LEVEL_COUNT; i++) {

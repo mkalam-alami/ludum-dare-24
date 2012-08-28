@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="12" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
+  <image source="img/tiles/objects.png" width="192" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="components" value="Player"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="components" value="Finish"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="components" value="Dead"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="components" value="Wall"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="components" value="CellJump"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="16" height="12">
+  <data encoding="base64" compression="zlib">
+   eJyVUlsOgzAM8xV4D8akwcrHOtDufztStVEtEI9aslriuG1CLICf0IZV9/ytNIgYhKPwj/tYaP8N/lzYEB+UU12c1wr7E/11w29O9En4Try/RqzFYl/TlT8FQ6I/g+93ISzpfo2zpvn8dpffCZ/B19LabTQH/t8V4sx84Puufo2zxnA9neFnRudyDj5Dcda4piO6965xaAwU
+  </data>
+ </layer>
+ <layer name="Objects" width="16" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYWBgYCEB60ExshgjA3GABY2NC2NTj8s8fGrI0c9Kovno8oT8REg/KQBZPys+hQTchsu9hOIDl/tZ0GhseonRz4ZHL7J+SjAA+tIBug==
+  </data>
+ </layer>
+</map>

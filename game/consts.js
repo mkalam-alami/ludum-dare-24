@@ -17,7 +17,7 @@ define([], function() {
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
-    LEVEL_COUNT: 9,
+    LEVEL_COUNT: 10,
     
     MUSIC_VOLUME: 75,
     

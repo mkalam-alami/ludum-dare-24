@@ -49,6 +49,9 @@ c.c('Cell', {
   },
   
   _onUnhitPlayer: function() {
+    if (this.player) {
+      this.player.targetCell = null;
+    }
     if (this.halo) {
       this.detach(this.halo);
       this.halo.destroy();
