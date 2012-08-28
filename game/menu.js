@@ -28,12 +28,13 @@ define(['consts', 'wan-components'], function(consts) {
   });
   c.c('WallOfText', {
     init: function() {
+      this.addComponent('2D, DOM');
       this.bind('EnterFrame', this._enterFrame);
       this._next = 0;
     },
     _enterFrame: function() {
       if (this._next <= 0) {
-        this._next = Utils.random(200)+50;
+        this._next = Utils.random(160)+50;
         var from = {x: Utils.random(900)-100, y: Utils.random(700)-100};
         var to = {x: from.x, y: from.y};
         if (Utils.random(2) == 0) {
@@ -60,10 +61,11 @@ define(['consts', 'wan-components'], function(consts) {
     }
   });
   c.c('Menu', {
-    YSIZE: 260,
-    BASEY: 260,
-    BASEX: 200,
     init: function() {
+      this.YSIZE = 260;
+      this.BASEY = 260;
+      this.BASEX = 200;
+      
       this.addComponent('2D, ' + consts.RENDER + ', Image, Tween, Keyboard');
       this.image(consts.ASSETS.UPDOWN);
       this.bind('KeyDown', this._keyDown);
@@ -79,11 +81,19 @@ define(['consts', 'wan-components'], function(consts) {
       return this;
     },
     addEntry: function(text, callback, disabled) {
+    
+     // 2 columns menu
+     var offsetx = offsety = 0;
+     if (this._menuSize >= 6 && this._entries.length >= this._menuSize/2) {
+        offsetx = 300;
+        offsety = -this.YSIZE/2;
+     }
+    
      var entry = c.e('MenuEntry')
       .text(text)
       .attr({
-        x: this.BASEX + 50,
-        y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize - 15
+        x: this.BASEX + 50 + offsetx,
+        y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize - 15 + offsety
       });
       if (disabled) {
         entry.textColor('#332222', 0.2);
@@ -91,7 +101,7 @@ define(['consts', 'wan-components'], function(consts) {
       this._entries.push(entry);
       this._callbacks.push((disabled) ? null : callback);
       this._index++;
-      return this;
+      return entry;
     },
     setCallback: function(index, callback) {
       this._callbacks[index] = callback;
@@ -121,18 +131,18 @@ define(['consts', 'wan-components'], function(consts) {
     },
     _update: function(fast) {
       this.tween({
-          x: this.BASEX,
-          y: this.BASEY + this.YSIZE * this._currentIndex / this._menuSize
+          x: this.BASEX + ((this._currentIndex >= this._menuSize/2 && this._menuSize >= 6) ? 300 : 0),
+          y: this.BASEY + this.YSIZE * this._currentIndex / this._menuSize - ((this._currentIndex >= this._menuSize/2 && this._menuSize >= 6) ? this.YSIZE/2 : 0)
       }, (fast) ? 1 : 5);
     }
   });
-  
+    
   c.scene('menu', function() {
     c.viewport.x = c.viewport.y = 0;
     soundManager.stopAll();
     soundManager.play(consts.SOUNDS.MUSIC_MAINSCREEN.ID);
     
-    var bg = c.e('WallOfText');
+    c.e('WallOfText');
     
     var logo = c.e('2D, ' + consts.RENDER + ', Image, Bouncey, Tween')
       .attr({x: 20, y: 30})
@@ -141,36 +151,21 @@ define(['consts', 'wan-components'], function(consts) {
     
     menu = c.e('Menu').menu((gameState.gameFinished) ? 5 : 4);
     menu.addEntry('Start a new game', function() {
-      bg.destroy();
       gameState.currentLevel = 1;
       soundManager.stopAll();
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('startLevel');
-    })
-    var currentLevelLabel = '';
-    if (gameState.currentLevel > 1) {
-      if (gameState.currentLevel > consts.LEVEL_COUNT) {
-        gameState.currentLevel = consts.LEVEL_COUNT;
-      }
-      var n = gameState.currentLevel;
-      if (n >= 6) n--; // do not count midgame script
-      currentLevelLabel = ' (lvl. ' + n + ')';
-    }
-    menu.addEntry('Continue game' + currentLevelLabel, function() {
-      bg.destroy();
-      soundManager.stopAll();
-      soundManager.play(consts.SOUNDS.START.ID);
-      c.e('SceneFade').sceneFade('startLevel');
-    }, gameState.currentLevel <= 1);
+    });
+    menu.addEntry('Choose level', function() {
+      c.scene('chooseLevel');
+    });
     menu.addEntry('Play introduction', function() {
-      bg.destroy();
       soundManager.stopAll();
       soundManager.play(consts.SOUNDS.START.ID);
       c.e('SceneFade').sceneFade('intro');
     });
     if (gameState.gameFinished) {
       menu.addEntry('1000 kittens', function() {
-      bg.destroy();
         gameState.currentLevel = "kittens";
         soundManager.stopAll();
         soundManager.play(consts.SOUNDS.START.ID);
@@ -199,6 +194,43 @@ define(['consts', 'wan-components'], function(consts) {
       e.tween({alpha: 1}, 80);
     });
     logo.tween({alpha: 1}, 20);
+  });
+  
+  c.scene('chooseLevel', function() {
+    c.e('WallOfText');
+  
+    menu = c.e('Menu'),
+    menu.YSIZE = 500;
+    menu.BASEY = 100;
+    menu.BASEX = 50;
+    menu.menu(consts.LEVEL_COUNT + 2);
+    
+    levelNames = {
+      6: 'Mid-game cutscene'
+    };
+    
+    for (var i = 1; i <= consts.LEVEL_COUNT; i++) {
+      var entry = menu.addEntry((levelNames[i]) ? levelNames[i] : 'Level ' + ((i > 6) ? i-1 : i),
+      function(entry) {
+        gameState.currentLevel = entry.level;
+        soundManager.stopAll();
+        soundManager.play(consts.SOUNDS.START.ID);
+        c.e('SceneFade').sceneFade('startLevel');
+      });
+      entry.level = i;
+    }
+    menu.addEntry('Final cutscene', function() {
+      c.scene('endgame');
+    });
+    menu.addEntry('Exit', function() {
+      c.scene('menu');
+    });
+    
+    c.e('2D, DOM, Keyboard').bind('KeyDown', function(e) {
+      if (e.key == c.keys['ESC']) {
+        c.scene('menu');
+      }
+    });
   });
   
 });
