@@ -149,6 +149,9 @@ define(['consts', 'wan-components'], function(consts) {
     })
     var currentLevelLabel = '';
     if (gameState.currentLevel > 1) {
+      if (gameState.currentLevel > consts.LEVEL_COUNT) {
+        gameState.currentLevel = consts.LEVEL_COUNT;
+      }
       var n = gameState.currentLevel;
       if (n >= 6) n--; // do not count midgame script
       currentLevelLabel = ' (lvl. ' + n + ')';
