@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="13" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="35" height="12" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
   <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
@@ -73,14 +73,14 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="20" height="13">
+ <layer name="Tiles" width="35" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BggQIBTKw6ZLUwwIbEZsdhPysOtjwJ9hKLBzsAABK/BLc=
+   eJy1lMEOgjAQROfWs4FUOZhwQC9ijPr//2ZJbZjULjCGbjKBwjI8drccABwFNWL+VrVBZ2ih5iu+qve9Bggix0V8xtUAQeTo8Nu7UyHXY+5rLRa1R4k98XqU+a3rfI+/bYmF89lP7elaTO93xOJR5s+jx/77iFlusOfFYZ7VVKeBfJ5Br6D3n+uc5WHw9sY51yWfCXXNfkssVtSYl+Sr/qtHxDrvpYnh+j1+AA3SE7w=
   </data>
  </layer>
- <layer name="Objects" width="20" height="13">
+ <layer name="Objects" width="35" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjAIIAAAEEAAB
+   eJxjYWBgYBlEmBRAqnpSzB3KbqEVICXe8Mmx4jAflzg2OXLjCFkfLjcS6y90c/C5E908ascpNj8RYwct0hcut5CaXpiRMDl8bG7B515CbHxph5i0hS7HCOWzobkHWz4YiDjCh5mpiJHdAgDKzQKK
   </data>
  </layer>
 </map>

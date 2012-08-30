@@ -75,12 +75,12 @@
  </tileset>
  <layer name="Tiles" width="20" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYEAFChRidKCPRYxYgM08Yuwk1TxyAT3MQ5cnxXxizMNlBy6MzyxC9rFDMQzIEVCPbCYhd+Gyn5CbSAW0MA8bJhYwo2Fi1eHCAEU9CCY=
+   eJxjYEAFYkAsTiYWYcAE+ljEiAWyWMQE0eyUoNA8VSL1GgKxMRHm6RJpFsgfoPAyQjIXm3nIABQ36P4FmaUAxJpArIOkBmQmIb8p4LADV/zqkOg2dMAOxTAgR0A9spnEpEts6U+UgB34ALb4IBRHpJoHijd0fxCbpkHmMaNhXABdHTYMSi8An6gJEQ==
   </data>
  </layer>
  <layer name="Objects" width="20" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjZmBgYEbCLBRikBnIACTGyEAewGUeOqbUPHIBIfNYqWAeujyl/kWXx2UHsfGLro+NBPcxEOE+FjQ2OemPEkDN+MVlHiVpmtoAAPQ6ATc=
+   eJylkksKACAIRCes7n/kcCGIaPgZmE3gMx0JACnvoZmhxW8LPUU86ykvI9lPhXc+LL0vYXg8y7b/jTIj5HhRj2y+tu5++nnKzju5v666+VZ53ZuezBbxHnQtAXg=
   </data>
  </layer>
 </map>
