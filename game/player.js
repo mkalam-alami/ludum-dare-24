@@ -75,8 +75,9 @@ c.c('Player', {
     
     // Update collision polygon & shape
     if (this.bodySize <= 1) {
-      var circle = new Crafty.circle(0, 0, this.w/2);
-      circle.shift(this.w/2, this.w/2);
+      this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
+      var circle = new Crafty.circle(0, 0, consts.TILE_SIZE/2);
+      circle.shift(consts.TILE_SIZE/2, consts.TILE_SIZE/2);
       this.collision(circle);
     }
     else {

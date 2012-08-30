@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="28" height="14" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
+  <image source="img/tiles/objects.png" width="192" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="components" value="Player"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="components" value="Finish"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="components" value="Dead"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="components" value="Wall"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="components" value="CellJump"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="28" height="14">
+  <data encoding="base64" compression="zlib">
+   eJzdktEKwjAMRfOi706nbm7YTQc69f9/zwQSzELTdYIvXjgUQtMkvRkBYFzIE7kh9wU5D6RGzjCvDVIgW2SHlBwv3Yy4qsx6Ffd2Qhqk5XjrZvjvFPDpnc4Dc1T3OqRHLsgVGTg+wFR7lW/f0H0LjdOX+EQekHcvjtMZFKT1zHw1TPfAinq2/oXIvZjEX8lPzRTrS/wLDqSVyhN/9T+m6okf9j/1vHpu65/8V249T3p/9B55yqknvdodI+l59dyikKiX6utb2XqdqkcqfgzV6Zl/1xuO0hTw
+  </data>
+ </layer>
+ <layer name="Objects" width="28" height="14">
+  <data encoding="base64" compression="zlib">
+   eJzlklEKACEIRF3w/mfeX1lqfONCPw1IlNUb0YyIBFGVZXWDSPEc/eE9Qx6pndZH+7DbE57TG9JP4lP9P/XV+dx5/b5XPGem1V3KUz7I2SpH/KqcM8+dr6k63om4RS9ocQIi
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="28" height="14">
+  <object x="793" y="93" width="318" height="257">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="delayms" value="30000"/>
+    <property name="image" value="ROTATE"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

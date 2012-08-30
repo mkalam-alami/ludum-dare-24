@@ -31,16 +31,13 @@ define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 
     c.scene('startLevel', function() {
       var music = soundManager.getSoundById(consts.SOUNDS.MUSIC_THEME1.ID);
       if (gameState.currentLevel == "kittens") {
-        // Party hard!
-        gameState.mute = false;
-        soundManager.unmute();
         music = soundManager.getSoundById(consts.SOUNDS.MUSIC_KITTENS.ID);
       }
       if (music.playState == 0) {
         music.play();
       }
       
-      if (gameState.currentLevel == 6) {
+      if (gameState.currentLevel == 7) {
         c.scene('scriptmidgame');
       }
       else {

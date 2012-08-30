@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="21" height="12" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
+  <image source="img/tiles/objects.png" width="192" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="components" value="Player"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="components" value="Finish"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="components" value="Dead"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="components" value="Wall"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="components" value="CellJump"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="components" value="VirusRotating"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="21" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOZIFYA0pTC8ii0ZQCQyBWhbJBtDGJ+gWBWBwL1oHKa+KQx4VFGLD7jZ1Ed8EAKwPEX8hmipHoJlz+o2a8goAcAyIuiAFsRJpJahzAsAQDJNzRw0uCBDcORwAAbXMHvA==
+  </data>
+ </layer>
+ <layer name="Objects" width="21" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOWJAwtQDILEYamIlMk6oXFyYkT0gvtQC6meS6idbuhLmNFmZS4j96+HsoAQBrDgEa
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="21" height="12">
+  <object x="54" y="324" width="160" height="132">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="So these one destroy cells, one by one..."/>
+   </properties>
+  </object>
+  <object x="300" y="363" width="160" height="132">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value=" Interesting."/>
+   </properties>
+  </object>
+  <object x="57" y="181" width="334" height="95">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="Oh! A new species."/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

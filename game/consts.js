@@ -1,5 +1,5 @@
 var gameState = {
-  currentLevel: 11,
+  currentLevel: 2,
   mute: false,
   gameFinished: false,
   resetSave: false
@@ -17,7 +17,7 @@ define([], function() {
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
-    LEVEL_COUNT: 11,
+    LEVEL_COUNT: 13,
     
     MUSIC_VOLUME: 75,
     
@@ -25,8 +25,10 @@ define([], function() {
       CELL_NORMAL: 'img/entities/cell-normal.png',
       CELL_JUMP: 'img/entities/cell-jump.png',
       CELL_COMPANION: 'img/entities/cell-companion.png',
+      CELL_VIRUS: 'img/entities/cell-virus.png',
       
       CELL_HALO: 'img/entities/cell-halo.png',
+      CELL_PARTICLE: 'img/entities/cell-particle.png',
       
       HERO_CELL: 'img/entities/hero-cell.png',
       HERO_CELL_CORE: 'img/entities/hero-cell-core.png',

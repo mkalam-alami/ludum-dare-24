@@ -92,5 +92,70 @@ c.c('CellJump', {
   }
 });
 
+c.c('Particle', {
+  init: function() {
+    this.addComponent('2D, ' + consts.RENDER + ', Image');
+    this.image(consts.ASSETS.CELL_PARTICLE);
+    this.speedX = Utils.random(7) - 3;
+    this.speedY = Utils.random(7) - 3;
+    this.bind('EnterFrame', this._enterFrame);
+  },
+  _enterFrame: function() {
+    this.attr({
+      x: this._x + this.speedX,
+      y: this._y + this.speedY,
+      alpha: this._alpha - 0.05,
+    });
+    if (this.alpha < 0.1) {
+      this.destroy();
+    }
+  }
+});
+
+c.c('Virus', {
+  init: function() {
+    this.addComponent('Collision');
+    this.attr({w: consts.TILE_SIZE, h: consts.TILE_SIZE});
+    
+    var circle = new Crafty.circle(0, 0, this.w/3);
+    circle.shift(this.w/2, this.w/2);
+    this.collision(circle);
+    
+    this.rotationSpeed = 2;
+    this.origin(this.w/2, this.h/2);
+    this.bind('EnterFrame', this._enterFrame);
+  },
+  _enterFrame: function(e) {
+    var hit = this.hit('Player');
+    if (hit && this.alpha == 1) {
+      var player = hit[0].obj;
+      if (player.bodySize > 1) {
+        player.bodySize -= 1;
+        player.attachedCells = player.attachedCells.slice(0, player.attachedCells.length-1);
+        player.refresh();
+      }
+      else {
+        player.die();
+        c.e('SceneFade').sceneFade('startLevel');
+      }
+      for (var i = 0; i < 5; i++) {
+        c.e('Particle').attr({x: this.x + this.w/2, y: this.y + this.h/2});
+      }
+      this.destroy();
+    }
+  }
+});
+
+c.c('VirusRotating', {
+  init: function() {
+    this.addComponent('Virus');
+    this.rotationSpeed = .2;
+    this.origin(this.w/2, this.h/2);
+    this.bind('EnterFrame', this._enterFrameRotation);
+  },
+  _enterFrameRotation: function() {
+    this.rotation += this.rotationSpeed;
+  }
+});
 
 });

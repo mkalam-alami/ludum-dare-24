@@ -69,18 +69,21 @@ define(['consts', 'wan-components'], function(consts) {
       this.addComponent('2D, ' + consts.RENDER + ', Image, Tween, Keyboard');
       this.image(consts.ASSETS.UPDOWN);
       this.bind('KeyDown', this._keyDown);
+      this.bind('EnterFrame', this._enterFrame);
+      this.bind('TweenEnd', this._tweenEnd);
       this._callbacks = [];
       this._entries = [];
       this._currentIndex = 0;
       this._menuSize = 1;
       this._index = 0;
+      this._moving = false;
     },
     menu: function(size) {
       this._menuSize = size;
       this._update(true);
       return this;
     },
-    addEntry: function(text, callback, disabled) {
+    addEntry: function(text, callback, postCompo) {
     
      // 2 columns menu
      var offsetx = offsety = 0;
@@ -95,11 +98,11 @@ define(['consts', 'wan-components'], function(consts) {
         x: this.BASEX + 50 + offsetx,
         y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize - 15 + offsety
       });
-      if (disabled) {
-        entry.textColor('#332222', 0.2);
+      if (postCompo) {
+        entry.textColor('#DD4422', 1.0);
       }
       this._entries.push(entry);
-      this._callbacks.push((disabled) ? null : callback);
+      this._callbacks.push(callback);
       this._index++;
       return entry;
     },
@@ -114,26 +117,39 @@ define(['consts', 'wan-components'], function(consts) {
           callback(this._entries[this._currentIndex]);
         }
       }
-      if (Utils.isUpPressed(e)) {
-        this._currentIndex += this._menuSize - 1;
-        if (!soundManager.muted) {
-          soundManager.play(consts.SOUNDS.CHANGE.ID);
+    },
+    _enterFrame: function() {
+      if (!this._moving) {
+        var updateNeeded = false;
+        if (Utils.isUpPressed()) {
+          this._currentIndex += this._menuSize - 1;
+          updateNeeded = true;
+          if (!soundManager.muted) {
+            soundManager.play(consts.SOUNDS.CHANGE.ID);
+          }
+        }
+        if (Utils.isDownPressed()) {
+          this._currentIndex++;
+          updateNeeded = true;
+          if (!soundManager.muted) {
+            soundManager.play(consts.SOUNDS.CHANGE.ID);
+          }
+        }
+        if (updateNeeded) {
+          this._currentIndex %= this._menuSize;
+          this._update();
         }
       }
-      if (Utils.isDownPressed(e)) {
-        this._currentIndex++;
-        if (!soundManager.muted) {
-          soundManager.play(consts.SOUNDS.CHANGE.ID);
-        }
-      }
-      this._currentIndex %= this._menuSize;
-      this._update();
     },
     _update: function(fast) {
+      this._moving = true;
       this.tween({
           x: this.BASEX + ((this._currentIndex >= this._menuSize/2 && this._menuSize >= 6) ? 300 : 0),
           y: this.BASEY + this.YSIZE * this._currentIndex / this._menuSize - ((this._currentIndex >= this._menuSize/2 && this._menuSize >= 6) ? this.YSIZE/2 : 0)
-      }, (fast) ? 1 : 5);
+      }, (fast) ? 1 : 6);
+    },
+    _tweenEnd: function() { 
+      this._moving = false;
     }
   });
     
@@ -149,7 +165,7 @@ define(['consts', 'wan-components'], function(consts) {
       .image(consts.ASSETS.LOGO)
       .bouncey();
     
-    menu = c.e('Menu').menu((gameState.gameFinished) ? 5 : 4);
+    menu = c.e('Menu').menu((gameState.gameFinished) ? 4 : 3);
     menu.addEntry('Start a new game', function() {
       gameState.currentLevel = 1;
       soundManager.stopAll();
@@ -159,19 +175,6 @@ define(['consts', 'wan-components'], function(consts) {
     menu.addEntry('Choose level', function() {
       c.scene('chooseLevel');
     });
-    menu.addEntry('Play introduction', function() {
-      soundManager.stopAll();
-      soundManager.play(consts.SOUNDS.START.ID);
-      c.e('SceneFade').sceneFade('intro');
-    });
-    if (gameState.gameFinished) {
-      menu.addEntry('1000 kittens', function() {
-        gameState.currentLevel = "kittens";
-        soundManager.stopAll();
-        soundManager.play(consts.SOUNDS.START.ID);
-        c.e('SceneFade').sceneFade('startLevel');
-      });
-    }
     menu.addEntry('Sound: ' + ((gameState.mute) ? 'disabled' : 'enabled'), function(entry) {
       var base = 'Sound: ';
       if (gameState.mute) {
@@ -186,6 +189,14 @@ define(['consts', 'wan-components'], function(consts) {
       }
       $.jStorage.set('gameState', gameState);
     });
+    if (gameState.gameFinished) {
+      menu.addEntry('1000 kittens', function() {
+        gameState.currentLevel = "kittens";
+        soundManager.stopAll();
+        soundManager.play(consts.SOUNDS.START.ID);
+        c.e('SceneFade').sceneFade('startLevel');
+      }, true);
+    }
     
     // Fade in menu contents
     _.each(c('Tween'), function(id) {
@@ -199,17 +210,29 @@ define(['consts', 'wan-components'], function(consts) {
   c.scene('chooseLevel', function() {
     c.e('WallOfText');
   
+    c.e('MenuEntry')
+      .text("In red: post-compo levels")
+      .textColor('#DD4422', 1.0)
+      .attr({
+        x: 430,
+        y: 480
+      });
+      
     menu = c.e('Menu'),
-    menu.YSIZE = 500;
+    menu.YSIZE = 650;
     menu.BASEY = 100;
-    menu.BASEX = 50;
-    menu.menu(consts.LEVEL_COUNT + 2);
+    menu.BASEX = 30;
+    menu.menu(consts.LEVEL_COUNT + 3);
     
     levelNames = {
-      6: 'Mid-game cutscene',
-      10: 'Level 9 (post-compo!)'
+      7: 'Diary entry 2'
     };
     
+    menu.addEntry('Diary entry 1', function() {
+      soundManager.stopAll();
+      soundManager.play(consts.SOUNDS.START.ID);
+      c.e('SceneFade').sceneFade('intro');
+    });
     for (var i = 1; i <= consts.LEVEL_COUNT; i++) {
       var entry = menu.addEntry((levelNames[i]) ? levelNames[i] : 'Level ' + ((i > 6) ? i-1 : i),
       function(entry) {
@@ -217,10 +240,10 @@ define(['consts', 'wan-components'], function(consts) {
         soundManager.stopAll();
         soundManager.play(consts.SOUNDS.START.ID);
         c.e('SceneFade').sceneFade('startLevel');
-      });
+      }, i > 9);
       entry.level = i;
     }
-    menu.addEntry('Final cutscene', function() {
+    menu.addEntry('Final diary entry', function() {
       c.scene('endgame');
     });
     menu.addEntry('Exit', function() {

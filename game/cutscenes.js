@@ -64,7 +64,7 @@ define(['consts', 'wan-components'], function(consts) {
       soundManager.mute();
     }
     
-    c.e('Script')
+    c.e('2D, DOM, Script')
       .action(0, this, write, 50, 50, 'May 2, 1642', 3)
       .action(70, this, write, 50, 100, 'The discovery I just made is fascinating.', 2)
       .action(110, this, write, 50, 140, 'I just found a way to manipulate the tiniest of things:', 2)
@@ -98,7 +98,7 @@ define(['consts', 'wan-components'], function(consts) {
       soundManager.mute();
     }
     
-    c.e('Script')
+    c.e('2D, DOM, Script')
       .action(0, this, write, 50, 50, 'This is amazing!', 3)
       .action(100, this, write, 50, 90, 'The cells adapt to their environment seamlessly.', 2)
       .action(100, this, write, 50, 160, 'Thanks to these first experiments,', 2)
@@ -123,14 +123,14 @@ define(['consts', 'wan-components'], function(consts) {
       soundManager.mute();
     }
     
-    c.e('Keyboard')
+    c.e('2D, DOM, Keyboard')
       .bind('KeyDown', function(e) {
         if (e.key == c.keys['ESC']) {
           c.scene('menu');
         }
       });
     
-    c.e('Script')
+    c.e('2D, DOM, Script')
       .action(0, this, write, 50, 100, 'This might be surprising, but I must stop here.', 2)
       .action(120, this, write, 50, 140, 'Things are getting risky.', 2)
       .action(120, this, fadeout)

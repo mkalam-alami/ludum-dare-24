@@ -32,12 +32,12 @@
                  "properties":
                     {
                      "components":"IngameMessage",
-                     "delayms":"10000",
+                     "delayms":"30000",
                      "image":"ROTATE"
                     },
                  "type":"",
                  "width":318,
-                 "x":844,
+                 "x":793,
                  "y":93
                 }],
          "opacity":1,
