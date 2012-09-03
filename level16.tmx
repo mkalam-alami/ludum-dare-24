@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="12" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
+  <image source="img/tiles/objects.png" width="192" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="components" value="Player"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="components" value="Finish"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="components" value="Dead"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="components" value="Wall"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="components" value="CellJump"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="components" value="VirusRotating"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="components" value="CellGravity"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="components" value="CellNormal"/>
+    <property name="object" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="standard" tilewidth="48" tileheight="48">
+  <image source="img/tiles/standard.png" width="384" height="384"/>
+  <tile id="13">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="components" value="Finish"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tiles" width="30" height="12">
+  <data encoding="base64" compression="zlib">
+   eJy9kVsLwjAMhfOkvnqrd+jUPqgbov7//+YpVBYPazpBduBjpEty2sSJyGpgFuAurZZiawpmYJ5qWaNCvU/fQL4HyuN7bMAW7MC+o++44PdRQ73Zl+MKHMEJnNV5nAPP0fLl3uwTKL6AK7iBmuq8gvt0yfLlOLdfy9f/wTe330C+PCft79KddW/O77vfOH+931psBerdFHxz+/1VQb7fOKH/fI+SuN7y5Rlp1irXGXl96rXiex7gOTAv8Abf+BY4
+  </data>
+ </layer>
+ <layer name="Objects" width="30" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYWBgYBkgDAPIbGTAjkUel1p8gAWJBmFGHGbh45NiLzZz8JlFrL34whCbOXJUtBefPnRAD3uxuYGe/kVPU/SIX2xuINVeYs0mxV5s8rQApJYplJRJ6PbiA8xomFSArh8ZAwCccQJ0
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="30" height="12">
+  <object x="536" y="100" width="444" height="442">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="Note: Rotation seems"/>
+   </properties>
+  </object>
+  <object x="538" y="151" width="444" height="442">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="impossible when"/>
+   </properties>
+  </object>
+  <object x="540" y="199" width="444" height="442">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="gravity is reversed."/>
+   </properties>
+  </object>
+  <object x="620" y="325" width="444" height="442">
+   <properties>
+    <property name="components" value="IngameMessage"/>
+    <property name="text" value="Bizarre..."/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -17,7 +17,7 @@ define([], function() {
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
-    LEVEL_COUNT: 14,
+    LEVEL_COUNT: 16,
     
     MUSIC_VOLUME: 75,
     
@@ -26,6 +26,7 @@ define([], function() {
       CELL_JUMP: 'img/entities/cell-jump.png',
       CELL_COMPANION: 'img/entities/cell-companion.png',
       CELL_VIRUS: 'img/entities/cell-virus.png',
+      CELL_GRAVITY: 'img/entities/cell-gravity.png',
       
       CELL_HALO: 'img/entities/cell-halo.png',
       CELL_PARTICLE: 'img/entities/cell-particle.png',

@@ -27,6 +27,7 @@ c.c('Player', {
     this.disabled = false;
     this.viewportXSpeed = 0;
     this.viewportYSpeed = 0;
+    this.gravityDirection = 1;
     
     // Appearance
     this.bodySize = 1;
@@ -147,7 +148,7 @@ c.c('Player', {
     if (e.key == Crafty.keys['R']) {
       c.scene('startLevel');
     }
-    if (this.bodySize > 1) {
+    if (this.bodySize > 1 && this.gravityDirection == 1) {
       var oldDirection = this.direction;
       
       if (Utils.isDownPressed() && Utils.isLeftPressed(e) 
@@ -236,8 +237,8 @@ c.c('Player', {
     }
     
     // Handle physics
-    if (!this.collisions.hitFloor) {
-      this.ySpeed += consts.GRAVITY;
+    if (this.gravityDirection == 1 && !this.collisions.hitFloor || this.gravityDirection == -1 && !this.collisions.hitCeiling) {
+      this.ySpeed += consts.GRAVITY * this.gravityDirection;
     }
     else if (this.jumping) {
       this.jumping = false;
@@ -255,8 +256,9 @@ c.c('Player', {
         this.xSpeed = this.XSPEED;
       }
     }
-    if (Utils.isUpPressed() && !this.jumping && this.canJump && this.collisions.hitFloor
-        && !this.collisions.hitCeiling && !this.level[this.i][this.j-1]) {
+    if (Utils.isUpPressed() && !this.jumping && this.canJump
+         && (this.gravityDirection == 1 && this.collisions.hitFloor && !this.collisions.hitCeiling || this.gravityDirection == -1 && this.collisions.hitCeiling && !this.collisions.hitFloor)
+         && !this.level[this.i][this.j-1]) {
       if (!soundManager.muted) {
         soundManager.play("jump" + (Utils.random(3) + 1));
       }
@@ -266,7 +268,7 @@ c.c('Player', {
       if (Utils.isRightPressed()) {
         this.xSpeed = this.XSPEED;
       }
-      this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1];
+      this.ySpeed = -this.JUMP_TABLE[this.bodySize - 1] * this.gravityDirection;
       this.jumping = true;
     }
     
@@ -330,6 +332,9 @@ c.c('Player', {
       targetCell.attached();
     }
     else {
+      if (newCellType == 'CellGravity') {
+        this.gravityDirection = -1;
+      }
       this.bodySize++;
       if (this.bodySize >= 5) {
         this.canJump = false; // This is not a bugfix, this is a feature!

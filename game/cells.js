@@ -92,6 +92,18 @@ c.c('CellJump', {
   }
 });
 
+c.c('CellGravity', {
+  init: function() {
+    this.addComponent('Cell');
+    this.origin(this.w/2, this.h/2);
+    this.bind('EnterFrame', this._enterFrameGravity);
+    this.rotationSpeed = 7;
+  },
+  _enterFrameGravity: function() {
+    this.rotation += this.rotationSpeed;
+  }
+});
+
 c.c('Particle', {
   init: function() {
     this.addComponent('2D, ' + consts.RENDER + ', Image');
@@ -132,6 +144,13 @@ c.c('Virus', {
       if (player.bodySize > 1) {
         player.bodySize -= 1;
         player.attachedCells = player.attachedCells.slice(0, player.attachedCells.length-1);
+        player.gravityDirection = 1;
+        for (var key in player.attachedCells) {
+          if (player.attachedCells[key] == 'CellGravity') {
+            player.gravityDirection = -1;
+            break;
+          } 
+        }
         player.refresh();
       }
       else {

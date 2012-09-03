@@ -63,6 +63,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
           c.sprite(48, 48, consts.ASSETS.HERO_CELL, cellMap("CellHero"));
           c.sprite(48, 48, consts.ASSETS.CELL_NORMAL, cellMap("CellNormal"));
           c.sprite(48, 48, consts.ASSETS.CELL_COMPANION, cellMap("CellCompanion"));
+          c.sprite(48, 48, consts.ASSETS.CELL_GRAVITY, cellMap("CellGravity"));
           
           // Launch game
           game();
