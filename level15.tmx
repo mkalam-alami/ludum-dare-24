@@ -80,12 +80,12 @@
  </tileset>
  <layer name="Tiles" width="30" height="12">
   <data encoding="base64" compression="zlib">
-   eJwTZGBgEKczlgBiWQbqAwUcbGRAC3txuYGe9mIDogNkr+wA2as6Au3VHSB79QfQXkY8ajhoZK8YA/3LSR0gBgC9TghD
+   eJwTZGBgEKczlgBiWQbaAQU8csPRXlxAdIDslR0ge1VHoL26A2Sv/gDay4hHDQeN7BVjoH85qQPEACPOCCM=
   </data>
  </layer>
  <layer name="Objects" width="30" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYBkgTC3ABqWRzcRmvhyV7cUGBspebIDa4Txq76i9I9negcAAyZQBhw==
+   eJxjYWBgYBkgTC3AhsbHZbYcle1FBwNlLy5A7XAetXfU3pFs70BgALZkAYM=
   </data>
  </layer>
  <objectgroup name="Calque d'objets 1" width="30" height="12">

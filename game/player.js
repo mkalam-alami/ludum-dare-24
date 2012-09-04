@@ -257,8 +257,8 @@ c.c('Player', {
       }
     }
     if (Utils.isUpPressed() && !this.jumping && this.canJump
-         && (this.gravityDirection == 1 && this.collisions.hitFloor && !this.collisions.hitCeiling || this.gravityDirection == -1 && this.collisions.hitCeiling && !this.collisions.hitFloor)
-         && !this.level[this.i][this.j-1]) {
+         && (this.gravityDirection == 1 && this.collisions.hitFloor && !this.collisions.hitCeiling /*&& !this.level[this.i][this.j-1]*/
+         || this.gravityDirection == -1 && this.collisions.hitCeiling && !this.collisions.hitFloor)) {
       if (!soundManager.muted) {
         soundManager.play("jump" + (Utils.random(3) + 1));
       }
@@ -334,6 +334,10 @@ c.c('Player', {
     else {
       if (newCellType == 'CellGravity') {
         this.gravityDirection = -1;
+        if (this.direction % 2 == 1) {
+          this.direction++;
+          this.refresh(this.direction - 1);
+        }
       }
       this.bodySize++;
       if (this.bodySize >= 5) {

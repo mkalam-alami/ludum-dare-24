@@ -92,7 +92,7 @@
   <object x="536" y="100" width="444" height="442">
    <properties>
     <property name="components" value="IngameMessage"/>
-    <property name="text" value="Note: Rotation seems"/>
+    <property name="text" value="Also, rotation seems"/>
    </properties>
   </object>
   <object x="538" y="151" width="444" height="442">
