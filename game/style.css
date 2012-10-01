@@ -9,6 +9,8 @@
 body {
   background-color: #FFF;
   font-family: 'TVEFont', serif;
+  margin: 0;
+  padding: 0;
   margin-top: 10px;
 }
 
@@ -31,6 +33,7 @@ div {
   width: 915px;
   height: 640px;
   background: url('../img/background.jpg');
+  margin-bottom: 30px;
 }
 
 #stage-foreground {
@@ -63,6 +66,12 @@ div {
 #legend a {
   color: #A86;
   font-weight: bold;
+}
+
+#footnotes {
+  border-top: 1px solid #A88;
+  background-color: #EEE;
+  padding-bottom: 10px;
 }
 
 p {
@@ -98,3 +107,4 @@ p {
   font-size: 15pt;
   text-align: center;
 }
+
