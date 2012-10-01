@@ -96,7 +96,8 @@ define(['consts', 'wan-components'], function(consts) {
       .text(text)
       .attr({
         x: this.BASEX + 50 + offsetx,
-        y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize - 15 + offsety
+        y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize + offsety,
+        w: 400
       });
       if (postCompo) {
         entry.textColor('#DD4422', 1.0);

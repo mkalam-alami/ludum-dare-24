@@ -13,7 +13,7 @@ define([], function() {
     WIDTH: 768,
     HEIGHT: 576,
     
-    RENDER: 'Canvas',
+    RENDER: 'DOM',
 
     GRAVITY: 0.8,
     TILE_SIZE: 48,
