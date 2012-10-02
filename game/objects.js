@@ -79,7 +79,7 @@ c.c('Wall', {
   }
   
  /* setup: function() {
-    c.e('2D, Canvas, Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
+    c.e('2D, ' + consts.RENDER + ', Text').text(this.i + '-' + this.j).attr({x:this.x+5, y:this.y+15});
   }*/
   
 });
@@ -145,10 +145,12 @@ c.c('IngameMessageText', {
     this.addComponent('IngameMessageAbstract, Text');
     this.textFont({ family: "'TVEFont', serif", size: '30pt' });
     this.textColor('#666666', 0.9);
+    this.w = 500;
   },
   ingameMessageText: function(text, delayms, initialSpeed) {
     this.ingameMessageAbstract(delayms, initialSpeed);
     this.text(text);
+    this.y -= 40;
   }
 });
   

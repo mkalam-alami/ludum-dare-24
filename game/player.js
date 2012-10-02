@@ -2,7 +2,7 @@ define(['consts', 'wan-components'], function(consts) {
 
 c.c('Player', {
   
-  XSPEED: 5,
+  XSPEED: 2,
   BOUNCING: 0.2,
   FRICTION: 0.82,
   JUMP_TABLE: [8, 12.5, 16, 19],

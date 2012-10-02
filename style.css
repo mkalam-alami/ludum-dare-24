@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20pt;
-  src: local('TVEFont'), local('TVEFont'), url('../font.woff') format('woff');
+  src: local('TVEFont'), local('TVEFont'), url('font.woff') format('woff');
 }
 
 body {
@@ -59,19 +59,23 @@ div {
   font-family: 'Trebuchet MS', 'Verdana', 'Arial', sans-serif;
   margin: auto;
   text-align: center;
-  margin-top: 20px;
-  color: #A86;
+  color: #964;
 }
 
 #legend a {
-  color: #A86;
+  color: #964;
   font-weight: bold;
+}
+
+#legend p {
+  margin: 5px;
 }
 
 #footnotes {
   border-top: 1px solid #A88;
+  border-bottom: 1px solid #A88;
   background-color: #EEE;
-  padding-bottom: 10px;
+  padding: 10px;
 }
 
 p {

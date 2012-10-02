@@ -15,7 +15,7 @@ define([], function() {
     
     RENDER: 'DOM',
 
-    GRAVITY: 0.8,
+    GRAVITY: 0.25,
     TILE_SIZE: 48,
     LEVEL_COUNT: 17,
     

@@ -41,7 +41,7 @@ define(['consts', 'wan-components', 'tiledMap', 'player', 'objects', 'cells', 'c
         c.scene('scriptmidgame');
       }
       else {
-        c.e('TiledMap').tiledMap('level' + gameState.currentLevel + '.json', consts.RENDER);
+        c.e('TiledMap').tiledMap('levels/level' + gameState.currentLevel + '.json', consts.RENDER);
       }
     });
     

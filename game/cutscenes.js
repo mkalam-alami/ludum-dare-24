@@ -34,7 +34,7 @@ define(['consts', 'wan-components'], function(consts) {
   
   var write = function(x, y, text, speed, w) {
     c.e('2D, ' + consts.RENDER + ', AnimatedText, Tween')
-      .attr({x: x, y: y - 100, w: w || 1000, h: 200})
+      .attr({x: x, y: y + 100, w: w || 1000, h: 200})
       .animatedText(text, speed || 3);
   }
   

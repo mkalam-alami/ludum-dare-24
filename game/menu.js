@@ -69,14 +69,11 @@ define(['consts', 'wan-components'], function(consts) {
       this.addComponent('2D, ' + consts.RENDER + ', Image, Tween, Keyboard');
       this.image(consts.ASSETS.UPDOWN);
       this.bind('KeyDown', this._keyDown);
-      this.bind('EnterFrame', this._enterFrame);
-      this.bind('TweenEnd', this._tweenEnd);
       this._callbacks = [];
       this._entries = [];
       this._currentIndex = 0;
       this._menuSize = 1;
       this._index = 0;
-      this._moving = false;
     },
     menu: function(size) {
       this._menuSize = size;
@@ -118,39 +115,32 @@ define(['consts', 'wan-components'], function(consts) {
           callback(this._entries[this._currentIndex]);
         }
       }
-    },
-    _enterFrame: function() {
-      if (!this._moving) {
-        var updateNeeded = false;
-        if (Utils.isUpPressed()) {
-          this._currentIndex += this._menuSize - 1;
-          updateNeeded = true;
-          if (!soundManager.muted) {
-            soundManager.play(consts.SOUNDS.CHANGE.ID);
-          }
+      
+      var updateNeeded = false;
+      if (Utils.isUpPressed()) {
+        this._currentIndex += this._menuSize - 1;
+        updateNeeded = true;
+        if (!soundManager.muted) {
+          soundManager.play(consts.SOUNDS.CHANGE.ID);
         }
-        if (Utils.isDownPressed()) {
-          this._currentIndex++;
-          updateNeeded = true;
-          if (!soundManager.muted) {
-            soundManager.play(consts.SOUNDS.CHANGE.ID);
-          }
+      }
+      else if (Utils.isDownPressed()) {
+        this._currentIndex++;
+        updateNeeded = true;
+        if (!soundManager.muted) {
+          soundManager.play(consts.SOUNDS.CHANGE.ID);
         }
-        if (updateNeeded) {
-          this._currentIndex %= this._menuSize;
-          this._update();
-        }
+      }
+      if (updateNeeded) {
+        this._currentIndex %= this._menuSize;
+        this._update();
       }
     },
     _update: function(fast) {
-      this._moving = true;
       this.tween({
           x: this.BASEX + ((this._currentIndex >= this._menuSize/2 && this._menuSize >= 6) ? 300 : 0),
           y: this.BASEY + this.YSIZE * this._currentIndex / this._menuSize - ((this._currentIndex >= this._menuSize/2 && this._menuSize >= 6) ? this.YSIZE/2 : 0)
       }, (fast) ? 1 : 6);
-    },
-    _tweenEnd: function() { 
-      this._moving = false;
     }
   });
     
