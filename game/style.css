@@ -1,0 +1,109 @@
+@font-face {
+  font-family: 'TVEFont';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20pt;
+  src: local('TVEFont'), local('TVEFont'), url('../font.woff') format('woff');
+}
+
+body {
+  background-color: #FFF;
+  font-family: 'TVEFont', serif;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+}
+
+a {
+  color: #05F;
+}
+
+div {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+#stage-container {
+  margin: auto;
+  width: 915px;
+  height: 640px;
+  background: url('../img/background.jpg');
+  margin-bottom: 30px;
+}
+
+#stage-foreground {
+  position: relative;
+  top: -546px;
+  left: 90px;
+  width: 768px;
+  height: 576px;
+  background: url('../img/foreground.png');
+  z-index: 100;
+}
+
+#cr-stage {
+  position: relative;
+  top: 30px;
+  left: 90px;
+  width: 768px;
+  height: 576px;
+  z-index: 50;
+}
+
+#legend {
+  font-family: 'Trebuchet MS', 'Verdana', 'Arial', sans-serif;
+  margin: auto;
+  text-align: center;
+  margin-top: 20px;
+  color: #A86;
+}
+
+#legend a {
+  color: #A86;
+  font-weight: bold;
+}
+
+#footnotes {
+  border-top: 1px solid #A88;
+  background-color: #EEE;
+  padding-bottom: 10px;
+}
+
+p {
+  margin-top: 5px;
+  margin-bottom: -5px;
+  font-size: 80%;
+}
+
+.Mouse {
+  cursor: pointer;
+}
+
+.LoadingMessage {
+  font-size: 25pt;
+  text-align: center;
+}
+
+.SceneFade {
+  background-color: white;
+}
+
+.GameOver {
+  font-size: 23pt;
+  text-align: center;
+  padding: 50px;
+}
+
+.Message {
+  font-size: 15pt;
+}
+
+.MessageCentered {
+  font-size: 15pt;
+  text-align: center;
+}

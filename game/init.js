@@ -13,6 +13,9 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
 
   // Init Crafty and display loading screen
   c.init(consts.WIDTH, consts.HEIGHT);
+  if (consts.RENDER == 'Canvas') {
+    c.canvas.init();
+  }
   
   c.scene('loadjs', function() {
     c.e('2D, DOM, Text, LoadingMessage')
@@ -29,39 +32,14 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
     'lib/inheritance',
     'lib/soundmanager2'], function() {
     
-    // Init sound and load mp3s
-    c.scene('loadsounds', function() {
-      soundsLoadBaseText = "Loading sounds: ";
-      var soundCount = _.size(consts.SOUNDS), loadedSounds = 0;
-      var soundLoadMessage = c.e('2D, DOM, Text, LoadingMessage')
-        .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
-        .text(soundsLoadBaseText + "<b>0%</b>");
-      _.each(consts.SOUNDS, function(sound) {
-          var isMusic = sound.ID.indexOf('music') != -1;
-          soundManager.createSound({
-            id: sound.ID,
-            url: sound.URL,
-            loops: (isMusic) ? 999 : 0,
-            volume: (isMusic) ? consts.MUSIC_VOLUME : 100,
-            onload: function() {
-              loadedSounds++;
-              soundLoadMessage.text(soundsLoadBaseText + "<b>" + Math.floor(100 * loadedSounds / soundCount) + "%</b>");
-              if (loadedSounds == soundCount) {
-                c.scene('loadassets');
-              }
-            }
-          }).load();
-      });
-    });
-    
-    soundManager.setup({
-      url: 'sound/swf',
-      preferFlash: true,
-      onready: function() {
-        c.scene('loadsounds');
-      }
-    });
-    
+    // Load game state
+    if (gameState.resetSave) {
+      $.jStorage.set('gameState', null);
+    }
+    var newGameState = $.jStorage.get('gameState');
+    if (newGameState) {
+      gameState = newGameState;
+    }
     
     require(['consts', 'game'], function(consts, game) {
     
@@ -87,18 +65,6 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
           c.sprite(48, 48, consts.ASSETS.CELL_COMPANION, cellMap("CellCompanion"));
           c.sprite(48, 48, consts.ASSETS.CELL_GRAVITY, cellMap("CellGravity"));
           
-          // Load game state
-          if (gameState.resetSave) {
-            $.jStorage.set('gameState', null);
-          }
-          var newGameState = $.jStorage.get('gameState');
-          if (newGameState) {
-            gameState = newGameState;
-          }
-          if (gameState.mute) {
-            soundManager.mute();
-          }
-          
           // Launch game
           game();
         },
@@ -106,6 +72,41 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
           assetsLoadText.text(assetsLoadBaseText + "<b>" + Math.floor(e.percent) + "%</b>");
         });
       });
+    
+      // Init sound and load mp3s
+      c.scene('loadsounds', function() {
+        soundsLoadBaseText = "Loading sounds: ";
+        var soundCount = _.size(consts.SOUNDS), loadedSounds = 0;
+        var soundLoadMessage = c.e('2D, DOM, Text, LoadingMessage')
+          .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
+          .text(soundsLoadBaseText + "<b>0%</b>");
+        _.each(consts.SOUNDS, function(sound) {
+            var isMusic = sound.ID.indexOf('music') != -1;
+            soundManager.createSound({
+              id: sound.ID,
+              url: sound.URL,
+              loops: (isMusic) ? 999 : 0,
+              volume: (isMusic) ? consts.MUSIC_VOLUME : 100,
+              onload: function() {
+                loadedSounds++;
+                soundLoadMessage.text(soundsLoadBaseText + "<b>" + Math.floor(100 * loadedSounds / soundCount) + "%</b>");
+                if (loadedSounds == soundCount) {
+                  c.scene('loadassets');
+                }
+              }
+            }).load();
+        });
+      });
+      soundManager.setup({
+        url: './sound/swf',
+        preferFlash: true,
+        onready: function() {
+          c.scene('loadsounds');
+        }
+      });
+      if (gameState.mute) {
+        soundManager.mute();
+      }
     
     });
     

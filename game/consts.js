@@ -13,9 +13,9 @@ define([], function() {
     WIDTH: 768,
     HEIGHT: 576,
     
-    RENDER: 'DOM',
+    RENDER: 'Canvas',
 
-    GRAVITY: 0.25,
+    GRAVITY: 0.8,
     TILE_SIZE: 48,
     LEVEL_COUNT: 17,
     

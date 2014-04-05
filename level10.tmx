@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="30" height="12" tilewidth="48" tileheight="48">
+<map version="1.0" orientation="orthogonal" width="16" height="12" tilewidth="48" tileheight="48">
  <tileset firstgid="1" name="objects" tilewidth="48" tileheight="48">
   <image source="img/tiles/objects.png" width="192" height="192"/>
   <tile id="0">
@@ -38,16 +38,6 @@
     <property name="object" value=""/>
    </properties>
   </tile>
-  <tile id="6">
-   <properties>
-    <property name="components" value="VirusRotating"/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="components" value="CellGravity"/>
-   </properties>
-  </tile>
   <tile id="8">
    <properties>
     <property name="components" value="CellNormal"/>
@@ -78,40 +68,14 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tiles" width="30" height="12">
+ <layer name="Tiles" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJy9kVsLwjAMhfOkvnqrd+jUPqgbov7//+YpVBYPazpBduBjpEty2sSJyGpgFuAurZZiawpmYJ5qWaNCvU/fQL4HyuN7bMAW7MC+o++44PdRQ73Zl+MKHMEJnNV5nAPP0fLl3uwTKL6AK7iBmuq8gvt0yfLlOLdfy9f/wTe330C+PCft79KddW/O77vfOH+931psBerdFHxz+/1VQb7fOKH/fI+SuN7y5Rlp1irXGXl96rXiex7gOTAv8Abf+BY4
+   eJyVkusOgjAMhc8roKCAmgjOH06I7/92tlkbTgi3Nfmy0fZs7WgE8BWirb7nbydgsk7ohR+O20j7j+lPwtWoZ/nVznmNcN+IPw7ow4L/YrW8hWfm/ar1fiKW+9rS51iXqS+Q3vsslHS/+znm+Vy75rfCzXQNre0spsb/u8I0My+kd3e9+znGpm86IM2Mz+VgukB+jnFPa2i9f5FkDCs=
   </data>
  </layer>
- <layer name="Objects" width="30" height="12">
+ <layer name="Objects" width="16" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYBkgDAPIbGTAjkUel1p8gAWJBmFGHGbh45NiLzZz8JlFrL34whCbOXJUtBefPnRAD3uxuYGe/kVPU/SIX2xuINVeYs0mxV5s8rQApJYplJRJ6PbiA8xomFSArh8ZAwCccQJ0
+   eJxjYWBgYCEB60ExshgjA3GABY2NC2NTj8s8bGpYKdSPyz3E6CfkJ2LsJxYg62fFp5CA23C5l1B84As/dPX4whmXfjY8epH1U4IBC10Bwg==
   </data>
  </layer>
- <objectgroup name="Calque d'objets 1" width="30" height="12">
-  <object x="536" y="100" width="444" height="442">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="text" value="Also, rotation seems"/>
-   </properties>
-  </object>
-  <object x="538" y="151" width="444" height="442">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="text" value="impossible when"/>
-   </properties>
-  </object>
-  <object x="540" y="199" width="444" height="442">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="text" value="gravity is reversed."/>
-   </properties>
-  </object>
-  <object x="620" y="325" width="444" height="442">
-   <properties>
-    <property name="components" value="IngameMessage"/>
-    <property name="text" value="Bizarre..."/>
-   </properties>
-  </object>
- </objectgroup>
 </map>

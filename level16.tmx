@@ -80,37 +80,37 @@
  </tileset>
  <layer name="Tiles" width="30" height="12">
   <data encoding="base64" compression="zlib">
-   eJwTZGBgEKczlgBiWQbaAQU8csPRXlxAdIDslR0ge1VHoL26A2Sv/gDay4hHDQeN7BVjoH85qQPEACPOCCM=
+   eJy9kVsLwjAMhfOkvnqrd+jUPqgbov7//+YpVBYPazpBduBjpEty2sSJyGpgFuAurZZiawpmYJ5qWaNCvU/fQL4HyuN7bMAW7MC+o++44PdRQ73Zl+MKHMEJnNV5nAPP0fLl3uwTKL6AK7iBmuq8gvt0yfLlOLdfy9f/wTe330C+PCft79KddW/O77vfOH+931psBerdFHxz+/1VQb7fOKH/fI+SuN7y5Rlp1irXGXl96rXiex7gOTAv8Abf+BY4
   </data>
  </layer>
  <layer name="Objects" width="30" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYBkgTC3AhsbHZbYcle1FBwNlLy5A7XAetXfU3pFs70BgALZkAYM=
+   eJxjYWBgYBkgDAPIbGTAjkUel1p8gAWJBmFGHGbh45NiLzZz8JlFrL34whCbOXJUtBefPnRAD3uxuYGe/kVPU/SIX2xuINVeYs0mxV5s8rQApJYplJRJ6PbiA8xomFSArh8ZAwCccQJ0
   </data>
  </layer>
  <objectgroup name="Calque d'objets 1" width="30" height="12">
-  <object x="73" y="225" width="418" height="316">
+  <object x="536" y="100" width="444" height="442">
    <properties>
     <property name="components" value="IngameMessage"/>
-    <property name="text" value="Oh, something new again."/>
+    <property name="text" value="Note: Rotation seems"/>
    </properties>
   </object>
-  <object x="155" y="299" width="419" height="341">
+  <object x="538" y="151" width="444" height="442">
    <properties>
     <property name="components" value="IngameMessage"/>
-    <property name="text" value="Hopefully not a virus."/>
+    <property name="text" value="impossible when"/>
    </properties>
   </object>
-  <object x="274" y="388" width="386" height="224">
+  <object x="540" y="199" width="444" height="442">
    <properties>
     <property name="components" value="IngameMessage"/>
-    <property name="text" value="Let's merge it, for science!"/>
+    <property name="text" value="gravity is reversed."/>
    </properties>
   </object>
-  <object x="269" y="248" width="482" height="108">
+  <object x="620" y="325" width="444" height="442">
    <properties>
     <property name="components" value="IngameMessage"/>
-    <property name="text" value="Incredible, how can this be?"/>
+    <property name="text" value="Bizarre..."/>
    </properties>
   </object>
  </objectgroup>

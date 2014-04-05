@@ -1,4 +1,4 @@
-define(['consts', 'wan-components', 'tiledMap', 'player', 'objects', 'cells', 'cutscenes', 'menu'], function(consts) {
+define(['consts', 'wan-components', 'tiledLevel', 'player', 'objects', 'cells', 'cutscenes', 'menu'], function(consts) {
   
   return function() {
 
@@ -41,7 +41,7 @@ define(['consts', 'wan-components', 'tiledMap', 'player', 'objects', 'cells', 'c
         c.scene('scriptmidgame');
       }
       else {
-        c.e('TiledMap').tiledMap('levels/level' + gameState.currentLevel + '.json', consts.RENDER);
+        c.e('TiledLevel').tiledLevel('level' + gameState.currentLevel + '.json', consts.RENDER);
       }
     });
     
