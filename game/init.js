@@ -5,18 +5,31 @@ requirejs.config({
     }
 });
 
+
 // Load minimal libraries
 requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
   $(document).ready(function() {
   
   c = Crafty;
 
+  // Prevent page scrolling
+  $(document).keydown(function(e) {
+    if (e.keyCode >= 37 && e.keyCode <= 90) { // arrows, 0-9, a-z
+      e.preventDefault();
+    }
+  });
+  
   // Init Crafty and display loading screen
   c.init(consts.WIDTH, consts.HEIGHT);
   if (consts.RENDER == 'Canvas') {
     c.canvas.init();
   }
   
+  c.c('LoadingMessage', {
+    init: function() {
+      this.textFont({size: '25px', family: "'TVEFont', serif" });
+    }
+  });
   c.scene('loadjs', function() {
     c.e('2D, DOM, Text, LoadingMessage')
       .attr({x: 0, y: consts.HEIGHT/2 - 20, w: consts.WIDTH, h: 40})
@@ -98,7 +111,7 @@ requirejs(['consts', 'lib/jquery', 'lib/crafty'], function(consts) {
         });
       });
       soundManager.setup({
-        url: './sound/swf',
+        url: '',
         preferFlash: true,
         onready: function() {
           c.scene('loadsounds');

@@ -350,6 +350,7 @@ c.c('Player', {
     this.refresh();
   },
   
+  // Yes, this is ugly.
   _fixPositionBeforeRotation: function(oldDirection) {
     //console.log(oldDirection + " " + this.direction);
     if (this.direction == 3) {

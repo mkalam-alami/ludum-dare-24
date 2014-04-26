@@ -26,6 +26,7 @@ define(['consts', 'wan-components'], function(consts) {
         if (this._timer >= this._delay) {
           this._textBuffer = this._textBuffer.slice(1);
           this.text(this._text + letter);
+          this.init();
           this._timer = 0;
         }
       }
@@ -34,20 +35,20 @@ define(['consts', 'wan-components'], function(consts) {
   
   var write = function(x, y, text, speed, w) {
     c.e('2D, ' + consts.RENDER + ', AnimatedText, Tween')
-      .attr({x: x, y: y - 100, w: w || 1000, h: 200})
+      .attr({x: x, y: y + 20, w: w || 1000, h: 200})
       .animatedText(text, speed || 3);
   }
   
   var image = function(x, y, url) {
     c.e('2D, ' + consts.RENDER + ', Image, Tween')
-      .attr({x: x, y: y, alpha: 0})
+      .attr({x: x, y: y, alpha: 0.0})
       .image(url)
-      .tween({alpha: 1}, 50);
+      .tween({alpha: 1}, 1500);
   }
   
   var fadeout = function() {
     _.each(c('Tween'), function(id) {
-      c(id).tween({alpha: 0}, 50);
+      c(id).tween({alpha: 0.0}, 1500);
     });
   }
   

@@ -9,11 +9,11 @@ define(['consts', 'wan-components'], function(consts) {
     wallOfTextText: function(id, from, to) {
       this.image(consts.ASSETS['TEXT' + id]);
       this.attr(from);
-      this.tween({alpha: .3}, 50);
-      this.tween(to, 300);
+      this.tween({alpha: .3}, 1500);
+      this.tween(to, 8000);
     },
     _tweenEnd: function(param) {
-      if (param == 'alpha') {
+      if (param && param.alpha) {
         if (this.alpha > .2) {
           this.tween(this._to, 500);
         }
@@ -21,8 +21,8 @@ define(['consts', 'wan-components'], function(consts) {
           this.destroy();
         }
       }
-      else if (param == 'x') {
-          this.tween({alpha: 0}, 30);
+      else if (param && param.x) {
+          this.tween({alpha: 0.0}, 500);
       }
     }
   });
@@ -55,9 +55,13 @@ define(['consts', 'wan-components'], function(consts) {
   c.c('MenuEntry', {
     init: function() {
       this.addComponent('2D, ' + consts.RENDER + ', Text, Tween');
-      this.attr({w: 200, h: 50});
       this.textFont({ family: "'TVEFont', serif", size: '25pt' });
       this.textColor('#332222', 0.9);
+      this.attr({w: 400, h: 50});
+    },
+    menuEntry: function(label) {
+      this.text(label);
+      return this;
     }
   });
   c.c('Menu', {
@@ -93,10 +97,10 @@ define(['consts', 'wan-components'], function(consts) {
      }
     
      var entry = c.e('MenuEntry')
-      .text(text)
+      .menuEntry(text)
       .attr({
         x: this.BASEX + 50 + offsetx,
-        y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize - 15 + offsety
+        y: this.BASEY + this.YSIZE * this._entries.length / this._menuSize + offsety
       });
       if (postCompo) {
         entry.textColor('#DD4422', 1.0);
@@ -121,20 +125,25 @@ define(['consts', 'wan-components'], function(consts) {
     _enterFrame: function() {
       if (!this._moving) {
         var updateNeeded = false;
-        if (Utils.isUpPressed()) {
+        var isUpPressed = Utils.isUpPressed();
+        var isDownPressed = Utils.isDownPressed();
+        if (isUpPressed && !this._wasUpPressed) {
           this._currentIndex += this._menuSize - 1;
           updateNeeded = true;
           if (!soundManager.muted) {
             soundManager.play(consts.SOUNDS.CHANGE.ID);
           }
         }
-        if (Utils.isDownPressed()) {
+        if (isDownPressed && !this._wasDownPressed) {
           this._currentIndex++;
           updateNeeded = true;
           if (!soundManager.muted) {
             soundManager.play(consts.SOUNDS.CHANGE.ID);
           }
         }
+        this._wasUpPressed = isUpPressed;
+        this._wasDownPressed = isDownPressed;
+        
         if (updateNeeded) {
           this._currentIndex %= this._menuSize;
           this._update();
@@ -164,13 +173,16 @@ define(['consts', 'wan-components'], function(consts) {
       .attr({x: 20, y: 30})
       .image(consts.ASSETS.LOGO)
       .bouncey();
-    
+    var sceneChange = false;
     menu = c.e('Menu').menu((gameState.gameFinished) ? 4 : 3);
     menu.addEntry('Start a new game', function() {
-      gameState.currentLevel = 1;
-      soundManager.stopAll();
-      soundManager.play(consts.SOUNDS.START.ID);
-      c.e('SceneFade').sceneFade('startLevel');
+      if (!sceneChange) {
+        sceneChange = true;
+        gameState.currentLevel = 1;
+        soundManager.stopAll();
+        soundManager.play(consts.SOUNDS.START.ID);
+        c.e('SceneFade').sceneFade('startLevel');
+      }
     });
     menu.addEntry('Choose level', function() {
       c.scene('chooseLevel');
@@ -191,10 +203,13 @@ define(['consts', 'wan-components'], function(consts) {
     });
     if (gameState.gameFinished) {
       menu.addEntry('1000 kittens', function() {
-        gameState.currentLevel = "kittens";
-        soundManager.stopAll();
-        soundManager.play(consts.SOUNDS.START.ID);
-        c.e('SceneFade').sceneFade('startLevel');
+        if (!sceneChange) {
+          sceneChange = true;
+          gameState.currentLevel = "kittens";
+          soundManager.stopAll();
+          soundManager.play(consts.SOUNDS.START.ID);
+          c.e('SceneFade').sceneFade('startLevel');
+        }
       }, true);
     }
     
@@ -202,9 +217,9 @@ define(['consts', 'wan-components'], function(consts) {
     _.each(c('Tween'), function(id) {
       var e = c(id);
       e.attr({alpha: 0});
-      e.tween({alpha: 1}, 80);
+      e.tween({alpha: 1}, 2000);
     });
-    logo.tween({alpha: 1}, 20);
+    logo.tween({alpha: 1}, 1000);
   });
   
   c.scene('chooseLevel', function() {
@@ -228,23 +243,35 @@ define(['consts', 'wan-components'], function(consts) {
       7: 'Diary entry 2'
     };
     
+    var sceneChange = false;
     menu.addEntry('Diary entry 1', function() {
-      soundManager.stopAll();
-      soundManager.play(consts.SOUNDS.START.ID);
-      c.e('SceneFade').sceneFade('intro');
+      if (!sceneChange) {
+        sceneChange = true;
+        soundManager.stopAll();
+        soundManager.play(consts.SOUNDS.START.ID);
+        c.e('SceneFade').sceneFade('intro');
+      }
     });
     for (var i = 1; i <= consts.LEVEL_COUNT; i++) {
       var entry = menu.addEntry((levelNames[i]) ? levelNames[i] : 'Level ' + ((i > 6) ? i-1 : i),
       function(entry) {
-        gameState.currentLevel = entry.level;
-        soundManager.stopAll();
-        soundManager.play(consts.SOUNDS.START.ID);
-        c.e('SceneFade').sceneFade('startLevel');
+        if (!sceneChange) {
+          sceneChange = true;
+          gameState.currentLevel = entry.level;
+          soundManager.stopAll();
+          soundManager.play(consts.SOUNDS.START.ID);
+          c.e('SceneFade').sceneFade('startLevel');
+        }
       }, i > 9);
       entry.level = i;
     }
     menu.addEntry('Final diary entry', function() {
-      c.scene('endgame');
+      if (!sceneChange) {
+        sceneChange = true;
+        soundManager.stopAll();
+        soundManager.play(consts.SOUNDS.START.ID);
+        c.e('SceneFade').sceneFade('endgame');
+      }
     });
     menu.addEntry('Exit', function() {
       c.scene('menu');

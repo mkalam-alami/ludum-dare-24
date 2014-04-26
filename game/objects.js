@@ -19,7 +19,7 @@ c.c('SceneFade', {
     this.tween({
       fadein: true,
       alpha: 1
-    }, 50);
+    }, 1500);
   },
     
   _tweenEnd: function(param) {
@@ -29,7 +29,7 @@ c.c('SceneFade', {
         c.viewport.x = c.viewport.y = 0;
         this.tween({
           fadeout: true,
-          alpha: 0
+          alpha: 0.0
         }, 50);
     }
     else {
@@ -120,12 +120,12 @@ c.c('IngameMessageAbstract', {
   ingameMessageAbstract: function(delayms, initialSpeed) {
     this._delayms = delayms;
     this._xspeed = initialSpeed;
-    this.tween({alpha: 1}, 40);
+    this.tween({alpha: 1}, 1200);
   },
   _tweenEndAbstract: function() {
     if (this._alpha > 0.5) {
       this.timeout(function() {
-        this.tween({alpha: 0}, 30);
+        this.tween({alpha: 0.0}, 1000);
       }, this._delayms);
     }
     else {
@@ -143,8 +143,9 @@ c.c('IngameMessageAbstract', {
 c.c('IngameMessageText', {
   init: function() {
     this.addComponent('IngameMessageAbstract, Text');
-    this.textFont({ family: "'TVEFont', serif", size: '30pt' });
+    this.textFont({size: '25px', family: "'TVEFont', serif" });
     this.textColor('#666666', 0.9);
+    this.w = 500;
   },
   ingameMessageText: function(text, delayms, initialSpeed) {
     this.ingameMessageAbstract(delayms, initialSpeed);
@@ -185,7 +186,7 @@ c.c('IngameMessage', {
     if (this._image) {
       var yOffset = 0;
       if (this._text) {
-        yOffset = 20;
+        yOffset = -20;
       }
       c.e('IngameMessageImage')
         .attr({x: this.x, y: this.y + yOffset})

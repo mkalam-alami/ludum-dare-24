@@ -2,7 +2,6 @@
   font-family: 'TVEFont';
   font-style: normal;
   font-weight: 400;
-  line-height: 20pt;
   src: local('TVEFont'), local('TVEFont'), url('../font.woff') format('woff');
 }
 
@@ -85,8 +84,11 @@ p {
 }
 
 .LoadingMessage {
-  font-size: 25pt;
   text-align: center;
+}
+
+.Text  {
+  font-size: 25pt;
 }
 
 .SceneFade {
