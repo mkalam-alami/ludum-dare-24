@@ -10,14 +10,14 @@ body {
   font-family: 'TVEFont', serif;
   margin: 0;
   padding: 0;
-  margin-top: 10px;
+  background-color: #EEE;  
 }
 
 a {
   color: #05F;
 }
 
-div {
+#contents div {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -27,12 +27,18 @@ div {
   cursor: default;
 }
 
+#contents {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #A88;
+}
+
 #stage-container {
   margin: auto;
   width: 915px;
   height: 640px;
   background: url('../img/background.jpg');
-  margin-bottom: 30px;
 }
 
 #stage-foreground {
@@ -60,17 +66,21 @@ div {
   text-align: center;
   margin-top: 20px;
   color: #A86;
+  padding-bottom: 10px;
+}
+
+#legend h2 {
+  margin: 0;
+  color: #864;
+}
+#legend h2 a {
+  color: #864;
+  font-weight: bold;
 }
 
 #legend a {
   color: #A86;
   font-weight: bold;
-}
-
-#footnotes {
-  border-top: 1px solid #A88;
-  background-color: #EEE;
-  padding-bottom: 10px;
 }
 
 p {
