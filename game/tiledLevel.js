@@ -101,7 +101,7 @@
       var _this = this;
       $.ajax({
         type: 'GET',
-        url: levelURL,
+        url: 'levels/' + levelURL,
         dataType: 'json',
         data: {},
         async: false,
